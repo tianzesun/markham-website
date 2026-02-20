@@ -54,10 +54,10 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            © {currentYear} HeyMarkham. Built for the City of Markham.
+            © {currentYear} HeyMarkham. All rights reserved.
           </p>
           <p className="text-sm text-slate-400 dark:text-slate-500">
-            City of Markham, Ontario, Canada
+            Developed by <a href="https://aydenait.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 hover:underline">Aydenait Solutions</a>
           </p>
         </div>
       </div>
