@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { 
-  ArrowRight, Mic, Search, Brain, 
+  Mic, Search, Brain, 
   ShieldCheck, Phone, Mail, CheckCircle2, 
   BarChart3, Clock, AlertCircle, FileSearch, MessageSquare,
-  Send, Play, Building2, MapPin
+  Send, Play, Building2, MapPin, Globe, Calendar, Users
 } from 'lucide-react';
 import { FeatureCard } from '../components/FeatureCard';
 
@@ -96,15 +96,6 @@ export default function HomePage() {
     { aspect: "Information accuracy", traditional: "May be outdated", heymarkham: "Real-time data" },
   ];
 
-  const governmentBenefits = [
-    "$150K-$300K annual savings in call center costs",
-    "Free staff to focus on complex issues requiring human judgment",
-    "Comprehensive analytics on resident needs and service gaps",
-    "Position Markham as a smart city leader",
-    "Reduce resident frustration and improve satisfaction",
-    "Compliance with accessibility requirements (WCAG 2.1 AA)",
-  ];
-
   const features = [
     {
       icon: <MessageSquare className="w-6 h-6" />,
@@ -131,149 +122,194 @@ export default function HomePage() {
   return (
     <div className="min-h-screen w-full flex flex-col bg-white dark:bg-slate-950">
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="relative pt-20 pb-16 md:pt-28 md:pb-20 px-6 bg-primary-700 dark:bg-primary-900">
+        {/* Hero Section - Demo First */}
+        <section className="relative pt-16 pb-12 md:pt-20 md:pb-16 px-4 bg-primary-700 dark:bg-primary-900">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left: Text Content */}
-              <div className="text-center lg:text-left">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/10 text-white text-sm font-medium mb-6"
-                >
-                  <Building2 size={16} />
-                  <span>Official Municipal Service</span>
-                </motion.div>
-
-                <motion.h1 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-4xl md:text-5xl font-serif font-bold text-white mb-6"
-                >
-                  City of Markham{" "}
-                  <span className="block text-2xl md:text-3xl font-sans font-normal mt-2 text-primary-200">
-                    AI Information Assistant
-                  </span>
-                </motion.h1>
-
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-lg text-primary-100 max-w-xl mx-auto lg:mx-0 mb-6 leading-relaxed"
-                >
-                  Get instant answers about city services. No searching, no waiting—just ask.
-                </motion.p>
-
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.25 }}
-                  className="text-base text-primary-200 max-w-xl mx-auto lg:mx-0 mb-8"
-                >
-                  Available 24/7 • Free Service • Official City Information
-                </motion.p>
-
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-                >
-                  <Link 
-                    href="#demo"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-800 rounded font-semibold transition-all shadow-lg"
-                  >
-                    <Play size={18} />
-                    Try It Now
-                  </Link>
-                  <Link 
-                    href="#contact"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white border border-primary-400 rounded font-semibold transition-all"
-                  >
-                    Contact City Services
-                    <ArrowRight size={18} />
-                  </Link>
-                </motion.div>
+            {/* Language Bar */}
+            <div className="flex justify-center mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm">
+                <Globe size={16} />
+                <span className="text-primary-200">Available in:</span>
+                <span className="font-medium">English</span>
+                <span className="text-primary-300">•</span>
+                <span className="font-medium">繁體中文</span>
+                <span className="text-primary-300">•</span>
+                <span className="font-medium">简体中文</span>
+                <span className="text-primary-300">•</span>
+                <span className="font-medium">فارسی</span>
+                <span className="text-primary-300">•</span>
+                <span className="font-medium">தமிழ்</span>
+                <span className="text-primary-300">•</span>
+                <span className="font-medium">Français</span>
               </div>
+            </div>
 
-              {/* Right: Interactive Demo Mockup */}
+            {/* Main Hero Content */}
+            <div className="text-center mb-8">
               <motion.div 
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="relative"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/10 text-white text-sm font-medium mb-4"
               >
-                <div className="relative mx-auto max-w-md">
-                  {/* Chat Interface Mockup */}
-                  <div className="relative bg-white rounded-lg shadow-2xl border border-slate-200 overflow-hidden">
-                    {/* Header */}
-                    <div className="bg-primary-700 px-5 py-4 border-b border-primary-600">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-white/20 rounded flex items-center justify-center">
-                          <Building2 className="text-white" size={20} />
-                        </div>
+                <ShieldCheck size={16} className="text-green-400" />
+                <span>Powered by official Markham data</span>
+              </motion.div>
+
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-3xl md:text-4xl font-serif font-bold text-white mb-4"
+              >
+                HeyMarkham
+              </motion.h1>
+
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg text-primary-100 max-w-2xl mx-auto mb-4"
+              >
+                Get instant answers about Markham city services. Ask anything—garbage schedules, recreation programs, bylaw info, and more.
+              </motion.p>
+
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="text-sm text-primary-200 mb-6"
+              >
+                24/7 • Free • Powered by official city data
+              </motion.p>
+
+              {/* Social Proof */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-wrap justify-center gap-6 text-primary-200 text-sm mb-8"
+              >
+                <div className="flex items-center gap-2">
+                  <Users size={16} className="text-green-400" />
+                  <span>500+ questions answered in beta</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock size={16} className="text-green-400" />
+                  <span>Avg response time: 1.2 seconds</span>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Interactive Chat Demo - Front and Center */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="max-w-2xl mx-auto"
+            >
+              <div className="relative bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden">
+                {/* Header */}
+                <div className="bg-primary-700 px-5 py-4 border-b border-primary-600">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-white/20 rounded flex items-center justify-center">
+                        <Building2 className="text-white" size={20} />
+                      </div>
+                      <div>
+                        <h3 className="text-white font-semibold">HeyMarkham</h3>
+                        <p className="text-primary-200 text-sm flex items-center gap-1">
+                          <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                          Online • Ready to help
+                        </p>
+                      </div>
+                    </div>
+                    {/* Address Input */}
+                    <div className="hidden sm:flex items-center gap-2 bg-white/10 rounded px-3 py-1.5">
+                      <MapPin size={14} className="text-primary-200" />
+                      <input 
+                        type="text" 
+                        placeholder="Enter your address for personalized answers"
+                        className="bg-transparent text-white text-sm placeholder-primary-300 outline-none w-48"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Chat Messages */}
+                <div className="p-5 space-y-4 min-h-[280px] bg-slate-50">
+                  {/* User Question */}
+                  <div className="flex justify-end">
+                    <div className="bg-primary-700 text-white px-4 py-3 rounded-lg max-w-[85%]">
+                      <p className="text-sm">{demoQuestions[currentDemoQ]}</p>
+                    </div>
+                  </div>
+
+                  {/* AI Response */}
+                  <div className="flex justify-start">
+                    <div className="bg-white px-4 py-3 rounded-lg max-w-[85%] shadow-sm border border-slate-200">
+                      <div className="flex items-start gap-2">
+                        <Building2 className="text-primary-600 flex-shrink-0 mt-0.5" size={16} />
                         <div>
-                          <h3 className="text-white font-semibold">HeyMarkham</h3>
-                          <p className="text-primary-200 text-sm flex items-center gap-1">
-                            <span className="w-2 h-2 bg-green-400 rounded-full" />
-                            City of Markham • Online
+                          <p className="text-sm text-slate-700">
+                            {currentDemoQ === 0 && "Based on your address, your garbage pickup is every Thursday. Place bins at the curb by 7 AM."}
+                            {currentDemoQ === 1 && "The Markham Pan Am Centre (16 Library Lane) is open today until 10 PM. Pool hours: 6 AM - 9 PM."}
+                            {currentDemoQ === 2 && "Report potholes via the Markham Request app (iOS/Android) or call 905-415-7535 during business hours."}
+                            {currentDemoQ === 3 && "Electronic waste: Milliken Transfer Station (7700 Kennedy Rd). Open Sat 8 AM - 4 PM. Free for Markham residents."}
+                          </p>
+                          <p className="text-xs text-primary-600 mt-2 font-medium flex items-center gap-1">
+                            <ShieldCheck size={12} />
+                            Source: markham.ca
                           </p>
                         </div>
                       </div>
                     </div>
-
-                    {/* Chat Messages */}
-                    <div className="p-5 space-y-4 min-h-[260px] bg-slate-50">
-                      {/* User Question */}
-                      <div className="flex justify-end">
-                        <div className="bg-primary-700 text-white px-4 py-3 rounded-lg max-w-[85%]">
-                          <p className="text-sm">{demoQuestions[currentDemoQ]}</p>
-                        </div>
-                      </div>
-
-                      {/* AI Response */}
-                      <div className="flex justify-start">
-                        <div className="bg-white px-4 py-3 rounded-lg max-w-[85%] shadow-sm border border-slate-200">
-                          <div className="flex items-start gap-2">
-                            <Building2 className="text-primary-600 flex-shrink-0 mt-0.5" size={16} />
-                            <div>
-                              <p className="text-sm text-slate-700">
-                                {currentDemoQ === 0 && "Your garbage pickup is every Thursday. Place bins at the curb by 7 AM."}
-                                {currentDemoQ === 1 && "The Markham Pan Am Centre is open today until 10 PM. Pool hours are 6 AM - 9 PM."}
-                                {currentDemoQ === 2 && "Report potholes via Markham Request app or call 905-415-7535."}
-                                {currentDemoQ === 3 && "Electronic waste drop-off: Milliken Transfer Station. Open Sat 8 AM - 4 PM."}
-                              </p>
-                              <p className="text-xs text-primary-600 mt-2 font-medium">
-                                ✓ Official city information
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Input Area */}
-                    <div className="p-4 border-t border-slate-200 bg-white">
-                      <div className="flex items-center gap-2">
-                        <button className="p-2 text-slate-400 hover:text-primary-600 transition-colors">
-                          <Mic size={20} />
-                        </button>
-                        <div className="flex-1 bg-slate-100 rounded px-4 py-2.5">
-                          <p className="text-sm text-slate-400">Ask about city services...</p>
-                        </div>
-                        <button className="p-2 bg-primary-600 text-white rounded hover:bg-primary-700 transition-colors">
-                          <Send size={18} />
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 </div>
-              </motion.div>
-            </div>
+
+                {/* Input Area */}
+                <div className="p-4 border-t border-slate-200 bg-white">
+                  <div className="flex items-center gap-2">
+                    <button className="p-2 text-slate-400 hover:text-primary-600 transition-colors" title="Voice input">
+                      <Mic size={20} />
+                    </button>
+                    <div className="flex-1 bg-slate-100 rounded-lg px-4 py-2.5 flex items-center">
+                      <input 
+                        type="text" 
+                        placeholder="Ask about city services..."
+                        className="bg-transparent text-sm text-slate-700 placeholder-slate-400 outline-none w-full"
+                      />
+                    </div>
+                    <button className="p-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                      <Send size={18} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
+            >
+              <Link 
+                href="#demo"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-800 rounded font-semibold transition-all shadow-lg"
+              >
+                <Play size={18} />
+                See More Examples
+              </Link>
+              <Link 
+                href="#for-city"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white border border-primary-400 rounded font-semibold transition-all"
+              >
+                <Calendar size={18} />
+                Book a Demo (For City Officials)
+              </Link>
+            </motion.div>
           </div>
         </section>
 
@@ -321,7 +357,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-lg text-slate-600 dark:text-slate-400"
               >
-                HeyMarkham is an official City of Markham service that helps residents find information instantly. No apps to download, no forms to fill—just ask.
+                HeyMarkham helps residents find Markham city information instantly. No apps to download, no forms to fill—just ask.
               </motion.p>
             </div>
 
@@ -630,35 +666,90 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Government Benefits */}
-        <section className="py-16 bg-white dark:bg-slate-950 border-y border-slate-200 dark:border-slate-800">
+        {/* For City Officials Section */}
+        <section id="for-city" className="py-16 bg-white dark:bg-slate-950 border-y border-slate-200 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-              <div className="max-w-xl">
-                <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider mb-3">
-                  <MapPin size={16} /> For Municipal Government
-                </div>
-                <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
-                  Benefits for the City
-                </h2>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                  HeyMarkham delivers measurable improvements for municipal operations while improving the resident experience.
-                </p>
-                <ul className="space-y-2">
-                  {governmentBenefits.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-slate-600 dark:text-slate-400 text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <div className="flex items-center justify-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider mb-3">
+                <MapPin size={16} /> For Municipal Government
+              </div>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
+                A Partner for Smart Cities
+              </h2>
+              <p className="text-slate-600 dark:text-slate-400">
+                HeyMarkham helps municipalities deliver better service while reducing operational costs.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 mb-12">
+              {/* Benefits */}
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Key Benefits</h3>
+                <ul className="space-y-3">
+                  {[
+                    { title: "Cost Savings", desc: "Reduce call center volume by up to 60% with automated answers to common questions" },
+                    { title: "Staff Efficiency", desc: "Free staff to focus on complex issues requiring human judgment" },
+                    { title: "Resident Insights", desc: "Comprehensive analytics on what residents are asking about" },
+                    { title: "Smart City Leadership", desc: "Position your municipality as an innovation leader" },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 p-3 rounded bg-slate-50 dark:bg-slate-900">
+                      <CheckCircle2 className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-slate-900 dark:text-white text-sm">{item.title}</p>
+                        <p className="text-slate-500 dark:text-slate-400 text-xs">{item.desc}</p>
+                      </div>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 w-full lg:w-auto">
-                <FeatureCard title="PIPEDA" description="Compliant" iconType="shield" index={0} />
-                <FeatureCard title="SOC 2" description="Ready" iconType="lock" index={1} />
-                <FeatureCard title="WCAG 2.1" description="Accessible" iconType="globe" index={2} />
-                <FeatureCard title="99.9%" description="Uptime SLA" iconType="server" index={3} />
+              {/* Privacy & Compliance */}
+              <div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Privacy & Compliance</h3>
+                <div className="space-y-3">
+                  <div className="p-4 rounded bg-slate-50 dark:bg-slate-900 border-l-4 border-primary-600">
+                    <p className="font-medium text-slate-900 dark:text-white text-sm mb-1">MFIPPA Compliant</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-xs">Designed to meet Ontario's Municipal Freedom of Information and Protection of Privacy Act requirements.</p>
+                  </div>
+                  <div className="p-4 rounded bg-slate-50 dark:bg-slate-900 border-l-4 border-green-500">
+                    <p className="font-medium text-slate-900 dark:text-white text-sm mb-1">PIPEDA Aligned</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-xs">Personal information handling follows federal privacy principles.</p>
+                  </div>
+                  <div className="p-4 rounded bg-slate-50 dark:bg-slate-900 border-l-4 border-blue-500">
+                    <p className="font-medium text-slate-900 dark:text-white text-sm mb-1">Data Residency</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-xs">All data stored and processed in Canada.</p>
+                  </div>
+                  <div className="p-4 rounded bg-slate-50 dark:bg-slate-900 border-l-4 border-purple-500">
+                    <p className="font-medium text-slate-900 dark:text-white text-sm mb-1">WCAG 2.1 AA Accessible</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-xs">Meets accessibility requirements for public sector organizations.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Pilot Program */}
+            <div className="bg-primary-50 dark:bg-slate-900 rounded-xl p-8 text-center">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                Start with a 90-Day Pilot
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 mb-6 max-w-2xl mx-auto">
+                Not ready for a full rollout? We offer a low-risk 90-day pilot program covering 3 service categories. 
+                No long-term commitment required—see the results first.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                  href="mailto:info@heymarkham.ai?subject=Pilot Program Inquiry"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-700 hover:bg-primary-600 text-white rounded font-semibold transition-all"
+                >
+                  <Calendar size={18} />
+                  Book a Demo
+                </a>
+                <a 
+                  href="mailto:info@heymarkham.ai?subject=ROI Information Request"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-primary-800 border border-primary-300 rounded font-semibold transition-all"
+                >
+                  Request ROI Details
+                </a>
               </div>
             </div>
           </div>

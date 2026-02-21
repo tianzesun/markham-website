@@ -46,8 +46,8 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Contact</h4>
             <ul className="space-y-2">
-              <li><a href="mailto:contact@heymarkham.ai" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">contact@heymarkham.ai</a></li>
-              <li><a href="tel:+14165550100" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">(416) 555-0100</a></li>
+              <li><a href="mailto:info@heymarkham.ai" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">info@heymarkham.ai</a></li>
+              <li><a href="https://markham.ca" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">City of Markham Website</a></li>
             </ul>
           </div>
         </div>
