@@ -1,20 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { 
-  ArrowRight, Mic, Search, Brain, Sparkles, 
-  ShieldCheck, Users, Phone, Mail, CheckCircle2, 
+  ArrowRight, Mic, Search, Brain, 
+  ShieldCheck, Phone, Mail, CheckCircle2, 
   BarChart3, Clock, AlertCircle, FileSearch, MessageSquare,
-  Send, Bot, User, Play, Building2, MapPin
+  Send, Play, Building2, MapPin
 } from 'lucide-react';
 import { FeatureCard } from '../components/FeatureCard';
 
 export default function HomePage() {
-  const [index, setIndex] = useState(0);
-  const words = ["Garbage Schedules", "Park Information", "City Events", "Building Permits", "Road Closures"];
-
   const demoQuestions = [
     "When is my garbage pickup day?",
     "What time does the community centre close?",
@@ -23,11 +20,6 @@ export default function HomePage() {
   ];
 
   const [currentDemoQ, setCurrentDemoQ] = useState(0);
-
-  useEffect(() => {
-    const wordInterval = setInterval(() => setIndex((prev) => (prev + 1) % words.length), 3000);
-    return () => clearInterval(wordInterval);
-  }, []);
 
   useEffect(() => {
     const demoInterval = setInterval(() => {
@@ -173,22 +165,7 @@ export default function HomePage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-lg text-primary-100 max-w-xl mx-auto lg:mx-0 mb-6 leading-relaxed"
                 >
-                  Get instant answers about {" "}
-                  <span className="relative inline-block h-[1.2em]">
-                    <AnimatePresence mode="wait">
-                      <motion.span 
-                        key={words[index]} 
-                        initial={{ opacity: 0, y: 20 }} 
-                        animate={{ opacity: 1, y: 0 }} 
-                        exit={{ opacity: 0, y: -20 }} 
-                        transition={{ duration: 0.5 }}
-                        className="text-white font-semibold absolute left-0 right-0"
-                      >
-                        {words[index]}
-                      </motion.span>
-                    </AnimatePresence>
-                  </span>
-                  {" "}. No searching, no waiting—just ask.
+                  Get instant answers about city services. No searching, no waiting—just ask.
                 </motion.p>
 
                 <motion.p 
