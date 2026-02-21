@@ -125,37 +125,8 @@ export default function HomePage() {
         {/* Hero Section - Demo First */}
         <section className="relative pt-16 pb-12 md:pt-20 md:pb-16 px-4 bg-primary-700 dark:bg-primary-900">
           <div className="max-w-7xl mx-auto">
-            {/* Language Bar */}
-            <div className="flex justify-center mb-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-sm">
-                <Globe size={16} />
-                <span className="text-primary-200">Available in:</span>
-                <span className="font-medium">English</span>
-                <span className="text-primary-300">•</span>
-                <span className="font-medium">繁體中文</span>
-                <span className="text-primary-300">•</span>
-                <span className="font-medium">简体中文</span>
-                <span className="text-primary-300">•</span>
-                <span className="font-medium">فارسی</span>
-                <span className="text-primary-300">•</span>
-                <span className="font-medium">தமிழ்</span>
-                <span className="text-primary-300">•</span>
-                <span className="font-medium">Français</span>
-              </div>
-            </div>
-
             {/* Main Hero Content */}
             <div className="text-center mb-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/10 text-white text-sm font-medium mb-4"
-              >
-                <ShieldCheck size={16} className="text-green-400" />
-                <span>Powered by official Markham data</span>
-              </motion.div>
-
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
