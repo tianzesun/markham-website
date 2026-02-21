@@ -267,19 +267,19 @@ export default function HomePage() {
               className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
             >
               <Link 
-                href="#demo"
+                href="#for-city"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-800 rounded font-semibold transition-all shadow-lg"
               >
-                <Play size={18} />
-                See More Examples
+                <Calendar size={18} />
+                Book a Demo
               </Link>
-              <Link 
-                href="#for-city"
+              <a 
+                href="mailto:info@heymarkham.ai?subject=HeyMarkham Inquiry"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white border border-primary-400 rounded font-semibold transition-all"
               >
-                <Calendar size={18} />
-                Book a Demo (For City Officials)
-              </Link>
+                <Mail size={18} />
+                Contact Us
+              </a>
             </motion.div>
           </div>
         </section>
@@ -517,122 +517,6 @@ export default function HomePage() {
                   ))}
                 </tbody>
               </table>
-            </div>
-          </div>
-        </section>
-
-        {/* Demo Section */}
-        <section id="demo" className="py-16 px-6 bg-slate-50 dark:bg-slate-900/50">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
-              >
-                Try HeyMarkham
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="text-lg text-slate-600 dark:text-slate-400"
-              >
-                See how residents get instant answers to common questions.
-              </motion.p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Example Questions */}
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="space-y-3"
-              >
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
-                  Common Questions:
-                </h3>
-                {[
-                  { q: "When is my garbage pickup day?", desc: "Collection schedule" },
-                  { q: "How do I pay my property tax?", desc: "Payment options" },
-                  { q: "What recreation programs are available?", desc: "Programs & registration" },
-                  { q: "How do I report a bylaw violation?", desc: "Submit reports" },
-                  { q: "Where is the nearest dog park?", desc: "Location & hours" },
-                ].map((item, i) => (
-                  <motion.div 
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: i * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center gap-3 p-3 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-primary-300 transition-colors"
-                  >
-                    <div className="flex-shrink-0 w-8 h-8 rounded bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center text-primary-600 dark:text-primary-400">
-                      <MessageSquare size={14} />
-                    </div>
-                    <div>
-                      <p className="font-medium text-slate-900 dark:text-white text-sm">"{item.q}"</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              {/* Demo Video Placeholder */}
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="aspect-video bg-slate-900 rounded-lg overflow-hidden shadow-lg border border-slate-700">
-                  <div className="h-full flex flex-col">
-                    <div className="bg-primary-700 px-4 py-2 flex items-center gap-2">
-                      <div className="w-6 h-6 bg-white/20 rounded flex items-center justify-center">
-                        <Building2 className="text-white" size={14} />
-                      </div>
-                      <span className="text-white text-sm font-medium">HeyMarkham</span>
-                    </div>
-                    <div className="flex-1 p-3 space-y-2 bg-slate-50 dark:bg-slate-900 overflow-hidden">
-                      <div className="flex justify-end">
-                        <div className="bg-primary-700 text-white px-3 py-2 rounded text-sm max-w-[80%]">
-                          When is my garbage pickup?
-                        </div>
-                      </div>
-                      <div className="flex justify-start">
-                        <div className="bg-white dark:bg-slate-800 px-3 py-2 rounded text-sm max-w-[80%] border border-slate-200 dark:border-slate-700">
-                          <p className="text-slate-700 dark:text-slate-300">Your garbage pickup is every <strong>Thursday</strong>.</p>
-                          <ul className="text-slate-600 dark:text-slate-400 text-xs mt-1 space-y-0.5">
-                            <li>• Green bin (organic waste)</li>
-                            <li>• Blue bin (recycling)</li>
-                            <li>• Garbage (black bin)</li>
-                          </ul>
-                          <p className="text-xs text-primary-600 mt-1">Place bins at curb by 7 AM</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-2 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
-                      <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 rounded px-3 py-1.5">
-                        <span className="text-slate-400 text-sm flex-1">Ask another question...</span>
-                        <Send size={14} className="text-primary-500" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <button className="w-14 h-14 bg-white hover:bg-slate-100 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105">
-                    <Play size={22} className="text-primary-600 ml-1" />
-                  </button>
-                </div>
-              </motion.div>
             </div>
           </div>
         </section>
