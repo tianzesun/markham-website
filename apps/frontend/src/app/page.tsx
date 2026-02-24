@@ -8,7 +8,10 @@ import {
   ShieldCheck, Phone, Mail, CheckCircle2, 
   BarChart3, Clock, AlertCircle, FileSearch, MessageSquare,
   Send, Building2, MapPin, Globe, Calendar, Users,
-  MousePointer, Bot, Link2, Home, Baby, Heart, Zap, Play
+  MousePointer, Bot, Link2, Home, Baby, Heart, Zap, Play,
+  Smartphone, Volume2, Headphones, CreditCard, BookOpen, Ticket,
+  Car, Lightbulb, Shield, Check, PartyPopper, Sparkles, Wifi,
+  PhoneCall, Leaf, Landmark, Waves, Trees, CalendarDays, RefreshCw
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -102,6 +105,237 @@ export default function HomePage() {
   return (
     <div className="min-h-screen w-full flex flex-col bg-white dark:bg-slate-950">
       <main className="flex-grow">
+        {/* Hero Section - Interactive Demo */}
+        <section className="relative pt-8 pb-12 md:pt-12 md:pb-16 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+          <div className="max-w-7xl mx-auto">
+            {/* Header Text */}
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <p className="text-xl md:text-2xl font-bold text-white mb-4">
+                The AI assistant that answers resident questions instantly, 24/7, with zero city staff involvement.
+              </p>
+
+              <p className="text-lg text-slate-400 mb-6">
+                Try it now — click any question or type your own to see the difference.
+              </p>
+
+              <p className="text-sm text-slate-500 mb-6">
+                24/7 • Free • Powered by official city data
+              </p>
+            </div>
+
+            {/* Demo Stats Banner */}
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
+              {[
+                { icon: "⚡", label: "Instant responses" },
+                { icon: "🎯", label: "Always accurate" },
+                { icon: "🗣️", label: "Voice or text" },
+                { icon: "24/7", label: "Never closed" }
+              ].map((stat, i) => (
+                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full">
+                  <span>{stat.icon}</span>
+                  <span className="text-white text-sm">{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Demo Interface */}
+            <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+              {/* Sidebar */}
+              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                <h4 className="font-semibold text-slate-900 dark:text-white mb-2 text-sm">✨ Popular Questions</h4>
+                <div className="space-y-1">
+                  {[
+                    { icon: "🗑️", text: "When is my garbage collection?" },
+                    { icon: "🌳", text: "What parks are near me?" },
+                    { icon: "🎉", text: "What events this weekend?" },
+                    { icon: "💦", text: "Any splash pads open?" },
+                    { icon: "♻️", text: "What can I recycle?" },
+                  ].map((q, i) => (
+                    <div key={i} className="flex items-center gap-2 p-2 rounded-lg">
+                      <span>{q.icon}</span>
+                      <span className="text-slate-700 dark:text-slate-300 text-xs">{q.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Chat Area */}
+              <div className="md:col-span-2 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                {/* Chat Header */}
+                <div className="flex items-center justify-between p-3 border-b border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+                      <Bot className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-slate-900 dark:text-white text-sm">HeyMarkham AI</h5>
+                      <p className="text-green-600 dark:text-green-400 text-xs flex items-center gap-1">
+                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                        Online
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Welcome */}
+                <div className="p-3 min-h-[150px]">
+                  <div className="h-full flex items-center justify-center">
+                    <div className="text-center">
+                      <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">
+                        Click a question or type below:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Input Area */}
+                <div className="p-3 border-t border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center gap-2">
+                    <button type="button" className="p-1.5 text-slate-400">
+                      <Mic className="w-4 h-4" />
+                    </button>
+                    <input
+                      type="text"
+                      placeholder="Ask me anything about Markham..."
+                      className="flex-1 bg-slate-100 dark:bg-slate-700 rounded-lg px-3 py-1.5 text-slate-900 dark:text-white placeholder-slate-500 text-sm outline-none focus:ring-2 focus:ring-primary-500"
+                    />
+                    <button type="button" className="p-1.5 bg-primary-600 text-white rounded-lg">
+                      <Send className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-8">
+              <p className="text-slate-400 text-sm mb-4">
+                Ready to bring this to your city?
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  href="#contact"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-800 rounded font-semibold transition-all shadow-lg"
+                >
+                  <Calendar size={18} />
+                  Get Started
+                </Link>
+                <a 
+                  href="mailto:info@heymarkham.ai?subject=HeyMarkham Inquiry"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white border border-primary-400 rounded font-semibold transition-all"
+                >
+                  <Mail size={18} />
+                  Contact Us
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Voice-First Experience Section */}
+        <section className="py-16 px-6 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 rounded-full text-purple-300 text-sm font-medium mb-4">
+                <Volume2 className="w-4 h-4" />
+                Voice-First Experience
+              </div>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4">
+                Just Say "Hey Markham" — Get Answers Instantly
+              </h2>
+              <p className="text-lg text-purple-200">
+                Like having a personal city assistant in your pocket. Hands-free, hassle-free, available 24/7.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Phone Mockup */}
+              <div className="flex justify-center">
+                <div className="relative">
+                  <div className="w-64 h-[500px] bg-slate-900 rounded-[3rem] p-3 shadow-2xl border-4 border-slate-700">
+                    <div className="w-full h-full bg-gradient-to-b from-primary-800 to-primary-900 rounded-[2.5rem] overflow-hidden relative">
+                      <div className="flex justify-between items-center px-6 py-3 bg-black/20">
+                        <span className="text-white text-xs">9:41</span>
+                        <div className="flex gap-1">
+                          <Wifi className="w-3 h-3 text-white" />
+                          <PhoneCall className="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                      <div className="p-4 pt-8">
+                        <div className="text-center mb-6">
+                          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <Building2 className="w-8 h-8 text-white" />
+                          </div>
+                          <h3 className="text-white font-bold">HeyMarkham</h3>
+                          <p className="text-purple-200 text-xs">Voice Assistant</p>
+                        </div>
+                        <div className="flex justify-center items-end gap-1 h-16 mb-6">
+                          {[...Array(5)].map((_, i) => (
+                            <div key={i} className="w-2 bg-purple-400 rounded-full animate-pulse" style={{ height: `${Math.random() * 20 + 8}px` }} />
+                          ))}
+                        </div>
+                        <div className="space-y-3">
+                          <div className="bg-white/10 rounded-lg p-3">
+                            <p className="text-white text-sm">"Hey Markham, what's the weather today?"</p>
+                          </div>
+                          <div className="bg-white rounded-lg p-3">
+                            <p className="text-slate-700 text-sm">Today in Markham: Sunny, 22°C. Perfect weather for outdoor activities!</p>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+                          <div className="w-14 h-14 bg-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                            <Mic className="w-6 h-6 text-white" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Volume2 className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">Natural Voice Recognition</h3>
+                    <p className="text-purple-200 text-sm">Speaks naturally, understands accents, and works with multiple languages.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Headphones className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">Hands-Free Operation</h3>
+                    <p className="text-purple-200 text-sm">Perfect for multitasking — use while driving or carrying groceries.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Smartphone className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">Works Everywhere</h3>
+                    <p className="text-purple-200 text-sm">iOS, Android, web browser, smart speakers. Your assistant follows you.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">Wake Word Activation</h3>
+                    <p className="text-purple-200 text-sm">Just say "Hey Markham" to start a conversation anytime.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Hero Section */}
         <section className="relative pt-16 pb-12 md:pt-20 md:pb-16 px-4 bg-primary-700 dark:bg-primary-900">
           <div className="max-w-7xl mx-auto">
@@ -726,52 +960,161 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Section 5: Feature Comparison Table */}
+        {/* Complete Solution Section */}
         <section className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
-              >
-                A Clear Comparison
-              </motion.h2>
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 rounded-full text-green-300 text-sm font-medium mb-4">
+                <Check className="w-4 h-4" />
+                Complete Solution
+              </div>
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
+                All Your City Services in One Place
+              </h2>
+              <p className="text-lg text-slate-600 dark:text-slate-400">
+                From information to transactions — HeyMarkham is your gateway to all municipal services
+              </p>
             </div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700"
-            >
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-slate-100 dark:bg-slate-700">
-                    <th className="text-left py-4 px-6 font-semibold text-slate-900 dark:text-white">Feature</th>
-                    <th className="text-left py-4 px-6 font-semibold text-slate-500 dark:text-slate-400">City Website Today</th>
-                    <th className="text-left py-4 px-6 font-semibold text-primary-600 dark:text-primary-400">HeyMarkham</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {featureComparison.map((row, i) => (
-                    <tr key={i} className="border-t border-slate-100 dark:border-slate-700">
-                      <td className="py-4 px-6 text-slate-900 dark:text-white font-medium">{row.feature}</td>
-                      <td className="py-4 px-6 text-slate-500 dark:text-slate-400">{row.current}</td>
-                      <td className="py-4 px-6 text-primary-600 dark:text-primary-400 font-medium">{row.heymarkham}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </motion.div>
+            {/* Phase 1: Information */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 md:p-8 border border-green-100 dark:border-slate-700 mb-4">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Information Access</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">Your Complete City Guide</p>
+                </div>
+                <div className="ml-auto px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
+                  Production Ready
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+                    <Leaf className="w-5 h-5 text-green-600 dark:text-green-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Garbage & Recycling</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Schedules, what goes where, collection zones</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+                    <Trees className="w-5 h-5 text-green-600 dark:text-green-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Parks & Recreation</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Park locations, facilities, programs</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+                    <CalendarDays className="w-5 h-5 text-green-600 dark:text-green-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Events & Activities</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Community events, programs, workshops</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Phase 2: Integration */}
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 md:p-8 border border-amber-100 dark:border-slate-700 mb-4">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Complete Integration</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">Connected Government Systems</p>
+                </div>
+                <div className="ml-auto px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-sm font-medium">
+                  Q2 2026
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Library System</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Check books, renew items, manage holds</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center">
+                    <Waves className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Recreation Booking</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Book pools, courts, community centers</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center">
+                    <Car className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Permit Applications</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Parking permits, building permits, licenses</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Phase 3: Payments */}
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 md:p-8 border border-purple-100 dark:border-slate-700 mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Unified Payment Center</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">Pay All Bills in One Place</p>
+                </div>
+                <div className="ml-auto px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
+                  Q4 2026
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
+                    <Home className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Property Tax</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">View, pay, set up payment plans</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
+                    <Lightbulb className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Utility Bills</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Hydro, water, gas payments</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
+                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
+                    <CreditCard className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Fines & Fees</h4>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs">Parking tickets, bylaw infractions</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Vision Statement */}
+            <div className="text-center p-8 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl">
+              <h3 className="text-2xl font-bold text-white mb-2">One App. Every Service. Zero Hassle.</h3>
+              <p className="text-primary-100">HeyMarkham is your gateway to all municipal services — information, transactions, and payments.</p>
+            </div>
           </div>
         </section>
-
-
-
 
         {/* Contact Section */}
         <section id="contact" className="py-16 md:py-20 px-6 bg-primary-700 dark:bg-primary-900">

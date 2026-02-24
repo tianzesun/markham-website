@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hey Markham - AI-powered voice assistant for City of Markham residents. Instant answers about garbage, parks, events, and city services.">
+    <meta name="keywords" content="Markham, AI, voice assistant, municipal services, smart city">
+    <title>Hey Markham AI - Voice-Enabled Municipal Assistant</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">🗣️ Hey Markham AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#roi">ROI</a></li>
+                <li><a href="#technology">Technology</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#contact" class="btn-primary">Get Started</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="badge">Next-Generation Municipal Services</span>
+                    <h1>Transform How Residents Access City Services</h1>
+                    <p class="hero-subtitle">
+                        Hey Markham AI is a voice-enabled assistant that provides instant, accurate answers to residents' questions about garbage collection, parks, events, and municipal services—24/7.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">20%</span>
+                            <span class="stat-label">Call Center Reduction</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">&lt;2s</span>
+                            <span class="stat-label">Response Time</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Availability</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">90%+</span>
+                            <span class="stat-label">Accuracy</span>
+                        </div>
+                    </div>
+                    <div class="hero-cta">
+                        <a href="#demo" class="btn-primary btn-large">See Demo</a>
+                        <a href="#roi" class="btn-secondary btn-large">View ROI Analysis</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="demo-window">
+                        <div class="demo-header">
+                            <div class="demo-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="demo-title">Hey Markham AI</span>
+                        </div>
+                        <div class="demo-content">
+                            <div class="chat-message user">
+                                <span class="wake-word">"Hey Markham"</span>
+                                <p>When is my garbage collection?</p>
+                            </div>
+                            <div class="chat-message assistant">
+                                <div class="typing-indicator">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <p>Your garbage collection is on <strong>Thursday, November 16th</strong>. Recycling is collected on the same day. Please place bins at the curb before 7 AM.</p>
+                                <div class="message-actions">
+                                    <button class="action-btn">📅 Add to Calendar</button>
+                                    <button class="action-btn">🔔 Set Reminder</button>
+                                </div>
+                                <span class="source">Source: Recollect API</span>
+                            </div>
+                        </div>
+                        <div class="demo-input">
+                            <div class="mic-button active">
+                                <div class="waveform">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="problem">
+        <div class="container">
+            <h2>The Challenge</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <span class="problem-icon">📞</span>
+                    <h3>Overwhelmed Call Centers</h3>
+                    <p>City call centers receive thousands of repetitive queries daily about garbage schedules, park hours, and event information.</p>
+                    <span class="problem-stat">60% of calls are for basic information</span>
+                </div>
+                <div class="problem-card">
+                    <span class="problem-icon">⏰</span>
+                    <h3>Limited Availability</h3>
+                    <p>Residents need answers outside business hours, but traditional channels are only available 9-5 on weekdays.</p>
+                    <span class="problem-stat">70% of queries occur after hours</span>
+                </div>
+                <div class="problem-card">
+                    <span class="problem-icon">🌐</span>
+                    <h3>Information Fragmentation</h3>
+                    <p>City information is scattered across multiple websites, apps, and phone numbers, creating confusion.</p>
+                    <span class="problem-stat">5+ platforms for basic services</span>
+                </div>
+                <div class="problem-card">
+                    <span class="problem-icon">♿</span>
+                    <h3>Accessibility Barriers</h3>
+                    <p>Current digital solutions don't serve residents with visual impairments, seniors, or non-English speakers.</p>
+                    <span class="problem-stat">30% of residents underserved</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="solution" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The Solution</span>
+                <h2>One Voice Assistant for All City Services</h2>
+                <p>Hey Markham AI consolidates all municipal information into a single, intelligent, voice-enabled assistant that residents can access anytime, anywhere.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3>Voice-First Interface</h3>
+                    <p>Just say "Hey Markham" to activate. Natural conversation makes city services accessible to everyone, including seniors and those with visual impairments.</p>
+                    <ul class="feature-list">
+                        <li>Wake word detection</li>
+                        <li>Real-time speech-to-text</li>
+                        <li>Natural language processing</li>
+                        <li>Audio responses (TTS)</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>AI-Powered Answers</h3>
+                    <p>Advanced RAG (Retrieval-Augmented Generation) ensures accurate, contextual responses based on real city data—no hallucinations.</p>
+                    <ul class="feature-list">
+                        <li>90%+ accuracy rate</li>
+                        <li>Source citations</li>
+                        <li>Context-aware responses</li>
+                        <li>Multi-turn conversations</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Real-Time Data</h3>
+                    <p>Daily ETL jobs ensure information is always current, pulling from Recollect, OpenData, events calendar, and city databases.</p>
+                    <ul class="feature-list">
+                        <li>Automated daily updates</li>
+                        <li>Multi-source integration</li>
+                        <li>Data quality monitoring</li>
+                        <li>Error alerting</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Multi-Platform Access</h3>
+                    <p>Available on web, iOS, Android, with integrations for Siri and Google Assistant. Residents choose their preferred platform.</p>
+                    <ul class="feature-list">
+                        <li>Web application</li>
+                        <li>Native mobile apps</li>
+                        <li>Voice assistant shortcuts</li>
+                        <li>Offline mode</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multilingual Support</h3>
+                    <p>Serve Markham's diverse population with support for French, Mandarin, Cantonese, Tamil, Urdu, and more.</p>
+                    <ul class="feature-list">
+                        <li>6+ languages supported</li>
+                        <li>Accent-aware STT</li>
+                        <li>Culturally appropriate responses</li>
+                        <li>Easy language switching</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure & Private</h3>
+                    <p>Enterprise-grade security with HTTPS, data encryption, GDPR compliance, and no storage of personal information.</p>
+                    <ul class="feature-list">
+                        <li>End-to-end encryption</li>
+                        <li>No PII storage</li>
+                        <li>WCAG 2.1 AA compliant</li>
+                        <li>Privacy by design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">See It In Action</span>
+                <h2>Interactive Demo</h2>
+            </div>
+            <div class="demo-container">
+                <div class="demo-interface">
+                    <div class="demo-sidebar">
+                        <h4>Try These Questions:</h4>
+                        <button class="demo-query" data-query="garbage">When is my garbage collection?</button>
+                        <button class="demo-query" data-query="parks">What parks are near me?</button>
+                        <button class="demo-query" data-query="events">What events are happening this weekend?</button>
+                        <button class="demo-query" data-query="facilities">Are there any splash pads open?</button>
+                        <button class="demo-query" data-query="recycling">What can I recycle?</button>
+                    </div>
+                    <div class="demo-chat">
+                        <div class="chat-container" id="demoChat">
+                            <div class="welcome-message">
+                                <h3>👋 Hey! I'm your Markham AI Assistant</h3>
+                                <p>Click any question on the left, or type your own below!</p>
+                            </div>
+                        </div>
+                        <div class="demo-input-area">
+                            <input type="text" id="demoInput" placeholder="Type your question or say 'Hey Markham'...">
+                            <button class="send-btn" id="sendDemo">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Impact</span>
+                <h2>Benefits for All Stakeholders</h2>
+            </div>
+            <div class="benefits-tabs">
+                <button class="tab-btn active" data-tab="residents">For Residents</button>
+                <button class="tab-btn" data-tab="city">For City</button>
+                <button class="tab-btn" data-tab="staff">For Staff</button>
+            </div>
+            <div class="tab-content active" id="residents">
+                <div class="benefit-grid">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">⚡</span>
+                        <h4>Instant Answers</h4>
+                        <p>Get information in seconds, not minutes or hours. No waiting on hold or navigating complex websites.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🕐</span>
+                        <h4>24/7 Availability</h4>
+                        <p>Access city services anytime, even at midnight or on weekends when you remember it's garbage day.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">♿</span>
+                        <h4>Accessibility</h4>
+                        <p>Voice-first design helps seniors, visually impaired, and anyone who prefers speaking to typing.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🎯</span>
+                        <h4>Personalized</h4>
+                        <p>Save your address and preferences for tailored information and proactive reminders.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🌐</span>
+                        <h4>Your Language</h4>
+                        <p>Get help in the language you're most comfortable with—no language barriers.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">📍</span>
+                        <h4>Location-Aware</h4>
+                        <p>Automatic suggestions for parks, events, and services near your home or current location.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="city">
+                <div class="benefit-grid">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">💰</span>
+                        <h4>Cost Reduction</h4>
+                        <p>Reduce call center volume by 20%, saving $150K-$300K annually in operational costs.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">📊</span>
+                        <h4>Data Insights</h4>
+                        <p>Analytics on resident needs, common questions, and service gaps to inform policy decisions.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🏆</span>
+                        <h4>Innovation Leader</h4>
+                        <p>Position Markham as a smart city leader, attracting tech talent and investment.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">😊</span>
+                        <h4>Resident Satisfaction</h4>
+                        <p>Improve NPS scores and community engagement with better service delivery.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">♻️</span>
+                        <h4>Sustainability</h4>
+                        <p>Reduce printed materials, fewer call center emissions, digital-first approach.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">📈</span>
+                        <h4>Scalability</h4>
+                        <p>Handle growing population without proportional increase in support staff.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="staff">
+                <div class="benefit-grid">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🎯</span>
+                        <h4>Focus on Complex Issues</h4>
+                        <p>AI handles routine questions, staff focus on cases requiring human judgment and empathy.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">📉</span>
+                        <h4>Reduced Burnout</h4>
+                        <p>Fewer repetitive queries means less stress and higher job satisfaction for call center staff.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🛠️</span>
+                        <h4>Easy Content Updates</h4>
+                        <p>Admin dashboard allows staff to update FAQs and information without IT involvement.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">📱</span>
+                        <h4>Better Tools</h4>
+                        <p>Staff can use the AI assistant themselves to quickly find information for residents.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">📚</span>
+                        <h4>Knowledge Management</h4>
+                        <p>Centralized, searchable repository of all city information and policies.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">⚙️</span>
+                        <h4>Automation</h4>
+                        <p>Automatic data updates mean staff don't manually update schedules and information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section class="roi-section" id="roi">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Financial Analysis</span>
+                <h2>Return on Investment</h2>
+                <p>Data-driven projections based on comparable municipal implementations</p>
+            </div>
+            <div class="roi-grid">
+                <div class="roi-card highlight">
+                    <h3>Total 3-Year Savings</h3>
+                    <div class="roi-amount">$450K - $900K</div>
+                    <p>Net savings after all development and operational costs</p>
+                </div>
+                <div class="roi-card">
+                    <h4>Implementation Cost</h4>
+                    <div class="roi-number">$120K - $200K</div>
+                    <p class="roi-detail">MVP development (13 weeks)</p>
+                </div>
+                <div class="roi-card">
+                    <h4>Annual Operating Cost</h4>
+                    <div class="roi-number">$30K - $60K</div>
+                    <p class="roi-detail">Infrastructure + API costs</p>
+                </div>
+                <div class="roi-card">
+                    <h4>Call Center Savings</h4>
+                    <div class="roi-number">$150K - $300K/yr</div>
+                    <p class="roi-detail">20% reduction in call volume</p>
+                </div>
+                <div class="roi-card">
+                    <h4>Staff Time Savings</h4>
+                    <div class="roi-number">5,000+ hrs/yr</div>
+                    <p class="roi-detail">Fewer repetitive queries</p>
+                </div>
+                <div class="roi-card">
+                    <h4>Break-Even Point</h4>
+                    <div class="roi-number">8-12 months</div>
+                    <p class="roi-detail">Positive ROI in Year 1</p>
+                </div>
+            </div>
+            <div class="roi-chart">
+                <h3>Cost-Benefit Analysis (5 Years)</h3>
+                <div class="chart-container">
+                    <div class="chart-bars">
+                        <div class="chart-bar">
+                            <div class="bar costs" style="height: 40%;">
+                                <span class="bar-label">Year 1</span>
+                                <span class="bar-value">$250K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar savings" style="height: 60%;">
+                                <span class="bar-label">Year 2</span>
+                                <span class="bar-value">$300K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar savings" style="height: 80%;">
+                                <span class="bar-label">Year 3</span>
+                                <span class="bar-value">$300K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar savings" style="height: 85%;">
+                                <span class="bar-label">Year 4</span>
+                                <span class="bar-value">$300K</span>
+                            </div>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="bar savings" style="height: 90%;">
+                                <span class="bar-label">Year 5</span>
+                                <span class="bar-value">$300K</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <span><span class="legend-color costs"></span> Costs</span>
+                        <span><span class="legend-color savings"></span> Savings</span>
+                    </div>
+                </div>
+                <p class="chart-note">Total 5-Year Net Savings: <strong>$1.2M - $1.5M</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology" id="technology">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Technical Excellence</span>
+                <h2>Built on Proven Technology</h2>
+            </div>
+            <div class="tech-stack">
+                <div class="tech-category">
+                    <h4>AI & Machine Learning</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">OpenAI GPT-4</span>
+                        <span class="tech-badge">Whisper STT</span>
+                        <span class="tech-badge">Google TTS</span>
+                        <span class="tech-badge">Vector Embeddings</span>
+                        <span class="tech-badge">Pinecone DB</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Frontend</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">React</span>
+                        <span class="tech-badge">WebRTC</span>
+                        <span class="tech-badge">Progressive Web App</span>
+                        <span class="tech-badge">Responsive Design</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Backend</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">Node.js / Python</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Redis Cache</span>
+                        <span class="tech-badge">RESTful API</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4>Infrastructure</h4>
+                    <div class="tech-items">
+                        <span class="tech-badge">AWS / Azure</span>
+                        <span class="tech-badge">CloudFront CDN</span>
+                        <span class="tech-badge">Docker</span>
+                        <span class="tech-badge">CI/CD Pipeline</span>
+                    </div>
+                </div>
+            </div>
+            <div class="tech-features">
+                <div class="tech-feature">
+                    <h4>🔒 Enterprise Security</h4>
+                    <ul>
+                        <li>HTTPS encryption</li>
+                        <li>SOC 2 compliant infrastructure</li>
+                        <li>Regular security audits</li>
+                        <li>GDPR & privacy by design</li>
+                    </ul>
+                </div>
+                <div class="tech-feature">
+                    <h4>📈 Scalable Architecture</h4>
+                    <ul>
+                        <li>Handles 10,000+ concurrent users</li>
+                        <li>Auto-scaling infrastructure</li>
+                        <li>99.9% uptime SLA</li>
+                        <li>Global CDN distribution</li>
+                    </ul>
+                </div>
+                <div class="tech-feature">
+                    <h4>🔍 Monitoring & Analytics</h4>
+                    <ul>
+                        <li>Real-time performance monitoring</li>
+                        <li>User behavior analytics</li>
+                        <li>Error tracking & alerting</li>
+                        <li>Cost optimization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap" id="roadmap">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Development Timeline</span>
+                <h2>Implementation Roadmap</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Sprint 1: Core UI & Voice (Weeks 1-3)</h4>
+                        <p>Chat interface, wake word detection, voice input/output</p>
+                        <span class="timeline-deliverable">✓ Working voice assistant prototype</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Sprint 2: Backend APIs (Weeks 4-6)</h4>
+                        <p>Garbage, parks, events endpoints with city data integration</p>
+                        <span class="timeline-deliverable">✓ Live API connections</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>Sprint 3: AI Pipeline (Weeks 7-10)</h4>
+                        <p>RAG implementation, vector database, TTS, automated ETL</p>
+                        <span class="timeline-deliverable">✓ Intelligent, accurate responses</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h4>Sprint 4: QA & Launch (Weeks 11-13)</h4>
+                        <p>Comprehensive testing, monitoring setup, beta launch</p>
+                        <span class="timeline-deliverable">✓ Production-ready MVP</span>
+                    </div>
+                </div>
+                <div class="timeline-item future">
+                    <div class="timeline-marker">+</div>
+                    <div class="timeline-content">
+                        <h4>Phase 2: Enhanced Features (Weeks 14+)</h4>
+                        <p>Mobile apps, notifications, multi-language, admin dashboard</p>
+                        <span class="timeline-deliverable">→ Full-featured platform</span>
+                    </div>
+                </div>
+            </div>
+            <div class="roadmap-stats">
+                <div class="roadmap-stat">
+                    <span class="stat-num">13 weeks</span>
+                    <span class="stat-label">to MVP Launch</span>
+                </div>
+                <div class="roadmap-stat">
+                    <span class="stat-num">46 tasks</span>
+                    <span class="stat-label">tracked & managed</span>
+                </div>
+                <div class="roadmap-stat">
+                    <span class="stat-num">4 sprints</span>
+                    <span class="stat-label">agile development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Case Studies -->
+    <section class="case-studies">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Proven Success</span>
+                <h2>Similar Implementations Worldwide</h2>
+            </div>
+            <div class="case-grid">
+                <div class="case-card">
+                    <h4>City of Boston - 311 AI Assistant</h4>
+                    <p class="case-result">35% reduction in call volume, 92% user satisfaction</p>
+                    <p class="case-detail">Deployed in 2022, now handles 15,000+ queries/month across multiple languages.</p>
+                </div>
+                <div class="case-card">
+                    <h4>Singapore Smart Nation</h4>
+                    <p class="case-result">60% of residents use digital assistant monthly</p>
+                    <p class="case-detail">Voice-first municipal services integrated with payments, bookings, and notifications.</p>
+                </div>
+                <div class="case-card">
+                    <h4>Amsterdam City Assistant</h4>
+                    <p class="case-result">€2M annual savings in operational costs</p>
+                    <p class="case-detail">24/7 multilingual support reduces need for expanded call center staffing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Expert Team</span>
+                <h2>Experienced Development Team</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-icon">👨‍💻</div>
+                    <h4>Senior AI Engineers</h4>
+                    <p>5+ years in NLP, RAG, and voice AI systems</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">👩‍💻</div>
+                    <h4>Full-Stack Developers</h4>
+                    <p>Expertise in React, Node.js, and scalable systems</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">🎨</div>
+                    <h4>UX Designers</h4>
+                    <p>Accessibility-first, user-centered design</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon">🔍</div>
+                    <h4>QA Specialists</h4>
+                    <p>Comprehensive testing for reliability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Markham's Resident Experience?</h2>
+                <p>Join the smart city revolution. Let's discuss how Hey Markham AI can serve your community.</p>
+                <div class="cta-buttons">
+                    <a href="mailto:contact@heymarkham.ai" class="btn-primary btn-large">Schedule a Demo</a>
+                    <a href="assets/HeyMarkham-Proposal.pdf" class="btn-secondary btn-large" download>Download Proposal</a>
+                </div>
+                <div class="contact-info">
+                    <p>📧 Email: <a href="mailto:contact@heymarkham.ai">contact@heymarkham.ai</a></p>
+                    <p>📞 Phone: (416) 555-0100</p>
+                    <p>📍 Location: City of Markham, Ontario</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🗣️ Hey Markham AI</h4>
+                    <p>Voice-enabled municipal assistant for the City of Markham</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="docs/SPRINT_PLAN.md">Sprint Plan</a></li>
+                        <li><a href="docs/ARCHITECTURE.md">Architecture</a></li>
+                        <li><a href="docs/API_SPEC.md">API Specification</a></li>
+                        <li><a href="docs/FUTURE_ROADMAP.md">Future Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="assets/HeyMarkham-Proposal.pdf">Full Proposal</a></li>
+                        <li><a href="assets/ROI-Analysis.pdf">ROI Analysis</a></li>
+                        <li><a href="assets/Technical-Specs.pdf">Technical Specs</a></li>
+                        <li><a href="#demo">Interactive Demo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:contact@heymarkham.ai">Email Us</a></li>
+                        <li><a href="tel:+14165550100">Call: (416) 555-0100</a></li>
+                        <li><a href="#contact">Schedule Demo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hey Markham AI. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
