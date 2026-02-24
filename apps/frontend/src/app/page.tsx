@@ -538,10 +538,7 @@ export default function HomePage() {
         <section className="py-16 px-6 bg-white dark:bg-slate-950">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 rounded-full text-green-300 text-sm font-medium mb-4">
-                <Check className="w-4 h-4" />
-                Complete Solution
-              </div>
+
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 All Your City Services in One Place
               </h2>
@@ -551,40 +548,40 @@ export default function HomePage() {
             </div>
 
             {/* Phase 1: Information */}
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 md:p-8 border border-green-100 dark:border-slate-700 mb-4">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 mb-4">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold">1</div>
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">Information Access</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">Your Complete City Guide</p>
                 </div>
-                <div className="ml-auto px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
+                <div className="ml-auto px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
                   Production Ready
                 </div>
               </div>
 
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
-                    <Leaf className="w-5 h-5 text-green-600 dark:text-green-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <Leaf className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Garbage & Recycling</h4>
                     <p className="text-slate-600 dark:text-slate-400 text-xs">Schedules, what goes where, collection zones</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
-                    <Trees className="w-5 h-5 text-green-600 dark:text-green-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <Trees className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Parks & Recreation</h4>
                     <p className="text-slate-600 dark:text-slate-400 text-xs">Park locations, facilities, programs</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
-                    <CalendarDays className="w-5 h-5 text-green-600 dark:text-green-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <CalendarDays className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Events & Activities</h4>
@@ -595,40 +592,40 @@ export default function HomePage() {
             </div>
 
             {/* Phase 2: Integration */}
-            <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 md:p-8 border border-amber-100 dark:border-slate-700 mb-4">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 mb-4">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold">2</div>
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">Complete Integration</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">Connected Government Systems</p>
                 </div>
-                <div className="ml-auto px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-sm font-medium">
+                <div className="ml-auto px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
                   Q2 2026
                 </div>
               </div>
 
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Library System</h4>
                     <p className="text-slate-600 dark:text-slate-400 text-xs">Check books, renew items, manage holds</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center">
-                    <Waves className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <Waves className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Recreation Booking</h4>
                     <p className="text-slate-600 dark:text-slate-400 text-xs">Book pools, courts, community centers</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center">
-                    <Car className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <Car className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Permit Applications</h4>
@@ -639,40 +636,40 @@ export default function HomePage() {
             </div>
 
             {/* Phase 3: Payments */}
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 md:p-8 border border-purple-100 dark:border-slate-700 mb-8">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 mb-8">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold">3</div>
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">Unified Payment Center</h3>
                   <p className="text-slate-600 dark:text-slate-400 text-sm">Pay All Bills in One Place</p>
                 </div>
-                <div className="ml-auto px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
+                <div className="ml-auto px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
                   Q4 2026
                 </div>
               </div>
 
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
-                    <Home className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <Home className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Property Tax</h4>
                     <p className="text-slate-600 dark:text-slate-400 text-xs">View, pay, set up payment plans</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
-                    <Lightbulb className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <Lightbulb className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Utility Bills</h4>
                     <p className="text-slate-600 dark:text-slate-400 text-xs">Hydro, water, gas payments</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl">
-                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
-                    <CreditCard className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                    <CreditCard className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Fines & Fees</h4>
@@ -683,7 +680,7 @@ export default function HomePage() {
             </div>
 
             {/* Vision Statement */}
-            <div className="text-center p-8 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl">
+            <div className="text-center p-8 bg-primary-600 dark:bg-primary-800 rounded-2xl">
               <h3 className="text-2xl font-bold text-white mb-2">One App. Every Service. Zero Hassle.</h3>
               <p className="text-primary-100">HeyMarkham is your gateway to all municipal services — information, transactions, and payments.</p>
             </div>
