@@ -15,22 +15,6 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
-  const demoQuestions = [
-    "When is my garbage pickup day?",
-    "What can I put in my blue bin?",
-    "How do I get a parking permit?",
-    "Are there swimming lessons for toddlers?",
-  ];
-
-  const [currentDemoQ, setCurrentDemoQ] = useState(0);
-
-  useEffect(() => {
-    const demoInterval = setInterval(() => {
-      setCurrentDemoQ((prev) => (prev + 1) % demoQuestions.length);
-    }, 5000);
-    return () => clearInterval(demoInterval);
-  }, []);
-
   const clickProblemStats = [
     { value: "12+", label: "Clicks to Find Info", description: "Average on municipal websites" },
     { value: "10+ min", label: "Search Time", description: "For simple questions like pickup schedules" },
@@ -64,20 +48,6 @@ export default function HomePage() {
       outcome: "Life-saving information, instantly accessible"
     },
   ];
-
-  const featureComparison = [
-    { feature: "Finding information", current: "12+ clicks, multiple pages", heymarkham: "1 question, instant answer" },
-    { feature: "Intelligence", current: "Keyword search only", heymarkham: "Understands natural conversation" },
-    { feature: "Source trust", current: "No citations shown", heymarkham: "Every answer cites official sources" },
-    { feature: "Availability", current: "Hard to navigate on mobile", heymarkham: "Mobile-first, voice-enabled" },
-    { feature: "City insights", current: "Basic page view stats", heymarkham: "Real-time resident needs dashboard" },
-  ];
-
-  const pilotInfo = {
-    duration: "90-day pilot",
-    categories: "3 service categories",
-    commitment: "No long-term commitment",
-  };
 
   const ragBenefits = [
     {
@@ -276,10 +246,10 @@ export default function HomePage() {
                         </div>
                         <div className="space-y-3">
                           <div className="bg-white/10 rounded-lg p-3">
-                            <p className="text-white text-sm">"Hey Markham, what's the weather today?"</p>
+                            <p className="text-white text-sm">"Hey Markham, when's my garbage collection?"</p>
                           </div>
                           <div className="bg-white rounded-lg p-3">
-                            <p className="text-slate-700 text-sm">Today in Markham: Sunny, 22°C. Perfect weather for outdoor activities!</p>
+                            <p className="text-slate-700 text-sm">Your garbage is collected every Thursday. Place bins at the curb by 7 AM.</p>
                           </div>
                         </div>
                         <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
