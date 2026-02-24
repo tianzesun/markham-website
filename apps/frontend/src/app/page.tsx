@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { 
   Mic, Search, Brain, 
   ShieldCheck, Phone, Mail, CheckCircle2, 
@@ -85,27 +84,8 @@ export default function HomePage() {
               </p>
 
               <p className="text-lg text-slate-400 mb-6">
-                Try it now — click any question or type your own to see the difference.
+                Used in beta testing with Markham residents.
               </p>
-
-              <p className="text-sm text-slate-500 mb-6">
-                24/7 • Free • Powered by official city data
-              </p>
-            </div>
-
-            {/* Demo Stats Banner */}
-            <div className="flex flex-wrap justify-center gap-4 mb-6">
-              {[
-                { icon: "⚡", label: "Instant responses" },
-                { icon: "🎯", label: "Always accurate" },
-                { icon: "🗣️", label: "Voice or text" },
-                { icon: "24/7", label: "Never closed" }
-              ].map((stat, i) => (
-                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full">
-                  <span>{stat.icon}</span>
-                  <span className="text-white text-sm">{stat.label}</span>
-                </div>
-              ))}
             </div>
 
             {/* Demo Interface */}
@@ -129,29 +109,6 @@ export default function HomePage() {
                     Request a Demo
                   </a>
                 </div>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-8">
-              <p className="text-slate-400 text-sm mb-4">
-                Ready to bring this to your city?
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="#contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-800 rounded font-semibold transition-all shadow-lg"
-                >
-                  <Calendar size={18} />
-                  Get Started
-                </Link>
-                <a 
-                  href="mailto:info@heymarkham.ai?subject=HeyMarkham Inquiry"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white border border-primary-400 rounded font-semibold transition-all"
-                >
-                  <Mail size={18} />
-                  Contact Us
-                </a>
               </div>
             </div>
           </div>
@@ -578,7 +535,7 @@ export default function HomePage() {
         </section>
 
         {/* Complete Solution Section */}
-        <section className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
+        <section className="py-16 px-6 bg-white dark:bg-slate-950">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 rounded-full text-green-300 text-sm font-medium mb-4">
