@@ -10,7 +10,8 @@ import {
   MousePointer, Bot, Link2, Home, Baby, Heart, Zap, Play,
   Smartphone, Volume2, Headphones, CreditCard, BookOpen, Ticket,
   Car, Lightbulb, Shield, Check, PartyPopper, Sparkles, Wifi,
-  PhoneCall, Leaf, Landmark, Waves, Trees, CalendarDays, RefreshCw
+  PhoneCall, Leaf, Landmark, Waves, Trees, CalendarDays, RefreshCw,
+  ArrowRight
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -534,11 +535,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Complete Solution Section */}
+        {/* Complete Solution Section - Development Path Graph */}
         <section className="py-16 px-6 bg-white dark:bg-slate-950">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
-
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 All Your City Services in One Place
               </h2>
@@ -547,140 +547,142 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Phase 1: Information */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 mb-4">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold">1</div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Information Access</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">Your Complete City Guide</p>
-                </div>
-                <div className="ml-auto px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
-                  Production Ready
+            {/* Development Path Graph */}
+            <div className="relative">
+              {/* Connecting Line */}
+              <div className="hidden md:block absolute left-1/2 top-24 bottom-24 w-0.5 bg-gradient-to-b from-primary-500 via-primary-400 to-primary-500 -translate-x-1/2 z-0"></div>
+
+              {/* Phase 1: Information - Left */}
+              <div className="relative z-10 mb-8 md:mb-0">
+                <div className="md:w-5/12 md:pr-8">
+                  <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border-2 border-primary-200 dark:border-primary-800 shadow-lg">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">Information Access</h3>
+                        <p className="text-slate-600 dark:text-slate-400 text-sm">Your Complete City Guide</p>
+                      </div>
+                      <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
+                        Live Now
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                          <Leaf className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Garbage & Recycling</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                          <Trees className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Parks & Recreation</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
+                          <CalendarDays className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Events & Activities</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <Leaf className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Garbage & Recycling</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Schedules, what goes where, collection zones</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <Trees className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Parks & Recreation</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Park locations, facilities, programs</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <CalendarDays className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Events & Activities</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Community events, programs, workshops</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Phase 2: Integration */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 mb-4">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold">2</div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Complete Integration</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">Connected Government Systems</p>
-                </div>
-                <div className="ml-auto px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
-                  Q2 2026
+              {/* Connector Node 1 → 2 */}
+              <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center shadow-lg">
+                  <ArrowRight className="w-5 h-5 text-white" />
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Library System</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Check books, renew items, manage holds</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <Waves className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Recreation Booking</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Book pools, courts, community centers</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <Car className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Permit Applications</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Parking permits, building permits, licenses</p>
+              {/* Phase 2: Integration - Right */}
+              <div className="relative z-10 mb-8 md:mb-0">
+                <div className="md:w-5/12 md:ml-auto md:pl-8">
+                  <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border-2 border-slate-200 dark:border-slate-700 shadow-lg">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-slate-400 dark:bg-slate-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">Complete Integration</h3>
+                        <p className="text-slate-600 dark:text-slate-400 text-sm">Connected Government Systems</p>
+                      </div>
+                      <div className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-sm font-medium">
+                        Q2 2026
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                          <BookOpen className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Library System</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                          <Waves className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Recreation Booking</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                          <Car className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Permit Applications</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Phase 3: Payments */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border border-slate-200 dark:border-slate-700 mb-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center text-primary-600 dark:text-primary-400 font-bold">3</div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">Unified Payment Center</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">Pay All Bills in One Place</p>
-                </div>
-                <div className="ml-auto px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
-                  Q4 2026
+              {/* Connector Node 2 → 3 */}
+              <div className="hidden md:flex absolute left-1/2 bottom-72 -translate-x-1/2 -translate-y-1/2 z-20">
+                <div className="w-10 h-10 bg-slate-400 dark:bg-slate-600 rounded-full flex items-center justify-center shadow-lg">
+                  <ArrowRight className="w-5 h-5 text-white" />
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <Home className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Property Tax</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">View, pay, set up payment plans</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <Lightbulb className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Utility Bills</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Hydro, water, gas payments</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
-                  <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                    <CreditCard className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-slate-900 dark:text-white text-sm">Fines & Fees</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-xs">Parking tickets, bylaw infractions</p>
+              {/* Phase 3: Payments - Left */}
+              <div className="relative z-10">
+                <div className="md:w-5/12 md:pr-8">
+                  <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border-2 border-slate-200 dark:border-slate-700 shadow-lg">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-slate-400 dark:bg-slate-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">Unified Payment Center</h3>
+                        <p className="text-slate-600 dark:text-slate-400 text-sm">Pay All Bills in One Place</p>
+                      </div>
+                      <div className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-sm font-medium">
+                        Q4 2026
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                          <Home className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Property Tax</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                          <Lightbulb className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Utility Bills</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                          <CreditCard className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                        </div>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm">Fines & Fees</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Vision Statement */}
-            <div className="text-center p-8 bg-primary-600 dark:bg-primary-800 rounded-2xl">
+            <div className="mt-12 text-center p-8 bg-primary-600 dark:bg-primary-800 rounded-2xl">
               <h3 className="text-2xl font-bold text-white mb-2">One App. Every Service. Zero Hassle.</h3>
               <p className="text-primary-100">HeyMarkham is your gateway to all municipal services — information, transactions, and payments.</p>
             </div>
