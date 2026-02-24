@@ -16,7 +16,7 @@ import {
 
 export default function HomePage() {
   const clickProblemStats = [
-    { value: "12+", label: "Clicks to Find Info", description: "Average on municipal websites" },
+    { value: "10+", label: "Clicks to Find Info", description: "Average on municipal websites" },
     { value: "10+ min", label: "Search Time", description: "For simple questions like pickup schedules" },
     { value: "5+", label: "Platforms", description: "Residents must navigate multiple systems" },
     { value: "70%", label: "After-Hours", description: "Queries happen when offices are closed" },
@@ -43,7 +43,7 @@ export default function HomePage() {
       icon: <Heart className="w-6 h-6" />,
       persona: "The Senior",
       question: '"Where is the nearest cooling center open right now?"',
-      traditionalPath: "Call 311 → Wait on hold → Hope operator knows → Get transferred → Write down address",
+      traditionalPath: "Call 905.477.5530 → Wait on hold → Hope operator knows → Get transferred → Write down address",
       heymarkhamPath: "Speak the question → Get immediate location + hours → Option for directions",
       outcome: "Life-saving information, instantly accessible"
     },
@@ -275,7 +275,7 @@ export default function HomePage() {
                     <MousePointer className="w-6 h-6 text-red-600 dark:text-red-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white">The "12-Click" Problem</h3>
+                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white">The "Multiple-Click" Problem</h3>
                     <p className="text-slate-500 dark:text-slate-400 text-sm">Finding simple info shouldn't be this hard</p>
                   </div>
                 </div>
@@ -299,9 +299,7 @@ export default function HomePage() {
                     <span className="text-slate-400">→</span>
                     <span className="px-3 py-1 bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 rounded-full font-medium">Find your zone...</span>
                   </div>
-                  <p className="text-red-600 dark:text-red-400 text-sm mt-3 font-medium">
-                    Result: 10+ clicks and still searching
-                  </p>
+
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -535,146 +533,135 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Complete Solution Section - Development Path Graph */}
-        <section className="py-16 px-6 bg-white dark:bg-slate-950">
+        {/* Complete Solution Section - Project Management Board */}
+        <section className="py-16 px-6 bg-slate-100 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 All Your City Services in One Place
               </h2>
               <p className="text-lg text-slate-600 dark:text-slate-400">
-                From information to transactions — HeyMarkham is your gateway to all municipal services
+                Project Roadmap — From information to transactions
               </p>
             </div>
 
-            {/* Development Path Graph */}
-            <div className="relative">
-              {/* Connecting Line */}
-              <div className="hidden md:block absolute left-1/2 top-24 bottom-24 w-0.5 bg-gradient-to-b from-primary-500 via-primary-400 to-primary-500 -translate-x-1/2 z-0"></div>
-
-              {/* Phase 1: Information - Left */}
-              <div className="relative z-10 mb-8 md:mb-0">
-                <div className="md:w-5/12 md:pr-8">
-                  <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border-2 border-primary-200 dark:border-primary-800 shadow-lg">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">Information Access</h3>
-                        <p className="text-slate-600 dark:text-slate-400 text-sm">Your Complete City Guide</p>
+            {/* Kanban Board */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Column: Completed */}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2 mb-4 px-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <h3 className="font-semibold text-slate-900 dark:text-white">Completed</h3>
+                  <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
+                </div>
+                <div className="bg-green-50 dark:bg-green-900/20 rounded-t-xl p-4 border-b-2 border-green-400 flex-shrink-0">
+                  <div className="flex items-center justify-between">
+                    <span className="text-green-700 dark:text-green-300 text-sm font-medium">Information Access</span>
+                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-slate-800 rounded-b-xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 flex-1">
+                  <div className="space-y-3">
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-green-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Leaf className="w-4 h-4 text-green-600" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Garbage & Recycling</span>
                       </div>
-                      <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
-                        Live Now
-                      </div>
+                      <p className="text-xs text-slate-500">Collection schedules, zones, what goes where</p>
                     </div>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                          <Leaf className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Garbage & Recycling</span>
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-green-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Trees className="w-4 h-4 text-green-600" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Parks & Recreation</span>
                       </div>
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                          <Trees className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Parks & Recreation</span>
+                      <p className="text-xs text-slate-500">Park locations, facilities, programs</p>
+                    </div>
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-green-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <CalendarDays className="w-4 h-4 text-green-600" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Events & Activities</span>
                       </div>
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center">
-                          <CalendarDays className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Events & Activities</span>
-                      </div>
+                      <p className="text-xs text-slate-500">Community events, workshops</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Connector Node 1 → 2 */}
-              <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center shadow-lg">
-                  <ArrowRight className="w-5 h-5 text-white" />
+              {/* Column: In Progress */}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2 mb-4 px-2">
+                  <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
+                  <h3 className="font-semibold text-slate-900 dark:text-white">In Progress</h3>
+                  <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
-              </div>
-
-              {/* Phase 2: Integration - Right */}
-              <div className="relative z-10 mb-8 md:mb-0">
-                <div className="md:w-5/12 md:ml-auto md:pl-8">
-                  <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border-2 border-slate-200 dark:border-slate-700 shadow-lg">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-slate-400 dark:bg-slate-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">Complete Integration</h3>
-                        <p className="text-slate-600 dark:text-slate-400 text-sm">Connected Government Systems</p>
+                <div className="bg-amber-50 dark:bg-amber-900/20 rounded-t-xl p-4 border-b-2 border-amber-400 flex-shrink-0">
+                  <div className="flex items-center justify-between">
+                    <span className="text-amber-700 dark:text-amber-300 text-sm font-medium">Integration Phase</span>
+                    <Clock className="w-4 h-4 text-amber-600" />
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-slate-800 rounded-b-xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 flex-1">
+                  <div className="space-y-3">
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-amber-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <BookOpen className="w-4 h-4 text-amber-600" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Library System</span>
                       </div>
-                      <div className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-sm font-medium">
-                        Q2 2026
-                      </div>
+                      <p className="text-xs text-slate-500">Q2 2026 — Check books, renew items</p>
                     </div>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                          <BookOpen className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Library System</span>
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-amber-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Waves className="w-4 h-4 text-amber-600" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Recreation Booking</span>
                       </div>
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                          <Waves className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Recreation Booking</span>
+                      <p className="text-xs text-slate-500">Q2 2026 — Book pools, courts</p>
+                    </div>
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-amber-500">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Car className="w-4 h-4 text-amber-600" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Permit Applications</span>
                       </div>
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                          <Car className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Permit Applications</span>
-                      </div>
+                      <p className="text-xs text-slate-500">Q2 2026 — Parking, building permits</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Connector Node 2 → 3 */}
-              <div className="hidden md:flex absolute left-1/2 bottom-72 -translate-x-1/2 -translate-y-1/2 z-20">
-                <div className="w-10 h-10 bg-slate-400 dark:bg-slate-600 rounded-full flex items-center justify-center shadow-lg">
-                  <ArrowRight className="w-5 h-5 text-white" />
+              {/* Column: Planned */}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2 mb-4 px-2">
+                  <div className="w-3 h-3 bg-slate-400 rounded-full"></div>
+                  <h3 className="font-semibold text-slate-900 dark:text-white">Planned</h3>
+                  <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
-              </div>
-
-              {/* Phase 3: Payments - Left */}
-              <div className="relative z-10">
-                <div className="md:w-5/12 md:pr-8">
-                  <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 border-2 border-slate-200 dark:border-slate-700 shadow-lg">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-slate-400 dark:bg-slate-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white">Unified Payment Center</h3>
-                        <p className="text-slate-600 dark:text-slate-400 text-sm">Pay All Bills in One Place</p>
+                <div className="bg-slate-100 dark:bg-slate-800 rounded-t-xl p-4 border-b-2 border-slate-300 flex-shrink-0">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-600 dark:text-slate-400 text-sm font-medium">Payment Center</span>
+                    <Calendar className="w-4 h-4 text-slate-500" />
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-slate-800 rounded-b-xl p-4 shadow-sm border border-slate-200 dark:border-slate-700 flex-1">
+                  <div className="space-y-3">
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-slate-400">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Home className="w-4 h-4 text-slate-500" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Property Tax</span>
                       </div>
-                      <div className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-sm font-medium">
-                        Q4 2026
-                      </div>
+                      <p className="text-xs text-slate-500">Q4 2026 — View, pay, payment plans</p>
                     </div>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                          <Home className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Property Tax</span>
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-slate-400">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Lightbulb className="w-4 h-4 text-slate-500" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Utility Bills</span>
                       </div>
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                          <Lightbulb className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Utility Bills</span>
+                      <p className="text-xs text-slate-500">Q4 2026 — Hydro, water, gas</p>
+                    </div>
+                    <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-slate-400">
+                      <div className="flex items-center gap-2 mb-1">
+                        <CreditCard className="w-4 h-4 text-slate-500" />
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Fines & Fees</span>
                       </div>
-                      <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                        <div className="w-8 h-8 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                          <CreditCard className="w-4 h-4 text-slate-600 dark:text-slate-400" />
-                        </div>
-                        <span className="text-slate-700 dark:text-slate-300 text-sm">Fines & Fees</span>
-                      </div>
+                      <p className="text-xs text-slate-500">Q4 2026 — Parking tickets</p>
                     </div>
                   </div>
                 </div>
