@@ -109,70 +109,25 @@ export default function HomePage() {
             </div>
 
             {/* Demo Interface */}
-            <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-              {/* Sidebar */}
-              <div className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-                <h4 className="font-semibold text-slate-900 dark:text-white mb-2 text-sm">✨ Popular Questions</h4>
-                <div className="space-y-1">
-                  {[
-                    { icon: "🗑️", text: "When is my garbage collection?" },
-                    { icon: "🌳", text: "What parks are near me?" },
-                    { icon: "🎉", text: "What events this weekend?" },
-                    { icon: "💦", text: "Any splash pads open?" },
-                    { icon: "♻️", text: "What can I recycle?" },
-                  ].map((q, i) => (
-                    <div key={i} className="flex items-center gap-2 p-2 rounded-lg">
-                      <span>{q.icon}</span>
-                      <span className="text-slate-700 dark:text-slate-300 text-xs">{q.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Chat Area */}
-              <div className="md:col-span-2 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-                {/* Chat Header */}
-                <div className="flex items-center justify-between p-3 border-b border-slate-200 dark:border-slate-700">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
-                      <Bot className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-                    </div>
-                    <div>
-                      <h5 className="font-semibold text-slate-900 dark:text-white text-sm">HeyMarkham AI</h5>
-                      <p className="text-green-600 dark:text-green-400 text-xs flex items-center gap-1">
-                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                        Online
-                      </p>
-                    </div>
+            <div className="max-w-3xl mx-auto">
+              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden p-8">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Bot className="w-8 h-8 text-primary-600 dark:text-primary-400" />
                   </div>
-                </div>
-
-                {/* Welcome */}
-                <div className="p-3 min-h-[150px]">
-                  <div className="h-full flex items-center justify-center">
-                    <div className="text-center">
-                      <p className="text-slate-600 dark:text-slate-400 text-sm mb-2">
-                        Click a question or type below:
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Input Area */}
-                <div className="p-3 border-t border-slate-200 dark:border-slate-700">
-                  <div className="flex items-center gap-2">
-                    <button type="button" className="p-1.5 text-slate-400">
-                      <Mic className="w-4 h-4" />
-                    </button>
-                    <input
-                      type="text"
-                      placeholder="Ask me anything about Markham..."
-                      className="flex-1 bg-slate-100 dark:bg-slate-700 rounded-lg px-3 py-1.5 text-slate-900 dark:text-white placeholder-slate-500 text-sm outline-none focus:ring-2 focus:ring-primary-500"
-                    />
-                    <button type="button" className="p-1.5 bg-primary-600 text-white rounded-lg">
-                      <Send className="w-4 h-4" />
-                    </button>
-                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                    Live Demo Available on Request
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400 mb-4">
+                    Experience HeyMarkham AI with real questions and answers in a personalized demo.
+                  </p>
+                  <a 
+                    href="#contact"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-lg font-semibold transition-all"
+                  >
+                    <Calendar size={18} />
+                    Request a Demo
+                  </a>
                 </div>
               </div>
             </div>
@@ -550,7 +505,7 @@ export default function HomePage() {
         </section>
 
         {/* Win Stories */}
-        <section className="py-16 px-6 bg-white dark:bg-slate-950">
+        <section className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <motion.h2 
