@@ -158,11 +158,11 @@ export default function HomePage() {
                   className="flex flex-col sm:flex-row gap-4"
                 >
                   <Link 
-                    href="#pilot"
+                    href="#contact"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-800 rounded font-semibold transition-all shadow-lg"
                   >
                     <Calendar size={18} />
-                    Start Your Pilot
+                    Get Started
                   </Link>
                   <a 
                     href="mailto:info@heymarkham.ai?subject=HeyMarkham Inquiry"
@@ -252,7 +252,7 @@ export default function HomePage() {
                     </button>
                   </div>
                   <p className="text-xs text-center text-slate-400 mt-2">
-                    <a href="#pilot" className="text-primary-600 hover:underline">Request a live demo →</a> to experience the full chatbot
+                    <a href="#contact" className="text-primary-600 hover:underline">Request a live demo →</a> to experience the full chatbot
                   </p>
                 </div>
               </div>
