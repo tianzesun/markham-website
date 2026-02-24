@@ -115,17 +115,17 @@ export default function HomePage() {
         </section>
 
         {/* Voice-First Experience Section */}
-        <section className="py-16 px-6 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900">
+        <section className="py-16 px-6 bg-primary-700 dark:bg-primary-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 rounded-full text-purple-300 text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-primary-200 text-sm font-medium mb-4">
                 <Volume2 className="w-4 h-4" />
                 Voice-First Experience
               </div>
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4">
                 Just Say "Hey Markham" — Get Answers Instantly
               </h2>
-              <p className="text-lg text-purple-200">
+              <p className="text-lg text-primary-200">
                 Like having a personal city assistant in your pocket. Hands-free, hassle-free, available 24/7.
               </p>
             </div>
@@ -149,11 +149,11 @@ export default function HomePage() {
                             <Building2 className="w-8 h-8 text-white" />
                           </div>
                           <h3 className="text-white font-bold">HeyMarkham</h3>
-                          <p className="text-purple-200 text-xs">Voice Assistant</p>
+                          <p className="text-primary-200 text-xs">Voice Assistant</p>
                         </div>
                         <div className="flex justify-center items-end gap-1 h-16 mb-6">
                           {[...Array(5)].map((_, i) => (
-                            <div key={i} className="w-2 bg-purple-400 rounded-full animate-pulse" style={{ height: `${Math.random() * 20 + 8}px` }} />
+                            <div key={i} className="w-2 bg-primary-300 rounded-full animate-pulse" style={{ height: `${Math.random() * 20 + 8}px` }} />
                           ))}
                         </div>
                         <div className="space-y-3">
@@ -165,7 +165,7 @@ export default function HomePage() {
                           </div>
                         </div>
                         <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                          <div className="w-14 h-14 bg-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                          <div className="w-14 h-14 bg-primary-500 rounded-full flex items-center justify-center shadow-lg">
                             <Mic className="w-6 h-6 text-white" />
                           </div>
                         </div>
@@ -178,39 +178,39 @@ export default function HomePage() {
               {/* Features */}
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Volume2 className="w-6 h-6 text-purple-400" />
+                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Volume2 className="w-6 h-6 text-primary-200" />
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Natural Voice Recognition</h3>
-                    <p className="text-purple-200 text-sm">Speaks naturally, understands accents, and works with multiple languages.</p>
+                    <p className="text-primary-200 text-sm">Speaks naturally, understands accents, and works with multiple languages.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Headphones className="w-6 h-6 text-purple-400" />
+                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Headphones className="w-6 h-6 text-primary-200" />
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Hands-Free Operation</h3>
-                    <p className="text-purple-200 text-sm">Perfect for multitasking — use while driving or carrying groceries.</p>
+                    <p className="text-primary-200 text-sm">Perfect for multitasking — use while driving or carrying groceries.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Smartphone className="w-6 h-6 text-purple-400" />
+                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Smartphone className="w-6 h-6 text-primary-200" />
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Works Everywhere</h3>
-                    <p className="text-purple-200 text-sm">iOS, Android, web browser, smart speakers. Your assistant follows you.</p>
+                    <p className="text-primary-200 text-sm">iOS, Android, web browser, smart speakers. Your assistant follows you.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-6 h-6 text-purple-400" />
+                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-6 h-6 text-primary-200" />
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Wake Word Activation</h3>
-                    <p className="text-purple-200 text-sm">Just say "Hey Markham" to start a conversation anytime.</p>
+                    <p className="text-primary-200 text-sm">Just say "Hey Markham" to start a conversation anytime.</p>
                   </div>
                 </div>
               </div>
