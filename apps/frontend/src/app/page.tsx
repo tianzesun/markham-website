@@ -15,6 +15,9 @@ import {
 } from 'lucide-react';
 
 export default function HomePage() {
+  // Generate static heights for voice bars to avoid hydration mismatch
+  const voiceBarHeights = ['16px', '24px', '12px', '20px', '28px'];
+
   const clickProblemStats = [
     { value: "10+", label: "Clicks to Find Info", description: "Average on municipal websites" },
     { value: "10+ min", label: "Search Time", description: "For simple questions like pickup schedules" },
@@ -153,8 +156,8 @@ export default function HomePage() {
                           <p className="text-primary-200 text-xs">Voice Assistant</p>
                         </div>
                         <div className="flex justify-center items-end gap-1 h-16 mb-6">
-                          {[...Array(5)].map((_, i) => (
-                            <div key={i} className="w-2 bg-primary-300 rounded-full animate-pulse" style={{ height: `${Math.random() * 20 + 8}px` }} />
+                          {voiceBarHeights.map((height, i) => (
+                            <div key={i} className="w-2 bg-primary-300 rounded-full animate-pulse" style={{ height }} />
                           ))}
                         </div>
                         <div className="space-y-3">
