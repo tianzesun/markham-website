@@ -1281,6 +1281,62 @@ section {
 }
 
 /* ===================================
+   SMOOTH PERFORMANCE OPTIMIZATIONS
+   =================================== */
+
+/* Hardware acceleration for all animated elements */
+.hero-visual,
+.feature-card,
+.problem-card,
+.benefit-item,
+.capability-card,
+.privacy-card,
+.story-card,
+.ready-card,
+.command-chip,
+.feature-row {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Smooth scrolling for entire page */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+/* Performance optimized transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Remove lag on hover effects */
+.btn-primary,
+.btn-secondary,
+.feature-card,
+.nav-menu a,
+.demo-query,
+.command-chip {
+    transition-duration: 180ms !important;
+}
+
+/* Perfect button animation */
+.btn-primary:active,
+.btn-secondary:active {
+    transform: scale(0.97) !important;
+}
+
+/* Ultra smooth card hover */
+.feature-card:hover,
+.problem-card:hover,
+.benefit-item:hover,
+.capability-card:hover,
+.privacy-card:hover {
+    transition-duration: 250ms;
+}
+
+/* ===================================
    NEW SECTIONS STYLES
    =================================== */
 
