@@ -834,11 +834,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Vision Statement */}
-            <div className="mt-12 text-center p-8 bg-primary-600 dark:bg-primary-800 rounded-2xl">
-              <h3 className="text-2xl font-bold text-white mb-2">One App. Every Service. Zero Hassle.</h3>
-              <p className="text-primary-100">HeyMarkham is your gateway to all municipal services — information, transactions, and payments.</p>
-            </div>
           </div>
         </section>
 
