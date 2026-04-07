@@ -212,9 +212,13 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               id="demo"
-              className="max-w-3xl mx-auto"
+              className="max-w-3xl mx-auto relative group"
             >
-              <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
+              {/* Glow Effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 rounded-2xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-700" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary-500/0 via-primary-400/70 to-primary-500/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
                 {/* Chat Header */}
                 <div className="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
                   <div className="flex items-center gap-3">
