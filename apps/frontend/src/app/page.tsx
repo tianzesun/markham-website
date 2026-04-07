@@ -655,18 +655,25 @@ export default function HomePage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {ragBenefits.map((benefit, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -4, scale: 1.01 }}
-                  transition={{ 
-                    duration: 0.5, delay: i * 0.1,
-                    type: "spring", stiffness: 300, damping: 20
-                  }}
-                  viewport={{ once: true }}
-                  className="flex gap-4 p-6 rounded-xl bg-primary-50 dark:bg-slate-900 border border-primary-100 dark:border-slate-800 cursor-pointer"
-                >
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ 
+                  y: -6, 
+                  scale: 1.015,
+                  boxShadow: "0 20px 40px -12px rgba(var(--primary), 0.15)"
+                }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: i * 0.12,
+                  type: "spring", 
+                  stiffness: 260, 
+                  damping: 20
+                }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="flex gap-4 p-6 rounded-xl bg-primary-50 dark:bg-slate-900 border border-primary-100 dark:border-slate-800 cursor-pointer will-change-transform"
+              >
                   <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center text-primary-600 dark:text-primary-400">
                     {benefit.icon}
                   </div>
