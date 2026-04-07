@@ -6,11 +6,33 @@
   :root {
     --background: 255 255 255;
     --foreground: 15 23 42;
+    --primary-50: 254 242 242;
+    --primary-100: 254 226 226;
+    --primary-200: 254 202 202;
+    --primary-300: 252 165 165;
+    --primary-400: 248 113 113;
+    --primary-500: 239 68 68;
+    --primary-600: 220 38 38;
+    --primary-700: 185 28 28;
+    --primary-800: 153 27 27;
+    --primary-900: 127 29 29;
+    --primary-950: 69 10 10;
   }
 
   .dark {
     --background: 2 6 23;
     --foreground: 248 250 252;
+    --primary-50: 254 242 242;
+    --primary-100: 254 226 226;
+    --primary-200: 254 202 202;
+    --primary-300: 252 165 165;
+    --primary-400: 248 113 113;
+    --primary-500: 239 68 68;
+    --primary-600: 220 38 38;
+    --primary-700: 185 28 28;
+    --primary-800: 153 27 27;
+    --primary-900: 127 29 29;
+    --primary-950: 69 10 10;
   }
 }
 
