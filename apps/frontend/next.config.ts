@@ -8,10 +8,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@heymarkham/ui'],
-  experimental: {
-    viewTransition: true,
-    serverComponentsExternalPackages: ['sharp'],
-  },
+  serverExternalPackages: ['sharp'],
   images: {
     remotePatterns: [
       {
