@@ -24,6 +24,60 @@ export default function HomePage() {
     { status: 'idle', error: null }
   );
 
+  // Demo Chat State
+  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean}>>([
+    { role: 'assistant', content: "👋 Hi there! I'm HeyMarkham. Ask me anything about City of Markham services." }
+  ]);
+  const [demoInput, setDemoInput] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  // Demo responses
+  const demoResponses: Record<string, string> = {
+    'garbage': "Your garbage collection is every Thursday. Please place bins at the curb by 7 AM. Next pickup: April 10th.",
+    'pool': "Markham Pan Am Centre pool closes at 10 PM today. Milliken Pool closes at 8 PM. The outdoor pools open May 18th.",
+    'parking': "Residential parking permits are $70/year. You can apply online at markham.ca/parking. Processing takes 2 business days.",
+    'cooling': "There are 7 cooling centers open right now. The nearest one to you is Milliken Mills Community Center, 5 minutes away.",
+    'recycle': "Blue bin accepts plastic bottles, paper, cardboard, metal cans. No plastic bags, food waste, or styrofoam please."
+  };
+
+  const handleDemoSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!demoInput.trim() || isProcessing) return;
+
+    const userMessage = demoInput;
+    setDemoInput('');
+    setDemoMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+    setIsProcessing(true);
+
+    // Add typing indicator
+    setDemoMessages(prev => [...prev, { role: 'assistant', content: '', isTyping: true }]);
+    
+    // Simulate AI processing
+    await new Promise(resolve => setTimeout(resolve, 1200));
+
+    // Find matching response
+    let response = "I can help with that! For more specific information please request a full demo.";
+    const lowerMessage = userMessage.toLowerCase();
+    
+    for (const [key, value] of Object.entries(demoResponses)) {
+      if (lowerMessage.includes(key)) {
+        response = value;
+        break;
+      }
+    }
+
+    // Replace typing indicator with actual response
+    setDemoMessages(prev => {
+      const newMessages = [...prev];
+      newMessages.pop();
+      newMessages.push({ role: 'assistant', content: response });
+      return newMessages;
+    });
+    
+    setIsProcessing(false);
+  };
+
   const clickProblemStats = [
     { value: "10+", label: "Clicks to Find Info", description: "Average on municipal websites" },
     { value: "10+ min", label: "Search Time", description: "For simple questions like pickup schedules" },
@@ -179,32 +233,77 @@ export default function HomePage() {
                 </div>
                 
                 {/* Chat Messages */}
-                <div className="p-6 h-72 overflow-y-auto space-y-4 bg-slate-900/50">
-                  <div className="flex gap-3">
-                    <div className="w-8 h-8 bg-primary-600 rounded-full flex-shrink-0 flex items-center justify-center">
-                      <Bot className="w-4 h-4 text-white" />
+                <div className="p-6 h-72 overflow-y-auto space-y-4 bg-slate-900/50 scroll-smooth">
+                  {demoMessages.map((msg, i) => (
+                    <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
+                      {msg.role === 'assistant' && (
+                        <div className="w-8 h-8 bg-primary-600 rounded-full flex-shrink-0 flex items-center justify-center">
+                          <Bot className="w-4 h-4 text-white" />
+                        </div>
+                      )}
+                      <div className={`${msg.role === 'user' 
+                        ? 'bg-primary-600 rounded-2xl rounded-tr-none' 
+                        : 'bg-slate-800 rounded-2xl rounded-tl-none'} px-4 py-3 max-w-md`}>
+                        {msg.isTyping ? (
+                          <div className="flex gap-1 items-center h-5">
+                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                          </div>
+                        ) : (
+                          <p className="text-white text-sm">{msg.content}</p>
+                        )}
+                      </div>
+                      {msg.role === 'user' && (
+                        <div className="w-8 h-8 bg-slate-600 rounded-full flex-shrink-0 flex items-center justify-center">
+                          <Users className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
-                    <div className="bg-slate-800 rounded-2xl rounded-tl-none px-4 py-3 max-w-md">
-                      <p className="text-white text-sm">👋 Hi there! I'm HeyMarkham. Ask me anything about City of Markham services.</p>
-                      <p className="text-slate-400 text-xs mt-2">Try: "When is garbage pickup?" or "Where is the nearest pool?"</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
                 
                 {/* Input Area */}
                 <div className="p-4 border-t border-slate-700 bg-slate-900">
-                  <div className="flex gap-3">
-                    <button className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all active:scale-95">
+                  <form onSubmit={handleDemoSubmit} className="flex gap-3">
+                    <button 
+                      type="button"
+                      onClick={() => setIsRecording(!isRecording)}
+                      className={`w-12 h-12 ${isRecording 
+                        ? 'bg-red-500 animate-pulse' 
+                        : 'bg-primary-600 hover:bg-primary-500'} rounded-xl flex items-center justify-center transition-all active:scale-95`}
+                    >
                       <Mic className="w-5 h-5 text-white" />
                     </button>
                     <input 
                       type="text" 
                       placeholder="Ask HeyMarkham anything..."
-                      className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      value={demoInput}
+                      onChange={(e) => setDemoInput(e.target.value)}
+                      disabled={isProcessing}
+                      className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50"
                     />
-                    <button className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all">
+                    <button 
+                      type="submit"
+                      disabled={isProcessing || !demoInput.trim()}
+                      className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
                       <Send className="w-5 h-5 text-white" />
                     </button>
+                  </form>
+                  
+                  {/* Quick Suggestions */}
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {['Garbage pickup', 'Pool hours', 'Parking permit', 'Cooling center'].map((suggestion) => (
+                      <button
+                        key={suggestion}
+                        type="button"
+                        onClick={() => setDemoInput(suggestion)}
+                        className="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors"
+                      >
+                        {suggestion}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
