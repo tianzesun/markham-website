@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useSpring, useTransform, useMotionValue, useMotionTemplate } from 'framer-motion';
 import { 
   Mic, Search, Brain, 
   ShieldCheck, Phone, Mail, CheckCircle2, 
@@ -135,11 +135,46 @@ export default function HomePage() {
     },
   ];
 
+  // Mouse parallax effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const heroRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], [2, -2]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-2, 2]);
+  const glowX = useTransform(mouseX, [-0.5, 0.5], ['30%', '70%']);
+  const glowY = useTransform(mouseY, [-0.5, 0.5], ['30%', '70%']);
+  const glowPosition = useMotionTemplate`${glowX} ${glowY}`;
+
   return (
     <div className="min-h-screen w-full flex flex-col bg-white dark:bg-slate-950">
       <main className="flex-grow">
         {/* Hero Section - Interactive Demo */}
-        <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+        <section ref={heroRef} className="relative pt-12 pb-20 md:pt-20 md:pb-28 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+          {/* Mouse following glow orb */}
+          <motion.div 
+            className="absolute w-[500px] h-[500px] bg-primary-500/15 rounded-full blur-3xl pointer-events-none"
+            style={{
+              left: glowX,
+              top: glowY,
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
@@ -209,7 +244,16 @@ export default function HomePage() {
             {/* Live Interactive Demo */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                rotateX: rotateX,
+                rotateY: rotateY,
+              }}
+              style={{
+                perspective: 1000,
+                transformPerspective: 1000,
+              }}
               transition={{ duration: 0.8, delay: 0.4 }}
               id="demo"
               className="max-w-3xl mx-auto relative group"
