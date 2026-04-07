@@ -219,26 +219,32 @@ export default function HomePage() {
                 The AI voice assistant that answers your city questions 24/7. No hold times, no clicking through 12 pages. Just ask.
               </motion.p>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-wrap justify-center gap-4"
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              <motion.a 
+                href="#demo"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold text-lg transition-all shadow-xl shadow-primary-600/20 hover:shadow-primary-500/30"
               >
-                <a 
-                  href="#demo"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold text-lg transition-all shadow-xl shadow-primary-600/20 hover:shadow-primary-500/30 hover:-translate-y-0.5"
-                >
-                  <Play className="w-5 h-5 fill-current" />
-                  Try The Demo
-                </a>
-                <a 
-                  href="#how-it-works"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/15 text-white rounded-xl font-semibold text-lg transition-all border border-white/20"
-                >
-                  How It Works
-                </a>
-              </motion.div>
+                <Play className="w-5 h-5 fill-current" />
+                Try The Demo
+              </motion.a>
+              <motion.a 
+                href="#how-it-works"
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/15 text-white rounded-xl font-semibold text-lg transition-all border border-white/20"
+              >
+                How It Works
+              </motion.a>
+            </motion.div>
             </div>
 
             {/* Live Interactive Demo */}
