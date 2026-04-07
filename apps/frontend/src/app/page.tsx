@@ -85,42 +85,130 @@ export default function HomePage() {
     <div className="min-h-screen w-full flex flex-col bg-white dark:bg-slate-950">
       <main className="flex-grow">
         {/* Hero Section - Interactive Demo */}
-        <section className="relative pt-8 pb-12 md:pt-12 md:pb-16 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-          <div className="max-w-7xl mx-auto">
+        <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+              backgroundSize: '40px 40px'
+            }} />
+          </div>
+          
+          <div className="max-w-7xl mx-auto relative z-10">
             {/* Header Text */}
-            <div className="text-center max-w-3xl mx-auto mb-8">
-              <p className="text-xl md:text-2xl font-bold text-white mb-4">
-                The AI assistant that answers resident questions instantly, 24/7, with zero city staff involvement.
-              </p>
+            <div className="text-center max-w-4xl mx-auto mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-600/20 rounded-full text-primary-300 text-sm font-medium mb-6 border border-primary-500/30">
+                  <Sparkles className="w-4 h-4" />
+                  Now in Public Beta for Markham Residents
+                </div>
+              </motion.div>
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+              >
+                Ask Markham.
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-300">
+                  Get Answers Instantly.
+                </span>
+              </motion.h1>
 
-              <p className="text-lg text-slate-400 mb-6">
-                Used in beta testing with Markham residents.
-              </p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl mx-auto"
+              >
+                The AI voice assistant that answers your city questions 24/7. No hold times, no clicking through 12 pages. Just ask.
+              </motion.p>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-wrap justify-center gap-4"
+              >
+                <a 
+                  href="#demo"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold text-lg transition-all shadow-xl shadow-primary-600/20 hover:shadow-primary-500/30 hover:-translate-y-0.5"
+                >
+                  <Play className="w-5 h-5 fill-current" />
+                  Try The Demo
+                </a>
+                <a 
+                  href="#how-it-works"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/15 text-white rounded-xl font-semibold text-lg transition-all border border-white/20"
+                >
+                  How It Works
+                </a>
+              </motion.div>
             </div>
 
-            {/* Demo Interface */}
-            <div className="max-w-3xl mx-auto">
-              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden p-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Bot className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+            {/* Live Interactive Demo */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              id="demo"
+              className="max-w-3xl mx-auto"
+            >
+              <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
+                {/* Chat Header */}
+                <div className="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
+                      <Building2 className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white">HeyMarkham Assistant</h3>
+                      <div className="flex items-center gap-1.5 text-xs text-green-400">
+                        <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+                        Online & Ready
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-                    Live Demo Available on Request
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-400 mb-4">
-                    Experience HeyMarkham AI with real questions and answers in a personalized demo.
-                  </p>
-                  <a 
-                    href="#contact"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-lg font-semibold transition-all"
-                  >
-                    <Calendar size={18} />
-                    Request a Demo
-                  </a>
+                  <span className="text-xs text-slate-500">Beta Demo</span>
+                </div>
+                
+                {/* Chat Messages */}
+                <div className="p-6 h-72 overflow-y-auto space-y-4 bg-slate-900/50">
+                  <div className="flex gap-3">
+                    <div className="w-8 h-8 bg-primary-600 rounded-full flex-shrink-0 flex items-center justify-center">
+                      <Bot className="w-4 h-4 text-white" />
+                    </div>
+                    <div className="bg-slate-800 rounded-2xl rounded-tl-none px-4 py-3 max-w-md">
+                      <p className="text-white text-sm">👋 Hi there! I'm HeyMarkham. Ask me anything about City of Markham services.</p>
+                      <p className="text-slate-400 text-xs mt-2">Try: "When is garbage pickup?" or "Where is the nearest pool?"</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Input Area */}
+                <div className="p-4 border-t border-slate-700 bg-slate-900">
+                  <div className="flex gap-3">
+                    <button className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all active:scale-95">
+                      <Mic className="w-5 h-5 text-white" />
+                    </button>
+                    <input 
+                      type="text" 
+                      placeholder="Ask HeyMarkham anything..."
+                      className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    />
+                    <button className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all">
+                      <Send className="w-5 h-5 text-white" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
