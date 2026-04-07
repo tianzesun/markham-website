@@ -4,7 +4,11 @@ import '../styles/globals.css'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
