@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@heymarkham/ui'],
   serverExternalPackages: ['sharp'],
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
+  productionBrowserSourceMaps: false,
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
+  },
   images: {
     remotePatterns: [
       {
@@ -38,8 +45,6 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
-  compress: true,
-  poweredByHeader: false,
 }
 
 export default bundleAnalyzer(nextConfig)
