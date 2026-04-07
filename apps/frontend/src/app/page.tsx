@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Mic, Search, Brain, 
@@ -13,10 +13,16 @@ import {
   PhoneCall, Leaf, Landmark, Waves, Trees, CalendarDays, RefreshCw,
   ArrowRight
 } from 'lucide-react';
+import { submitContactForm } from './actions/contact';
 
 export default function HomePage() {
   // Generate static heights for voice bars to avoid hydration mismatch
   const voiceBarHeights = ['16px', '24px', '12px', '20px', '28px'];
+  
+  // Optimistic update for contact form
+  const [optimisticContact, setOptimisticContact] = useState<{ status: 'idle' | 'success' | 'error'; error: string | null }>(
+    { status: 'idle', error: null }
+  );
 
   const clickProblemStats = [
     { value: "10+", label: "Clicks to Find Info", description: "Average on municipal websites" },
@@ -430,36 +436,6 @@ export default function HomePage() {
                 </motion.div>
               ))}
             </div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="mt-12 bg-slate-50 dark:bg-slate-900 rounded-xl p-8 border border-slate-200 dark:border-slate-800"
-            >
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <Link2 className="w-5 h-5 text-primary-600" />
-                See It In Action: Verified by Source
-              </h3>
-              <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
-                <div className="flex items-start gap-3">
-                  <Building2 className="text-primary-600 flex-shrink-0 mt-0.5" size={18} />
-                  <div>
-                    <p className="text-slate-700 dark:text-slate-300 mb-3">
-                      "Yard waste collection runs from April to December on your regular garbage day. Bundle branches in 1.2m lengths, tie with string."
-                    </p>
-                    <div className="flex items-center gap-2 text-sm">
-                      <ShieldCheck className="w-4 h-4 text-green-600" />
-                      <span className="text-primary-600 dark:text-primary-400 font-medium">Source:</span>
-                      <a href="#" className="text-blue-600 dark:text-blue-400 underline hover:no-underline">
-                        markham.ca/waste-and-environment/yard-waste
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </section>
 
@@ -679,69 +655,201 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-16 md:py-20 px-6 bg-primary-700 dark:bg-primary-900">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-2xl md:text-3xl font-serif font-bold text-white mb-4"
-            >
-              Ready to Transform Resident Services?
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-primary-100 mb-8"
-            >
-              Start with a pilot. See the results. Then decide.
-            </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
-            >
-              <a 
-                href="mailto:info@heymarkham.ai?subject=Pilot Program Request" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-primary-800 rounded-lg font-semibold transition-all"
-              >
-                <Mail size={18} />
-                info@heymarkham.ai
-              </a>
-              <a 
-                href="mailto:info@heymarkham.ai?subject=Schedule a Call" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white border border-primary-400 rounded-lg font-semibold transition-all"
-              >
-                <Calendar size={18} />
-                Schedule a Call
-              </a>
-            </motion.div>
+         {/* Contact Section */}
+         <section id="contact" className="py-16 md:py-20 px-6 bg-primary-700 dark:bg-primary-900">
+           <div className="max-w-5xl mx-auto">
+             <div className="text-center mb-12">
+               <motion.h2 
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.5 }}
+                 viewport={{ once: true }}
+                 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4"
+               >
+                 Ready to Transform Resident Services?
+               </motion.h2>
+               <motion.p 
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.5, delay: 0.1 }}
+                 viewport={{ once: true }}
+                 className="text-primary-100"
+               >
+                 Start with a pilot. See the results. Then decide.
+               </motion.p>
+             </div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="flex flex-wrap justify-center gap-6 text-primary-200 text-sm"
-            >
-              <div className="flex items-center gap-2">
-                <MapPin size={16} />
-                <span>Serving Markham, Ontario</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock size={16} />
-                <span>Response within 24 hours</span>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+             <div className="grid md:grid-cols-2 gap-12">
+               {/* Contact Info */}
+               <motion.div 
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.5 }}
+                 viewport={{ once: true }}
+                 className="space-y-8"
+               >
+                 <div className="text-left">
+                   <h3 className="text-xl font-bold text-white mb-4">Why Choose HeyMarkham?</h3>
+                   <div className="space-y-4">
+                     <div className="flex gap-4">
+                       <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                         <Zap className="w-5 h-5 text-primary-200" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-medium">Quick Implementation</h4>
+                         <p className="text-primary-200 text-sm">Deploy in weeks, not months. Our solution integrates with your existing systems.</p>
+                       </div>
+                     </div>
+                     <div className="flex gap-4">
+                       <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                         <Users className="w-5 h-5 text-primary-200" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-medium">Reduce Call Volume</h4>
+                         <p className="text-primary-200 text-sm">Handle 80% of common questions automatically, freeing staff for complex issues.</p>
+                       </div>
+                     </div>
+                     <div className="flex gap-4">
+                       <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                         <ShieldCheck className="w-5 h-5 text-primary-200" />
+                       </div>
+                       <div>
+                         <h4 className="text-white font-medium">Enterprise Security</h4>
+                         <p className="text-primary-200 text-sm">PIPEDA compliant, WCAG 2.1 AA accessible, with 99.9% uptime guarantee.</p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div className="pt-6">
+                   <h3 className="text-xl font-bold text-white mb-4">Get in Touch</h3>
+                   <div className="space-y-3">
+                     <div className="flex items-center gap-3 text-primary-200">
+                       <Mail className="w-5 h-5" />
+                       <a href="mailto:info@heymarkham.ai" className="hover:text-white transition-colors">info@heymarkham.ai</a>
+                     </div>
+                     <div className="flex items-center gap-3 text-primary-200">
+                       <Building2 className="w-5 h-5" />
+                       <span>City of Markham, Ontario</span>
+                     </div>
+                     <div className="flex items-center gap-3 text-primary-200">
+                       <Globe className="w-5 h-5" />
+                       <a href="https://markham.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">markham.ca</a>
+                     </div>
+                   </div>
+                 </div>
+               </motion.div>
+
+               {/* Contact Form */}
+               <motion.div 
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.5, delay: 0.2 }}
+                 viewport={{ once: true }}
+               >
+                 <form 
+                   onSubmit={async (e) => {
+                     e.preventDefault();
+                     const formData = new FormData(e.target as HTMLFormElement);
+                     const result = await submitContactForm(formData);
+                      if (result.success) {
+                        setOptimisticContact({ status: 'success', error: null });
+                      } else {
+                        setOptimisticContact({ status: 'error', error: result.error || 'Failed to send' });
+                      }
+                   }}
+                   className="space-y-5 bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
+                 >
+                   <div>
+                     <label htmlFor="name" className="block text-sm font-medium text-primary-100 mb-2">
+                       Name
+                     </label>
+                     <input
+                       type="text"
+                       id="name"
+                       name="name"
+                       autoComplete="name"
+                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                       placeholder="Your name"
+                       required
+                     />
+                   </div>
+                   <div>
+                     <label htmlFor="email" className="block text-sm font-medium text-primary-100 mb-2">
+                       Email
+                     </label>
+                     <input
+                       type="email"
+                       id="email"
+                       name="email"
+                       autoComplete="email"
+                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                       placeholder="your@email.com"
+                       required
+                     />
+                   </div>
+                   
+                   <div>
+                     <label htmlFor="subject" className="block text-sm font-medium text-primary-100 mb-2">
+                       Subject
+                     </label>
+                     <input
+                       type="text"
+                       id="subject"
+                       name="subject"
+                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                       placeholder="How can we help?"
+                       required
+                     />
+                   </div>
+                   
+                   <div>
+                     <label htmlFor="message" className="block text-sm font-medium text-primary-100 mb-2">
+                       Message
+                     </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={4}
+                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all resize-none"
+                        placeholder="Tell us more about your needs..."
+                        required
+                      />
+                   </div>
+                   
+                   <div>
+                     <button 
+                       type="submit"
+                       className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-700 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl"
+                     >
+                       Send Message
+                       <ArrowRight size={18} />
+                     </button>
+                   </div>
+                   
+                    {/* Status message */}
+                    <div className="text-center text-sm min-h-[20px]">
+                     {optimisticContact.status === 'idle' && (
+                       <p className="text-primary-200">
+                         We'll get back to you within 24 hours
+                       </p>
+                     )}
+                     {optimisticContact.status === 'success' && (
+                       <p className="text-green-300">
+                         Message sent! We'll get back to you shortly.
+                       </p>
+                     )}
+                     {optimisticContact.status === 'error' && (
+                       <p className="text-red-300">
+                         {optimisticContact.error || 'Failed to send message'}
+                       </p>
+                     )}
+                   </div>
+                 </form>
+               </motion.div>
+             </div>
+           </div>
+         </section>
       </main>
     </div>
   );
