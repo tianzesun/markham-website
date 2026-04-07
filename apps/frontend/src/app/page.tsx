@@ -252,13 +252,13 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ 
                 opacity: 1, 
-                y: 0,
+                y: 0
               }}
               style={{
                 perspective: 1000,
                 transformPerspective: 1000,
                 rotateX: rotateX,
-                rotateY: rotateY,
+                rotateY: rotateY
               }}
               transition={{ duration: 0.8, delay: 0.4 }}
               id="demo"
