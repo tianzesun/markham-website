@@ -1,12 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { Mic, Menu, X, ArrowRight } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { scrollY } = useScroll();
+  
+  const headerOpacity = useTransform(scrollY, [0, 80], [0.7, 0.95]);
+  const headerBlur = useTransform(scrollY, [0, 80], [8, 20]);
+  const headerShadow = useTransform(scrollY, [0, 80], ['0 0 0 0 transparent', '0 4px 20px -5px rgba(0, 0, 0, 0.1)']);
+  const headerBorder = useTransform(scrollY, [0, 80], ['rgba(255, 255, 255, 0)', 'rgba(229, 231, 235, 0.8)']);
 
   const navigation = [
     { name: 'Features', href: '#features' },
@@ -15,7 +21,15 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
+    <motion.header 
+      style={{
+        backgroundColor: headerOpacity,
+        backdropFilter: headerBlur,
+        boxShadow: headerShadow,
+        borderColor: headerBorder,
+      }}
+      className="fixed top-0 left-0 right-0 z-[100] backdrop-blur-md border-b transition-all duration-300"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
