@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Mic, Menu, X, ArrowRight } from 'lucide-react';
+import { useMagneticEffect } from '../hooks/useMagneticEffect';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,13 +76,15 @@ export const Header: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="hidden md:flex items-center gap-3"
           >
-            <Link
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium text-sm transition-all shadow-sm"
-            >
-              Get Started
-              <ArrowRight size={16} />
-            </Link>
+            <MagneticButton>
+              <Link
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium text-sm transition-all shadow-sm btn-hover"
+              >
+                Get Started
+                <ArrowRight size={16} />
+              </Link>
+            </MagneticButton>
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -126,5 +129,15 @@ export const Header: React.FC = () => {
         </motion.div>
       </div>
     </header>
+
+const MagneticButton = ({ children }: { children: React.ReactNode }) => {
+  const { ref, x, y } = useMagneticEffect();
+  return (
+    <motion.div ref={ref} style={{ x, y }}>
+      {children}
+    </motion.div>
+  );
+};
+
   );
 };
