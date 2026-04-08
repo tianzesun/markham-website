@@ -17,6 +17,31 @@ const iconMap = {
 };
 
 export const FeatureCard: React.FC<FeatureProps> = ({ title, description, iconType, index }) => {
+  const rotateX = useRef<MotionValue<number>>(motionValue(0)).current;
+  const rotateY = useRef<MotionValue<number>>(motionValue(0)).current;
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!e.currentTarget) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateXValue = (y - centerY) / 10;
+    const rotateYValue = (centerX - x) / 10;
+    
+    animate(rotateX, rotateXValue, { type: 'spring', stiffness: 300, damping: 30 });
+    animate(rotateY, rotateYValue, { type: 'spring', stiffness: 300, damping: 30 });
+  };
+  
+  const handleMouseLeave = () => {
+    animate(rotateX, 0, { type: 'spring', stiffness: 300, damping: 30 });
+    animate(rotateY, 0, { type: 'spring', stiffness: 300, damping: 30 });
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -31,6 +56,13 @@ export const FeatureCard: React.FC<FeatureProps> = ({ title, description, iconTy
         y: -6,
         transition: { duration: 0.2, ease: [0.34, 1.56, 0.64, 1] }
       }}
+      style={{
+        rotateX,
+        rotateY,
+        transformPerspective: 1000,
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className="p-6 rounded-2xl glass-card card-hover group"
     >
       <motion.div 
