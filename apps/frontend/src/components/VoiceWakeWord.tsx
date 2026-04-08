@@ -4,18 +4,35 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+interface ISpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onresult: ((event: any) => void) | null;
+  onerror: ((event: any) => void) | null;
+  onend: (() => void) | null;
+  start(): void;
+  stop(): void;
+}
+
+interface SpeechRecognitionConstructor {
+  new (): ISpeechRecognition;
+}
+
 declare global {
   interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
+    SpeechRecognition?: SpeechRecognitionConstructor;
+    webkitSpeechRecognition?: SpeechRecognitionConstructor;
   }
 }
+
+export {};
 
 export const VoiceWakeWord = () => {
   const [isListening, setIsListening] = useState(false);
   const [isWakeWordActive, setIsWakeWordActive] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
 
   const speak = useCallback((text: string) => {
@@ -39,7 +56,7 @@ export const VoiceWakeWord = () => {
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = 'en-CA';
 
-      recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
+      recognitionRef.current.onresult = (event: any) => {
         const current = event.results[event.results.length - 1];
         const text = current[0].transcript.toLowerCase().trim();
         setTranscript(text);
