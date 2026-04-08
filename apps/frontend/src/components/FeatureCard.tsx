@@ -21,15 +21,30 @@ export const FeatureCard: React.FC<FeatureProps> = ({ title, description, iconTy
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-300 dark:hover:border-slate-700 transition-all"
+      transition={{ 
+        delay: index * 0.1,
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1]
+      }}
+      viewport={{ once: true, margin: "-40px" }}
+      whileHover={{ 
+        y: -6,
+        transition: { duration: 0.2, ease: [0.34, 1.56, 0.64, 1] }
+      }}
+      className="p-6 rounded-2xl glass-card card-hover group"
     >
-      <div className="mb-3 p-2.5 w-fit rounded-lg bg-primary-100 dark:bg-primary-900/50">
+      <motion.div 
+        className="mb-4 p-3 w-fit rounded-xl bg-gradient-to-br from-primary-50 to-primary-100 group-hover:from-primary-100 group-hover:to-primary-200 transition-all duration-300"
+        whileHover={{ 
+          scale: 1.05,
+          rotate: 3,
+          transition: { duration: 0.3 }
+        }}
+      >
         {iconMap[iconType]}
-      </div>
-      <h3 className="font-semibold text-slate-900 dark:text-white">{title}</h3>
-      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+      </motion.div>
+      <h3 className="font-semibold text-slate-900 text-lg mb-2 group-hover:text-primary-700 transition-colors duration-300">{title}</h3>
+      <p className="text-sm text-slate-600 leading-relaxed">
         {description}
       </p>
     </motion.div>
