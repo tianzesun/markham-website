@@ -238,16 +238,6 @@ export default function HomePage() {
               className="flex flex-wrap justify-center gap-4"
             >
               <motion.a 
-                href="#demo"
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold text-lg transition-all shadow-xl shadow-primary-600/20 hover:shadow-primary-500/30"
-              >
-                <Play className="w-5 h-5 fill-current" />
-                Try The Demo
-              </motion.a>
-              <motion.a 
                 href="#how-it-works"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
