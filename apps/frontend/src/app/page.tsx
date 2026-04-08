@@ -64,21 +64,7 @@ export default function HomePage() {
     setDemoMessages(prev => [...prev, { role: 'assistant', content: '', isTyping: true }]);
     
     // RAG Search Simulation phases
-    await new Promise(resolve => setTimeout(resolve, 400));
-    
-    // Update indicator to show searching
-    setDemoMessages(prev => {
-      const newMessages = [...prev];
-      newMessages[newMessages.length - 1] = { 
-        role: 'assistant', 
-        content: '', 
-        isTyping: true,
-        state: 'searching'
-      };
-      return newMessages;
-    });
-    
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 1200));
     
     // Find actual matching response from knowledge base
     const response = findAnswer(userMessage);
