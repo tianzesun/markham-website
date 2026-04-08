@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
+import { VoiceWakeWord } from '../components/VoiceWakeWord'
 import { useEffect, useRef } from 'react'
 
 const inter = Inter({ 
@@ -57,6 +58,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <VoiceWakeWord />
       </body>
     </html>
   )

@@ -14,6 +14,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { submitContactForm } from './actions/contact';
+import { findAnswer } from '../lib/faq-data';
 
 export default function HomePage() {
   // Generate static heights for voice bars to avoid hydration mismatch
@@ -31,6 +32,15 @@ export default function HomePage() {
   const [demoInput, setDemoInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Auto scroll chat to bottom
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [demoMessages]);
 
   // Demo responses
   const demoResponses: Record<string, string> = {
@@ -56,16 +66,8 @@ export default function HomePage() {
     // Simulate AI processing
     await new Promise(resolve => setTimeout(resolve, 1200));
 
-    // Find matching response
-    let response = "I can help with that! For more specific information please request a full demo.";
-    const lowerMessage = userMessage.toLowerCase();
-    
-    for (const [key, value] of Object.entries(demoResponses)) {
-      if (lowerMessage.includes(key)) {
-        response = value;
-        break;
-      }
-    }
+    // Find matching response from 100+ FAQ database
+    let response = findAnswer(userMessage);
 
     // Replace typing indicator with actual response
     setDemoMessages(prev => {
@@ -287,7 +289,7 @@ export default function HomePage() {
                 </div>
                 
                 {/* Chat Messages */}
-                <div className="p-6 h-72 overflow-y-auto space-y-4 bg-slate-900/50 scroll-smooth">
+                <div ref={chatContainerRef} className="p-6 h-72 overflow-y-auto space-y-4 bg-slate-900/50 scroll-smooth">
                   {demoMessages.map((msg, i) => (
                     <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                       {msg.role === 'assistant' && (
@@ -340,7 +342,7 @@ export default function HomePage() {
                     <button 
                       type="submit"
                       disabled={isProcessing || !demoInput.trim()}
-                      className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900"
                     >
                       <Send className="w-5 h-5 text-white" />
                     </button>
@@ -640,7 +642,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
               >
-                Why Our Answers Are Trustworthy
+                This Is Not ChatGPT
               </motion.h2>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -649,7 +651,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-lg text-slate-600 dark:text-slate-400"
               >
-                Why our AI is different—without getting too technical
+                This is purpose built. This is correct. This is for Markham.
               </motion.p>
             </div>
 
