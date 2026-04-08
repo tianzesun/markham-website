@@ -63,19 +63,43 @@ export default function HomePage() {
     // Add typing indicator
     setDemoMessages(prev => [...prev, { role: 'assistant', content: '', isTyping: true }]);
     
-    // Simulate AI processing
-    await new Promise(resolve => setTimeout(resolve, 1200));
+    // RAG Search Simulation phases
+    await new Promise(resolve => setTimeout(resolve, 400));
+    
+    // Update indicator to show searching
+    setDemoMessages(prev => {
+      const newMessages = [...prev];
+      newMessages[newMessages.length - 1] = { 
+        role: 'assistant', 
+        content: '', 
+        isTyping: true,
+        state: 'searching'
+      };
+      return newMessages;
+    });
+    
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    // Find actual matching response from knowledge base
+    const response = findAnswer(userMessage);
 
-    // Find matching response from 100+ FAQ database
-    let response = findAnswer(userMessage);
-
-    // Replace typing indicator with actual response
+    // Type out response character by character for realistic effect
     setDemoMessages(prev => {
       const newMessages = [...prev];
       newMessages.pop();
-      newMessages.push({ role: 'assistant', content: response });
+      newMessages.push({ role: 'assistant', content: '', isTyping: false });
       return newMessages;
     });
+    
+    // Simulate typing output
+    for (let i = 0; i <= response.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, 15));
+      setDemoMessages(prev => {
+        const newMessages = [...prev];
+        newMessages[newMessages.length - 1].content = response.substring(0, i);
+        return newMessages;
+      });
+    }
     
     setIsProcessing(false);
   };

@@ -463,9 +463,11 @@ export function findAnswer(query: string): string {
     }
   }
 
-  if (highestScore >= 1 && bestMatch) {
+  // Minimum threshold - at least 2 keyword matches required for confident answer
+  if (highestScore >= 2 && bestMatch) {
     return bestMatch.answer;
   }
-
-  return "I can help with that! For more specific information please request a full demo.";
+  
+  // Uncertain / irrelevant question - official Markham response
+  return "As an AI virtual assistant for the City of Markham, I can only assist with inquiries related to Markham municipal services. I don't have specific information about that question. For further assistance you can call customer service at 905-477-5530 or email customerservice@markham.ca during business hours.";
 }
