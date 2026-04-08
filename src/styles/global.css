@@ -1,35 +1,38 @@
-/* Global polish on the main layout. */
+/* --- FINAL POLISH: Invisible Transition Layer --- */
 
-/* --- Global Transitions and Polish --- */
+/* 1. Page Transitions (For App Router Pages) */
+/* This requires wrapper components in app/layout.tsx, but we define the necessary class here */
+.page-transition-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 2. Background Effect */
 body {
-    /* Ensures all elements inherit a smooth transition for hover/focus */
-    transition: background-color 0.3s, color 0.3s;
+    background-color: #f9fafb; /* Lighter background for visual breathing room */
+    background-image: radial-gradient(at 0% 0%, #e0e7ff 0%, transparent 50%), radial-gradient(at 100% 100%, #e0e7ff 0%, transparent 50%);
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    animation: gradientShift 20s ease infinite alternate;
 }
 
-/* Target all major container elements to ensure smooth transitions */
-.card, .widget-container, .dashboard-section {
-    transition: all transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease-out;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
-/* Hover Effect: Lift, Shadow, and Color Shift */
-.card:hover, .widget-container:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
-}
-
-/* Active State Feedback */
-.btn-primary:active {
-    transform: scale(0.98);
-    box-shadow: none !important;
-}
-
-/* Global utility class to apply the transition smoothly */
-.transition-smooth {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* @keyframes for animation */
-@keyframes pulse-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+/* 3. Particle Effect Container (Requires a background element in the layout) */
+/* This is a stylistic placeholder to suggest a continuous, subtle background life. */
+.particle-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
 }
