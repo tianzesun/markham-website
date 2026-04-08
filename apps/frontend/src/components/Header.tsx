@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
   const { scrollY } = useScroll();
   
   const headerOpacity = useTransform(scrollY, [0, 80], [0.7, 0.95]);
-  const headerBlur = useTransform(scrollY, [0, 80], [8, 20]);
+  const headerBlur = useTransform(scrollY, [0, 80], ['blur(8px)', 'blur(20px)']);
   const headerShadow = useTransform(scrollY, [0, 80], ['0 0 0 0 transparent', '0 4px 20px -5px rgba(0, 0, 0, 0.1)']);
   const headerBorder = useTransform(scrollY, [0, 80], ['rgba(255, 255, 255, 0)', 'rgba(229, 231, 235, 0.8)']);
 
@@ -129,7 +129,9 @@ export const Header: React.FC = () => {
           </div>
         </motion.div>
       </div>
-    </header>
+    </motion.header>
+  );
+};
 
 const MagneticButton = ({ children }: { children: React.ReactNode }) => {
   const { ref, x, y } = useMagneticEffect();
@@ -137,8 +139,5 @@ const MagneticButton = ({ children }: { children: React.ReactNode }) => {
     <motion.div ref={ref} style={{ x, y }}>
       {children}
     </motion.div>
-  );
-};
-
   );
 };
