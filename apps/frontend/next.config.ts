@@ -7,7 +7,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@heymarkham/ui'],
+  transpilePackages: ['@heymarkham/ui', 'framer-motion', 'lucide-react'],
   serverExternalPackages: ['sharp'],
   compress: true,
   poweredByHeader: false,
