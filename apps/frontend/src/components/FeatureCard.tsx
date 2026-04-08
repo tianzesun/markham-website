@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, MotionValue, motionValue, animate } from 'framer-motion';
 import { Shield, Lock, Globe, Server } from 'lucide-react';
 
 interface FeatureProps {
