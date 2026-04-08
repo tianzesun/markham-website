@@ -873,7 +873,7 @@ export default function HomePage() {
                   <h4 className="font-bold mb-3 text-lg">Performance</h4>
                   <ul className="space-y-2 text-sm text-slate-300">
                     <li>✓ 92% answer accuracy</li>
-                    <li>✓ <1.2s average response time</li>
+                    <li>✓ {'<1.2s'} average response time</li>
                     <li>✓ 99.9% uptime SLA</li>
                     <li>✓ SOC 2 Type II compliant</li>
                   </ul>
