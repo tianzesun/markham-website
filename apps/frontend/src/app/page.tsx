@@ -238,7 +238,7 @@ export default function HomePage() {
               className="flex flex-wrap justify-center gap-4"
             >
               <motion.a 
-                href="#how-it-works"
+                href="#solution"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -694,7 +694,7 @@ export default function HomePage() {
         </section>
 
         {/* How It Actually Works: RAG Architecture */}
-        <section id="how-it-works" className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
+        <section id="solution" className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <motion.h2 
