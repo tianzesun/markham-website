@@ -838,12 +838,12 @@ export default function HomePage() {
                   viewport={{ once: true }}
                   className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white"
                 >
-                  <h4 className="font-bold mb-3 text-lg">Vector Database</h4>
+                  <h4 className="font-bold mb-3 text-lg">Graph RAG System</h4>
                   <ul className="space-y-2 text-sm text-slate-300">
-                    <li>✓ Pinecone Serverless</li>
-                    <li>✓ 120,000 document vectors</li>
-                    <li>✓ Hybrid search + semantic ranking</li>
-                    <li>✓ 50ms average query time</li>
+                    <li>✓ Microsoft GraphRAG Architecture</li>
+                    <li>✓ Knowledge graph extraction</li>
+                    <li>✓ Cross document relationship reasoning</li>
+                    <li>✓ Hierarchical community detection</li>
                   </ul>
                 </motion.div>
 
@@ -859,7 +859,7 @@ export default function HomePage() {
                     <li>✓ GPT-4o Mini</li>
                     <li>✓ Temperature = 0.0</li>
                     <li>✓ System prompt boundary enforcement</li>
-                    <li>✓ 8k context window</li>
+                    <li>✓ Global search + local search</li>
                   </ul>
                 </motion.div>
 
