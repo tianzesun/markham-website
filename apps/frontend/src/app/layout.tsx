@@ -5,7 +5,7 @@ import '../styles/globals.css'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { VoiceWakeWord } from '../components/VoiceWakeWord'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -19,6 +19,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const spotlightRef = useRef<HTMLDivElement>(null)
+  const [reduceMotion, setReduceMotion] = useState(false)
+
+  useEffect(() => {
+    // Respect user's reduced motion preferences
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduceMotion(motionQuery.matches)
+    
+    const handleMotionChange = () => setReduceMotion(motionQuery.matches)
+    motionQuery.addEventListener('change', handleMotionChange)
+    
+    return () => motionQuery.removeEventListener('change', handleMotionChange)
+  }, [])
 
   useEffect(() => {
     // Mouse following spotlight effect
@@ -33,8 +45,16 @@ export default function RootLayout({
   }, [])
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${reduceMotion ? 'motion-reduce' : ''}`}>
       <body className={`${inter.className} relative overflow-x-hidden`}>
+        {/* Skip Navigation Link for Accessibility */}
+        <a 
+          href="#main-content" 
+          className="fixed top-0 left-0 z-[10000] bg-sky-600 text-white px-4 py-3 -translate-y-full focus:translate-y-0 transition-transform"
+        >
+          Skip to main content
+        </a>
+
         {/* Grain Overlay - 2026 Premium Effect */}
         <div 
           className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay"
@@ -54,7 +74,7 @@ export default function RootLayout({
         />
 
         <Header />
-        <main className="pt-16 relative z-10">
+        <main id="main-content" className="pt-16 relative z-10" role="main">
           {children}
         </main>
         <Footer />
