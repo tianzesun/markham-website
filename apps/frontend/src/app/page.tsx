@@ -237,15 +237,6 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-4"
             >
-              <motion.a 
-                href="#solution"
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold text-lg transition-all shadow-xl shadow-primary-600/20 hover:shadow-primary-500/30"
-              >
-                Request Demo
-              </motion.a>
             </motion.div>
             </div>
 
