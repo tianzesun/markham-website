@@ -1156,17 +1156,8 @@ export default function HomePage() {
                    <div className="space-y-3">
                      <div className="flex items-center gap-3 text-primary-200">
                        <Mail className="w-5 h-5" />
-                       <a href="mailto:info@heymarkham.ai" className="hover:text-white transition-colors">info@heymarkham.ai</a>
+                       <a href="mailto:info@aydenait.com" className="hover:text-white transition-colors">info@aydenait.com</a>
                      </div>
-                     <div className="flex items-center gap-3 text-primary-200">
-                       <Building2 className="w-5 h-5" />
-                       <span>City of Markham, Ontario</span>
-                     </div>
-                     <div className="flex items-center gap-3 text-primary-200">
-                       <Globe className="w-5 h-5" />
-                       <a href="https://markham.ca" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">markham.ca</a>
-                     </div>
-                   </div>
                  </div>
                </motion.div>
 
