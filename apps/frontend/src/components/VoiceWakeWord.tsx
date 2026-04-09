@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Mic, MicOff } from 'lucide-react';
+import { Mic, MicOff, Volume2, X, History } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ISpeechRecognition extends EventTarget {
@@ -31,19 +31,65 @@ export {};
 export const VoiceWakeWord = () => {
   const [isListening, setIsListening] = useState(false);
   const [isWakeWordActive, setIsWakeWordActive] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState('');
+  const [voiceLevel, setVoiceLevel] = useState(0);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
+  
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const currentUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  // Audio feedback tones
+  const playTone = useCallback((frequency: number, duration: number, volume: number = 0.1) => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    }
+    
+    const oscillator = audioContextRef.current.createOscillator();
+    const gainNode = audioContextRef.current.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContextRef.current.destination);
+    
+    oscillator.frequency.value = frequency;
+    oscillator.type = 'sine';
+    gainNode.gain.setValueAtTime(volume, audioContextRef.current.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContextRef.current.currentTime + duration);
+    
+    oscillator.start(audioContextRef.current.currentTime);
+    oscillator.stop(audioContextRef.current.currentTime + duration);
+  }, []);
 
   const speak = useCallback((text: string) => {
     if (synthRef.current) {
+      // Cancel any ongoing speech
+      synthRef.current.cancel();
+      
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 1.0;
       utterance.pitch = 0.95;
       utterance.volume = 0.8;
+      
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      
+      currentUtteranceRef.current = utterance;
       synthRef.current.speak(utterance);
     }
   }, []);
+
+  // Interrupt speech immediately
+  const interruptSpeech = useCallback(() => {
+    if (synthRef.current && isSpeaking) {
+      synthRef.current.cancel();
+      setIsSpeaking(false);
+      playTone(350, 0.15, 0.08);
+    }
+  }, [isSpeaking, playTone]);
 
   useEffect(() => {
     synthRef.current = window.speechSynthesis;
