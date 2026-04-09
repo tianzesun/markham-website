@@ -45,7 +45,7 @@ export const Header: React.FC = () => {
               <Mic className="text-white" size={18} />
             </div>
             <Link href="/" className="flex items-center">
-              <span className="text-lg font-bold text-slate-900 dark:text-white">
+              <span className="text-lg font-bold text-white">
                 HeyMarkham
               </span>
             </Link>
@@ -62,7 +62,7 @@ export const Header: React.FC = () => {
               >
                 <Link
                   href={item.href}
-                  className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className="text-sm font-medium text-white"
                 >
                   {item.name}
                 </Link>
@@ -111,7 +111,7 @@ export const Header: React.FC = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block px-4 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                className="block px-4 py-2.5 text-sm font-medium text-white"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
