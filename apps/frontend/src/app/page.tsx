@@ -318,10 +318,15 @@ export default function HomePage() {
                       onClick={() => setIsRecording(!isRecording)}
                       className={`w-12 h-12 ${isRecording 
                         ? 'bg-red-500 animate-pulse' 
-                        : 'bg-primary-600 hover:bg-primary-500'} rounded-xl flex items-center justify-center transition-all active:scale-95`}
+                        : 'bg-white hover:bg-gray-100'} rounded-xl flex items-center justify-center transition-all active:scale-95`}
                     >
-                      <Mic className="w-5 h-5 text-white" />
+                      <Mic className="w-5 h-5 text-gray-600" />
                     </button>
+                    <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center transition-all active:scale-95">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 11H21L15 5L13 7L19 11Z" fill="currentColor" />
+                        <path d="M1 11C1 6.03 6.03 1 11 1C15.04 1 18.84 3.43 21 7V11C21 6.03 16.97 1 11 1C5.96 1 2.16 3.43 0 7L1 11Z" fill="currentColor" />
+                        <path d="M11 13C14.33 13 17 15.67 17 19C17 20.1 16.55 21.08 15.92 21.84L21 17L21 23L20.5 22.5L15.92 16.92C16.55 17.68 17 18.66 17 19.77C17 22.3 14.31
                     <input 
                       type="text" 
                       placeholder="Ask HeyMarkham anything..."
