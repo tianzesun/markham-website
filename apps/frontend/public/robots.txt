@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://heymarkham.ai/sitemap.xml
+Sitemap: https://heymarkham.vercel.app/sitemap.xml

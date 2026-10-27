@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://heymarkham.ai'),
+  metadataBase: new URL('https://heymarkham.vercel.app'),
   title: {
     default: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
     template: '%s | HeyMarkham',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
     description: 'Get instant answers about Markham city services 24/7. Just say "Hey Markham".',
-    url: 'https://heymarkham.ai',
+    url: 'https://heymarkham.vercel.app',
     siteName: 'HeyMarkham',
     locale: 'en_CA',
     type: 'website',
