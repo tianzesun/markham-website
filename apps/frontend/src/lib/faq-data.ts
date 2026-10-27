@@ -441,6 +441,32 @@ export const faqDatabase: Array<{ keywords: string[], answer: string }> = [
   }
 ];
 
+// Filler and question words that appear in queries of every kind and never identify a topic on their own
+const genericKeywords = new Set([
+  'what', 'when', 'where', 'why', 'how', 'my', 'of', 'on', 'off', 'not', 'use', 'way', 'right',
+  'far', 'wide', 'safe', 'size', 'item', 'line', 'call', 'free', 'time', 'day', 'days', 'year',
+]);
+
+// How many entries share each keyword; a keyword used by one or two entries is a strong signal
+const keywordFrequency = new Map<string, number>();
+for (const entry of faqDatabase) {
+  for (const keyword of new Set(entry.keywords)) {
+    keywordFrequency.set(keyword, (keywordFrequency.get(keyword) ?? 0) + 1);
+  }
+}
+
+// Match whole words only (so "ice" doesn't match "office"), allowing simple plurals
+const keywordPatterns = new Map<string, RegExp>();
+const matchesKeyword = (query: string, keyword: string) => {
+  let pattern = keywordPatterns.get(keyword);
+  if (!pattern) {
+    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    pattern = new RegExp(`\\b${escaped}(s|es)?\\b`);
+    keywordPatterns.set(keyword, pattern);
+  }
+  return pattern.test(query);
+};
+
 /**
  * Find best matching answer for user query
  */
@@ -453,8 +479,9 @@ export function findAnswer(query: string): string {
   for (const entry of faqDatabase) {
     let score = 0;
     for (const keyword of entry.keywords) {
-      if (lowerQuery.includes(keyword)) {
-        score++;
+      if (matchesKeyword(lowerQuery, keyword)) {
+        const isDistinctive = !genericKeywords.has(keyword) && (keywordFrequency.get(keyword) ?? 0) <= 2;
+        score += isDistinctive ? 2 : 1;
       }
     }
     if (score > highestScore) {
@@ -463,11 +490,11 @@ export function findAnswer(query: string): string {
     }
   }
 
-  // Minimum threshold - at least 2 keyword matches required for confident answer
+  // Minimum threshold - two common keywords, or one distinctive keyword
   if (highestScore >= 2 && bestMatch) {
     return bestMatch.answer;
   }
   
-  // Uncertain / irrelevant question - official Markham response
-  return "As an AI virtual assistant for the City of Markham, I can only assist with inquiries related to Markham municipal services. I don't have specific information about that question. For further assistance you can call customer service at 905-477-5530 or email customerservice@markham.ca during business hours.";
+  // Uncertain / irrelevant question
+  return "I'm HeyMarkham, and I can only help with questions about Markham municipal services. I don't have specific information about that question. For further assistance you can call City of Markham customer service at 905-477-5530 or email customerservice@markham.ca during business hours.";
 }

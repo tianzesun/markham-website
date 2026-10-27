@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
               <span className="font-bold text-slate-900 dark:text-white">HeyMarkham</span>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              AI-powered voice assistant for the City of Markham.
+              AI-powered voice assistant for Markham residents.
             </p>
           </div>
 
@@ -45,8 +45,7 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Contact</h4>
             <ul className="space-y-2">
-              <li><a href="mailto:info@heymarkham.ai" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">info@heymarkham.ai</a></li>
-              <li><a href="https://markham.ca" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">City of Markham Website</a></li>
+              <li><a href="mailto:info@aydenait.com" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">info@aydenait.com</a></li>
             </ul>
           </div>
         </div>
@@ -56,7 +55,7 @@ export const Footer: React.FC = () => {
             © {currentYear} <a href="https://aydenait.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 hover:underline">Aydenait Solutions</a>. All rights reserved.
           </p>
           <p className="text-sm text-slate-400 dark:text-slate-500">
-            Built for the City of Markham
+            Built for Markham residents
           </p>
         </div>
       </div>

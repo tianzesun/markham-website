@@ -91,6 +91,10 @@ export const VoiceWakeWord = () => {
     }
   }, [isSpeaking, playTone]);
 
+  // Mirror of isListening for recognition callbacks, so the recognizer is created once
+  const isListeningRef = useRef(false);
+  const isWakeWordActiveRef = useRef(false);
+
   useEffect(() => {
     synthRef.current = window.speechSynthesis;
     
@@ -107,35 +111,52 @@ export const VoiceWakeWord = () => {
         const text = current[0].transcript.toLowerCase().trim();
         setTranscript(text);
 
-        if (text.includes('hey markham') || text.includes('hi markham') || text.includes('okay markham')) {
+        // Interim results repeat the same phrase, so only greet once per activation
+        if (!isWakeWordActiveRef.current && (text.includes('hey markham') || text.includes('hi markham') || text.includes('okay markham'))) {
+          isWakeWordActiveRef.current = true;
           setIsWakeWordActive(true);
           speak("Hi there, how can I help you?");
         }
       };
 
-      recognitionRef.current.onerror = () => setIsListening(false);
+      recognitionRef.current.onerror = (event: any) => {
+        // 'no-speech' and 'aborted' are recoverable; onend restarts the session
+        if (event?.error === 'not-allowed' || event?.error === 'service-not-allowed' || event?.error === 'audio-capture') {
+          isListeningRef.current = false;
+          setIsListening(false);
+          setIsWakeWordActive(false);
+        }
+      };
       recognitionRef.current.onend = () => {
-        if (isListening && recognitionRef.current) {
+        if (isListeningRef.current && recognitionRef.current) {
           try { recognitionRef.current.start(); } catch {}
         }
       };
     }
 
     return () => {
+      isListeningRef.current = false;
       if (recognitionRef.current) {
+        recognitionRef.current.onend = null;
         recognitionRef.current.stop();
       }
+      synthRef.current?.cancel();
     };
-  }, [isListening, speak]);
+  }, [speak]);
 
   const toggleListening = () => {
     if (isListening) {
+      isListeningRef.current = false;
+      isWakeWordActiveRef.current = false;
       recognitionRef.current?.stop();
       setIsListening(false);
       setIsWakeWordActive(false);
     } else {
+      // Browsers without the Web Speech API (e.g. Firefox) have nothing to start
+      if (!recognitionRef.current) return;
       try {
-        recognitionRef.current?.start();
+        recognitionRef.current.start();
+        isListeningRef.current = true;
         setIsListening(true);
       } catch {}
     }
@@ -144,6 +165,8 @@ export const VoiceWakeWord = () => {
   return (
     <motion.button
       onClick={toggleListening}
+      aria-label={isListening ? 'Stop listening for "Hey Markham"' : 'Start listening for "Hey Markham"'}
+      aria-pressed={isListening}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all ${

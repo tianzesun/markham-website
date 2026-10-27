@@ -1,6 +1,6 @@
-export const runtime = 'edge';
+import type { Metadata, Viewport } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL('https://heymarkham.ai'),
   title: {
     default: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
@@ -14,7 +14,7 @@ export const metadata = {
   ],
   authors: [{ name: 'HeyMarkham' }],
   creator: 'HeyMarkham',
-  publisher: 'City of Markham',
+  publisher: 'Aydenait Solutions',
   formatDetection: {
     email: false,
     address: false,
@@ -27,21 +27,13 @@ export const metadata = {
     siteName: 'HeyMarkham',
     locale: 'en_CA',
     type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'HeyMarkham - Voice Assistant for City of Markham',
-      }
-    ],
+    // Image comes from app/opengraph-image.tsx
   },
   twitter: {
     card: 'summary_large_image',
     title: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
     description: 'Get instant answers about Markham city services 24/7. Just say "Hey Markham".',
     creator: '@heymarkham',
-    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -54,9 +46,6 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'not yet verified',
-  },
   category: 'Government',
   applicationName: 'HeyMarkham',
   appleWebApp: {
@@ -64,6 +53,10 @@ export const metadata = {
     statusBarStyle: 'black-translucent',
     title: 'HeyMarkham',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
   themeColor: '#0ea5e9',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 };

@@ -1,11 +1,11 @@
-"use client";
-
 import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { VoiceWakeWord } from '../components/VoiceWakeWord'
-import { useEffect, useRef, useState } from 'react'
+import { MouseSpotlight } from '../components/MouseSpotlight'
+
+export { metadata, viewport } from './metadata'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -18,34 +18,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const spotlightRef = useRef<HTMLDivElement>(null)
-  const [reduceMotion, setReduceMotion] = useState(false)
-
-  useEffect(() => {
-    // Respect user's reduced motion preferences
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduceMotion(motionQuery.matches)
-    
-    const handleMotionChange = () => setReduceMotion(motionQuery.matches)
-    motionQuery.addEventListener('change', handleMotionChange)
-    
-    return () => motionQuery.removeEventListener('change', handleMotionChange)
-  }, [])
-
-  useEffect(() => {
-    // Mouse following spotlight effect
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!spotlightRef.current) return
-      spotlightRef.current.style.setProperty('--mouse-x', `${e.clientX}px`)
-      spotlightRef.current.style.setProperty('--mouse-y', `${e.clientY}px`)
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
   return (
-    <html lang="en" className={`scroll-smooth ${reduceMotion ? 'motion-reduce' : ''}`}>
+    // suppressHydrationWarning: theme-init.js may add the "dark" class before React hydrates
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script src="/theme-init.js" />
+      </head>
       <body className={`${inter.className} relative overflow-x-hidden`}>
         {/* Skip Navigation Link for Accessibility */}
         <a 
@@ -65,13 +43,7 @@ export default function RootLayout({
         />
 
         {/* Mouse Following Spotlight */}
-        <div 
-          ref={spotlightRef}
-          className="fixed inset-0 pointer-events-none z-30 transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.06), transparent 40%)`,
-          }}
-        />
+        <MouseSpotlight />
 
         <Header />
         <main id="main-content" className="pt-16 relative z-10" role="main">

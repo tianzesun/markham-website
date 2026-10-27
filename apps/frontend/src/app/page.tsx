@@ -15,12 +15,14 @@ import {
 } from 'lucide-react';
 import { submitContactForm } from './actions/contact';
 import { findAnswer } from '../lib/faq-data';
+import { FAQSection } from '../components/FAQSection';
 
 export default function HomePage() {
   // Generate static heights for voice bars to avoid hydration mismatch
   const voiceBarHeights = ['16px', '24px', '12px', '20px', '28px'];
   
   // Optimistic update for contact form
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
   const [optimisticContact, setOptimisticContact] = useState<{ status: 'idle' | 'success' | 'error'; error: string | null }>(
     { status: 'idle', error: null }
   );
@@ -82,7 +84,8 @@ export default function HomePage() {
       await new Promise(resolve => setTimeout(resolve, 15));
       setDemoMessages(prev => {
         const newMessages = [...prev];
-        newMessages[newMessages.length - 1].content = response.substring(0, i);
+        const last = newMessages[newMessages.length - 1];
+        newMessages[newMessages.length - 1] = { ...last, content: response.substring(0, i) };
         return newMessages;
       });
     }
@@ -175,7 +178,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-white dark:bg-slate-950">
-      <main className="flex-grow">
+      <div className="flex-grow">
         {/* Hero Section - Interactive Demo */}
         <section ref={heroRef} className="relative pt-12 pb-20 md:pt-20 md:pb-28 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
           {/* Mouse following glow orb */}
@@ -316,6 +319,8 @@ export default function HomePage() {
                      <button 
                        type="button"
                        onClick={() => setIsRecording(!isRecording)}
+                       aria-label={isRecording ? 'Stop recording' : 'Start recording'}
+                       aria-pressed={isRecording}
                        className={`w-12 h-12 ${isRecording 
                          ? 'bg-red-500 animate-pulse' 
                          : 'bg-white hover:bg-gray-100'} rounded-xl flex items-center justify-center transition-all active:scale-95`}
@@ -332,6 +337,7 @@ export default function HomePage() {
                      <input 
                       type="text" 
                       placeholder="Ask HeyMarkham anything..."
+                      aria-label="Ask HeyMarkham a question"
                       value={demoInput}
                       onChange={(e) => setDemoInput(e.target.value)}
                       disabled={isProcessing}
@@ -340,6 +346,7 @@ export default function HomePage() {
                     <button 
                       type="submit"
                       disabled={isProcessing || !demoInput.trim()}
+                      aria-label="Send message"
                       className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900"
                     >
                       <Send className="w-5 h-5 text-white" />
@@ -630,7 +637,7 @@ export default function HomePage() {
         </section>
 
         {/* Section 2: The "RAG" Difference */}
-        <section className="py-16 px-6 bg-white dark:bg-slate-950">
+        <section id="features" className="py-16 px-6 bg-white dark:bg-slate-950">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
               <motion.h2 
@@ -1092,6 +1099,8 @@ export default function HomePage() {
           </div>
         </section>
 
+        <FAQSection />
+
          {/* Contact Section */}
          <section id="contact" className="py-16 md:py-20 px-6 bg-primary-700 dark:bg-primary-900">
            <div className="max-w-5xl mx-auto">
@@ -1179,13 +1188,23 @@ export default function HomePage() {
                  <form 
                    onSubmit={async (e) => {
                      e.preventDefault();
-                     const formData = new FormData(e.target as HTMLFormElement);
-                     const result = await submitContactForm(formData);
-                      if (result.success) {
-                        setOptimisticContact({ status: 'success', error: null });
-                      } else {
-                        setOptimisticContact({ status: 'error', error: result.error || 'Failed to send' });
-                      }
+                     if (isSubmittingContact) return;
+                     const form = e.currentTarget;
+                     const formData = new FormData(form);
+                     setIsSubmittingContact(true);
+                     try {
+                       const result = await submitContactForm(formData);
+                       if (result.success) {
+                         setOptimisticContact({ status: 'success', error: null });
+                         form.reset();
+                       } else {
+                         setOptimisticContact({ status: 'error', error: result.error || 'Failed to send' });
+                       }
+                     } catch {
+                       setOptimisticContact({ status: 'error', error: 'Failed to send message' });
+                     } finally {
+                       setIsSubmittingContact(false);
+                     }
                    }}
                    className="space-y-5 bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
                  >
@@ -1249,9 +1268,10 @@ export default function HomePage() {
                    <div>
                      <button 
                        type="submit"
-                       className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-700 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl"
+                       disabled={isSubmittingContact}
+                       className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-700 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
                      >
-                       Send Message
+                       {isSubmittingContact ? 'Sending...' : 'Send Message'}
                        <ArrowRight size={18} />
                      </button>
                    </div>
@@ -1279,7 +1299,7 @@ export default function HomePage() {
              </div>
            </div>
          </section>
-      </main>
+      </div>
     </div>
   );
 }

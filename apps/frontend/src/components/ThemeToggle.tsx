@@ -11,12 +11,12 @@ export const ThemeToggle = () => {
     // Check for saved preference or system preference
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     
+    // theme-init.js has already applied the class; sync the icon to it
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
-      document.documentElement.classList.add('dark');
+    } else {
+      setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
     }
 
     // Listen for system theme changes
@@ -45,7 +45,7 @@ export const ThemeToggle = () => {
       onClick={toggleTheme}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 transition-colors hover:bg-slate-200 dark:hover:bg-slate-700"
+      className="p-2 rounded-lg bg-white/10 text-slate-200 transition-colors hover:bg-white/20 hover:text-white"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
       {theme === 'light' ? (

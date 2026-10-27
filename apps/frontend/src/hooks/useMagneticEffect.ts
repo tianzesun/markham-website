@@ -1,13 +1,13 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { animate, motionValue, useTransform } from 'framer-motion';
+import { animate, useMotionValue } from 'framer-motion';
 
 export const useMagneticEffect = (strength: number = 30) => {
   const ref = useRef<HTMLDivElement>(null);
   
-  const x = motionValue(0);
-  const y = motionValue(0);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!ref.current) return;
@@ -19,8 +19,8 @@ export const useMagneticEffect = (strength: number = 30) => {
     const distanceX = e.clientX - centerX;
     const distanceY = e.clientY - centerY;
     
-    animate(x, distanceX * 0.3, { type: 'spring', stiffness: 150, damping: 15 });
-    animate(y, distanceY * 0.3, { type: 'spring', stiffness: 150, damping: 15 });
+    animate(x, distanceX * (strength / 100), { type: 'spring', stiffness: 150, damping: 15 });
+    animate(y, distanceY * (strength / 100), { type: 'spring', stiffness: 150, damping: 15 });
   };
 
   const handleMouseLeave = () => {
