@@ -7,9 +7,10 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
-    question: "What are the pool hours?",
-    keywords: ['pool', 'swim', 'swimming', 'close', 'open', 'hour', 'time', 'facility'],
-    answer: "Pool hours vary by location and season. Check the drop-in swim schedules on markham.ca for current times at each pool."
+    question: "Where can I go swimming?",
+    keywords: ['pool', 'swim', 'swimming', 'close', 'open', 'hour', 'time', 'facility', 'public swim', 'lane', 'aquafit', 'drop-in'],
+    answer: "Markham pools offer public swims, including recreational, lane and endurance lane swims, plus Aquafit classes. Find drop-in times through the City's online program system (View Drop In Programs on markham.ca), or call the Contact Centre at 905.477.5530.",
+    source: "https://www.markham.ca/sports-recreation-fitness/sports-recreation-programs/swimming"
   },
   {
     question: "Can I park on the street overnight?",
@@ -19,8 +20,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "Where can I find a cooling centre?",
-    keywords: ['cooling', 'center', 'centre', 'heat', 'hot', 'nearest', 'open', 'location'],
-    answer: "During heat warnings, the City opens cooling centres at community centres and libraries. Check markham.ca for the current list of open locations and hours, or call 905-477-5530."
+    keywords: ['cooling', 'center', 'centre', 'heat', 'hot', 'nearest', 'open', 'location', 'heat warning', 'humidex', 'air conditioning'],
+    answer: "During heat warnings, City of Markham community centres are available as cooling centres during regular business hours. Environment and Climate Change Canada issues heat warnings for two or more days of highs of 31°C or more with overnight lows of 20°C or more, or a humidex of 40 or higher. Drink plenty of water, check on neighbours, and call 911 for suspected heat stroke.",
+    source: "https://www.markham.ca/neighbourhood-services/fire-services-emergency-preparedness/emergency-preparedness/heat-warnings-markham"
   },
   {
     question: "What goes in the blue bin?",
@@ -36,8 +38,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "When are Markham libraries open?",
-    keywords: ['library', 'book', 'open', 'close', 'renew', 'borrow', 'card'],
-    answer: "Markham Public Library branches have different hours. Check markhampubliclibrary.ca for current branch hours. You can renew items online with your library card."
+    keywords: ['library', 'book', 'open', 'close', 'renew', 'borrow', 'card', 'branch', 'hours'],
+    answer: "A Markham Public Library card is free. Check each branch's hours at markham.bibliocommons.com/locations, and see or renew your checked-out items online under My Borrowing. Questions: 905.513.7977 or AskMPL@markhamlibrary.ca.",
+    source: "https://www.markhampubliclibrary.ca/"
   },
   {
     question: "When does York Region Transit run?",
@@ -46,8 +49,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How are snow and sidewalks cleared?",
-    keywords: ['snow', 'plow', 'winter', 'sidewalk', 'road', 'clear'],
-    answer: "The City clears priority roads first, then residential streets and sidewalks. Check markham.ca for current winter maintenance updates and snow clearing standards."
+    keywords: ['snow', 'plow', 'street', 'winter', 'sidewalk', 'road', 'clear', 'windrow', 'driveway', 'salt', 'senior'],
+    answer: "Arterial and primary roads are salted or plowed around the clock until the pavement is bare. Local roads are plowed once snow reaches 7.5 cm, which can take about 16 hours. Sidewalks are plowed within 24 hours of the end of a snowfall of 5 cm or more. Parking is banned on both sides of all City streets during snow clearing, and you shouldn't push or blow snow onto the road. Households where everyone is 60 or older can apply for the Snow Windrow Removal Assistance Program by calling 905.477.5530.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/winter-road-services"
   },
   {
     question: "How do I license my dog or cat?",
@@ -110,18 +114,21 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How do water bills work, and how do I report a leak?",
-    keywords: ['water', 'bill', 'leak', 'meter', 'payment', 'utility'],
-    answer: "Water bills are issued regularly by the City. To report a leak or water emergency, call 905-477-5530. Check markham.ca for after-hours emergency contacts."
+    keywords: ['water', 'bill', 'leak', 'meter', 'payment', 'utility', 'alectra', 'rate', 'high bill'],
+    answer: "Markham water and sewer charges are billed every two months on your Alectra bill. The 2026 combined water and wastewater rate is $5.3694 per cubic metre (rates change each April 1). For a high bill, check for leaks: turn off all water, note your meter reading, wait a few hours without using water and read it again. Leaks in your own plumbing are your responsibility. Questions: 905.477.5530.",
+    source: "https://www.markham.ca/neighbourhood-services/water-sewer/rates-meters-billing-fees"
   },
   {
     question: "When are municipal elections held?",
-    keywords: ['election', 'vote', 'poll', 'station', 'day', 'register'],
-    answer: "Ontario municipal elections are held every four years in October; the most recent was on October 26, 2026. Check elections.markham.ca for results and voter information."
+    keywords: ['election', 'vote', 'poll', 'station', 'day', 'register', 'results', 'voting', 'online'],
+    answer: "Markham's 2026 municipal election ran from October 16 to 26, 2026, with online voting. Results are posted at markham.ca/elections. Ontario municipal elections are held every four years.",
+    source: "https://www.markham.ca/elections"
   },
   {
     question: "When are skating rinks open?",
-    keywords: ['skating', 'rink', 'ice', 'outdoor', 'winter', 'schedule'],
-    answer: "Outdoor rinks open in winter, weather permitting, and indoor arenas offer public skating year round. Check markham.ca for current skate schedules."
+    keywords: ['skating', 'skate', 'rink', 'ice', 'outdoor', 'winter', 'schedule', 'public skate', 'arena', 'helmet', 'outdoor rink'],
+    answer: "Public skating is available at seven City arenas, including Angus Glen, Centennial, Markham Village and Thornhill. From September 1, 2026, admission (plus HST) is free for children 3 and under, $3.10 for ages 4 to 15, $5.17 for adults and $3.63 for 65+. A CSA-approved helmet is recommended. The free Civic Centre outdoor rink reopens in December.",
+    source: "https://www.markham.ca/sports-recreation-fitness/sports-recreation-programs/public-skating-lessons-hockey"
   },
   {
     question: "How do I book a tennis court?",
@@ -226,8 +233,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "When does City Council meet?",
-    keywords: ['council', 'meeting', 'agenda', 'minute', 'watch', 'attend'],
-    answer: "City Council meetings are open to the public and streamed online. Check markham.ca for the meeting calendar and agendas."
+    keywords: ['council', 'meeting', 'agenda', 'minute', 'watch', 'attend', 'deputation', 'speak', 'minutes'],
+    answer: "Council and committee meetings are held at the Markham Civic Centre, 101 Town Centre Boulevard, and are open to the public; you can attend or listen live online. Agendas and minutes are on markham.ca, and you can ask to speak at a meeting using the Request to Speak form. Questions: clerkspublic@markham.ca or 905.477.7000 ext. 2366.",
+    source: "https://www.markham.ca/about-the-city-of-markham/city-hall/council-and-committee-meetings"
   },
   {
     question: "Where can I see the City budget?",
@@ -306,8 +314,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "What should I do if my basement floods?",
-    keywords: ['flood', 'basement', 'rain', 'storm', 'sewer', 'backup'],
-    answer: "For basement flooding, call the City at 905-477-5530. Check markham.ca for after-hours emergency contacts."
+    keywords: ['flood', 'basement', 'rain', 'storm', 'sewer', 'backup', 'backwater valve', 'sump pump', 'rebate', 'sewer backup'],
+    answer: "Report basement flooding to the City's Waterworks team at 905.477.5530 and staff will investigate. The City fixes blockages on City property; blockages on private property are the owner's cost. The Private Plumbing Protection Rebate can cover up to $1,750 for an indoor backwater valve, $2,000 for an outdoor one, and up to $5,000 to disconnect weeping tiles with a sump pump. The City never calls homeowners to sell flood protection devices.",
+    source: "https://www.markham.ca/neighbourhood-services/water-sewer/basement-flooding-and-sewer-back-prevention"
   },
   {
     question: "Who do I call about a power outage?",
@@ -336,8 +345,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "When does summer camp registration open?",
-    keywords: ['camp', 'summer', 'child', 'program', 'register'],
-    answer: "Summer camp registration usually opens in the spring. Check markham.ca for dates, ages and programs."
+    keywords: ['camp', 'summer', 'child', 'program', 'register', 'march break', 'winter camp', 'kids'],
+    answer: "Markham runs summer, winter break and March Break camps with sports, music and arts, plus camps at the Markham Museum, Varley Art Gallery, Flato Markham Theatre and Markham Public Library. Ages, dates and fees are listed with each camp in the City's online program system. Questions: 905.477.5530.",
+    source: "https://www.markham.ca/sports-recreation-fitness/sports-recreation-programs/camps"
   },
   {
     question: "Where are the skate parks?",
@@ -599,13 +609,13 @@ for (const keywords of entryKeywords) {
   }
 }
 
-// Match whole words only (so "ice" doesn't match "office"), allowing simple plurals
+// Match whole words only (so "ice" doesn't match "office"), allowing simple word endings
 const keywordPatterns = new Map<string, RegExp>();
 const matchesKeyword = (query: string, keyword: string) => {
   let pattern = keywordPatterns.get(keyword);
   if (!pattern) {
     const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    pattern = new RegExp(`\\b${escaped}(s|es)?\\b`);
+    pattern = new RegExp(`\\b${escaped}(s|es|ed|ing)?\\b`);
     keywordPatterns.set(keyword, pattern);
   }
   return pattern.test(query);
@@ -626,8 +636,9 @@ export function findFaq(query: string): { answer: string; source?: string } {
     let score = 0;
     for (const keyword of entryKeywords[index]) {
       if (matchesKeyword(lowerQuery, keyword)) {
-        const isDistinctive = !genericKeywords.has(keyword) && (keywordFrequency.get(keyword) ?? 0) <= 2;
-        score += isDistinctive ? 2 : 1;
+        // Filler words only nudge a match; distinctive words carry it
+        if (genericKeywords.has(keyword)) score += 0.5;
+        else score += (keywordFrequency.get(keyword) ?? 0) <= 2 ? 2 : 1;
       }
     }
     if (score > highestScore) {

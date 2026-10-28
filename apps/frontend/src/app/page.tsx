@@ -125,7 +125,7 @@ export default function HomePage() {
                             <p className="text-white text-sm">"Hey Markham, when's my garbage collection?"</p>
                           </div>
                           <div className="bg-white rounded-lg p-3">
-                            <p className="text-slate-700 text-sm">Your garbage is collected every Thursday. Place bins at the curb by 7 AM.</p>
+                            <p className="text-slate-700 text-sm">Your next garbage day is this Thursday. Put it out by 7 AM in clear bags.</p>
                           </div>
                         </div>
                         <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
