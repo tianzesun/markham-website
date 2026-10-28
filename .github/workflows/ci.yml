@@ -8,6 +8,9 @@ on:
 
 permissions:
   contents: read
+  # For the Vercel status step: read this run's job results, set a commit status
+  actions: read
+  statuses: write
 
 jobs:
   frontend:
@@ -16,6 +19,14 @@ jobs:
       run:
         working-directory: apps/frontend
     steps:
+      # Reports this job's result to Vercel Deployment Checks, which holds production until it passes.
+      # Must stay first: it marks the commit pending now and posts success/failure after all steps.
+      # The name must match the check configured in Vercel (Settings > Deployment Checks).
+      - name: Notify Vercel
+        uses: vercel/repository-dispatch/actions/status@v1
+        with:
+          name: 'Vercel - heymarkham: lint'
+
       - uses: actions/checkout@v4
 
       # pnpm version comes from "packageManager" in the root package.json
