@@ -67,8 +67,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "Do I need a building permit?",
-    keywords: ['building', 'permit', 'renovation', 'deck', 'fence', 'application', 'cost'],
-    answer: "Many projects, such as additions, decks and structural changes, need a building permit. Check markham.ca for what needs a permit, current fees and how to apply."
+    keywords: ['building', 'permit', 'renovation', 'deck', 'fence', 'application', 'cost', 'shed', 'addition', 'garage', 'basement', 'renovate'],
+    answer: "You need a building permit for most construction, including additions, garages, carports, sunrooms and structural changes such as removing a basement wall. Decks need one if they're over 10 m², attached to the house, or more than 600 mm (2 ft) above the ground; sheds and other accessory buildings need one at 10 m² or more. Replacing fixtures, like-for-like furnace or water heater replacement, painting, new cupboards and re-shingling don't. Permit questions: 905-475-4870.",
+    source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/decks-construction-permits"
   },
   {
     question: "How do I report a pothole?",
@@ -212,9 +213,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How do I pay or dispute a parking ticket?",
-    keywords: ['tickets', 'traffic', 'parking', 'pay', 'fine', 'dispute', 'amps'],
-    answer: "You can pay a parking ticket online or by phone at 905-678-8465 (toll-free 1-877-678-8465), both with a $2.50 fee; in person at the Markham Civic Centre from 8:30 AM to 4:30 PM; or by cheque by mail or at the Thornhill entrance drop box. Most parking violations fall under the City's Administrative Monetary Penalty System; see markham.ca for how to dispute one.",
-    source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/parking"
+    keywords: ['tickets', 'traffic', 'parking', 'pay', 'fine', 'dispute', 'amps', 'penalty notice', 'screening', 'review', 'appeal'],
+    answer: "Most parking tickets are penalty notices under Markham's Administrative Monetary Penalty System. You have 15 days from the notice date to pay or request a screening review. Pay online through the City's ticket portal, by phone at 1.888.948.1408, in person at the Civic Centre cashier, or by cheque by mail. Request a review online or through amps@markham.ca. Paying late adds a $25 fee.",
+    source: "https://www.markham.ca/permits-licences-taxes/administrative-monetary-penalty-system"
   },
   {
     question: "Where can I get a flu shot?",
@@ -335,8 +336,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "Where are the off-leash dog parks?",
-    keywords: ['off', 'leash', 'dog', 'park', 'area', 'location'],
-    answer: "Markham has off-leash dog areas in several parks. Check markham.ca for locations and rules."
+    keywords: ['off', 'leash', 'dog', 'park', 'area', 'location', 'dog park', 'leash-free'],
+    answer: "Markham has four permanent off-leash dog parks: Boxgrove (6780 14th Avenue), Cornell Community (300 William Forster Road), Huntington Park (116 Huntington Park Drive, Thornhill) and Miller Avenue (560 Miller Avenue), plus a pop-up off-leash park in each ward. Dogs must be licensed and vaccinated against rabies, handlers can bring at most three dogs, and you must pick up after your dog.",
+    source: "https://www.markham.ca/permits-licences-taxes/animal-services/off-leash-dog-parks"
   },
   {
     question: "Is there a public beach with lifeguards?",
@@ -541,42 +543,50 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   {
     question: "How wide are sidewalks?",
     keywords: ['sidewalk', 'width', 'wide', 'meter', 'foot', 'multiuse', 'pathway', 'mup', 'atmp', 'active', 'transportation'],
-    answer: "Sidewalks are generally 1.5 meters (approximately five feet) wide but could be wider depending on its placement relative to the road curb and on the level of anticipated pedestrian traffic. A sidewalk could also be upgraded to a multiuse pathway (MUP) to accommodate both walking and cycling. The decision is typically determined through recommendations in Markham Active Transportation Master Plan (ATMP), feasibility studies and detailed design, prior to construction."
+    answer: "Sidewalks are generally 1.5 meters (approximately five feet) wide but could be wider depending on its placement relative to the road curb and on the level of anticipated pedestrian traffic. A sidewalk could also be upgraded to a multiuse pathway (MUP) to accommodate both walking and cycling. The decision is typically determined through recommendations in Markham Active Transportation Master Plan (ATMP), feasibility studies and detailed design, prior to construction.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
   {
     question: "What if construction damages my property?",
     keywords: ['private', 'property', 'damage', 'sidewalk', 'construction', 'responsible', 'compensation', 'city'],
-    answer: "The City takes every precaution to protect private property during construction. In the event that private property is damaged during construction, residents should contact the City’s Project Manager listed on the construction notice immediately to make arrangements for repair or compensation."
+    answer: "The City aims to minimize damage to your property during sidewalk construction. If private property outside the City right-of-way is damaged, the City will repair, restore or compensate to return it to its pre-construction state, within reason. Questions: 905.477.5530.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
   {
     question: "Will I lose driveway access during sidewalk construction?",
     keywords: ['driveway', 'access', 'construction', 'property', 'parking', 'restricted', 'closed', 'temporary', 'alternate'],
-    answer: "For at least a week or more, your driveway will not be accessible during construction of the sidewalk. The construction contractor and/or the City will confirm with each property owner/tenant the days when driveway access will be restricted. The City will provide alternate overnight parking arrangements during the construction period."
+    answer: "For at least a week or more, your driveway will not be accessible during construction of the sidewalk. The construction contractor and/or the City will confirm with each property owner/tenant the days when driveway access will be restricted. The City will provide alternate overnight parking arrangements during the construction period.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
   {
     question: "Will I be notified about construction on my street?",
     keywords: ['notification', 'notify', 'notice', 'construction', 'scheduled', 'my', 'street', 'when', 'advance'],
-    answer: "The City will send out construction notices to residents/businesses at least one week in advance of construction."
+    answer: "The City will send out construction notices to residents/businesses at least one week in advance of construction.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
   {
     question: "Why isn't my street included in the sidewalk program?",
     keywords: ['gap', 'not', 'included', 'why', 'excluded', 'left out', 'missing', 'sidewalk', 'program'],
-    answer: "The City developed a methodology to prioritize sidewalk projects. Some gaps will be built as part of other capital programs. Others are deferred due to constructability issues or are outside developed areas. Local roads are not currently included in this program."
+    answer: "Some arterial and collector road sidewalks are built through other capital or development projects, and others are deferred because of construction issues or because they're outside developed areas. Local road gaps aren't part of this program, but a request with majority resident support is scheduled separately.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
   {
     question: "What happens to landscaping in the right-of-way?",
     keywords: ['impacted', 'property', 'right', 'of', 'way', 'landscaping', 'sprinkler', 'fence', 'construction'],
-    answer: "It is the City's goal to mitigate damage to your property during sidewalk construction. If you have any landscaping facilities within the City right-of-way please notify the City immediately. All private landscaping features within right-of-way that conflict with construction will be removed."
+    answer: "Private landscaping in the City right-of-way that conflicts with sidewalk construction will be removed. Tell the City promptly if you want to salvage any items. Questions: 905.477.5530.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
   {
     question: "When will construction happen on my street?",
     keywords: ['timing', 'when', 'schedule', 'construction', 'on', 'my', 'street', 'program', 'status'],
-    answer: "Please check the Construction Program and Project Status section. Residents directly impacted by a sidewalk project will be informed in advance of any construction proceeding."
+    answer: "Please check the Construction Program and Project Status section. Residents directly impacted by a sidewalk project will be informed in advance of any construction proceeding.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
   {
     question: "What is the City right-of-way?",
     keywords: ['right', 'of', 'way', 'property', 'boundary', 'curb', 'how', 'far', 'city', 'land'],
-    answer: "Approximately 5.0 meters / 16.4 feet from the curb is City right-of-way. This land allows the City to lay cables, pipes, streetlights and sidewalks to provide services for everyone."
+    answer: "Approximately 5.0 meters / 16.4 feet from the curb is City right-of-way. This land allows the City to lay cables, pipes, streetlights and sidewalks to provide services for everyone.",
+    source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   }
 ];
 

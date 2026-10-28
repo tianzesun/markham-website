@@ -41,13 +41,13 @@ export const HeroDemo = () => {
     // Add typing indicator
     setDemoMessages(prev => [...prev, { role: 'assistant', content: '', isTyping: true }]);
     
-    // RAG Search Simulation phases
-    await new Promise(resolve => setTimeout(resolve, 1200));
+    // Brief "looking it up" pause so the reply reads as an answer, not a page swap
+    await new Promise(resolve => setTimeout(resolve, 350));
     
     // Find actual matching response from knowledge base
     const { answer: response, source } = findFaq(userMessage);
 
-    // Type out response character by character for realistic effect
+    // Stream the reply in word by word
     setDemoMessages(prev => {
       const newMessages = [...prev];
       newMessages.pop();
@@ -55,13 +55,15 @@ export const HeroDemo = () => {
       return newMessages;
     });
     
-    // Simulate typing output
-    for (let i = 0; i <= response.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 15));
+    // Long answers finish in about the same time as short ones (~0.7 s)
+    const words = response.split(' ');
+    const delay = Math.min(30, 700 / words.length);
+    for (let i = 1; i <= words.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, delay));
       setDemoMessages(prev => {
         const newMessages = [...prev];
         const last = newMessages[newMessages.length - 1];
-        newMessages[newMessages.length - 1] = { ...last, content: response.substring(0, i) };
+        newMessages[newMessages.length - 1] = { ...last, content: words.slice(0, i).join(' ') };
         return newMessages;
       });
     }
@@ -180,7 +182,7 @@ export const HeroDemo = () => {
           </h1>
 
           <p className="animate-rise text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl mx-auto [animation-delay:100ms]">
-            The AI voice assistant that answers your city questions 24/7. No hold times, no clicking through 12 pages. Just ask.
+            Quick, accurate answers to your city questions, 24/7, drawn from official City of Markham information with a link to the source. No hold times, no clicking through pages.
           </p>
         </div>
 

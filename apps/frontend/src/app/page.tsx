@@ -9,11 +9,38 @@ import { HeroDemo } from '../components/HeroDemo';
 import { ContactForm } from '../components/ContactForm';
 import { FAQSection } from '../components/FAQSection';
 import { RevealOnScroll } from '../components/RevealOnScroll';
+import { faqDatabase } from '../lib/faq-data';
 
 // Server-rendered; only HeroDemo, FAQSection and ContactForm hydrate in the browser
 export default function HomePage() {
   // Generate static heights for voice bars to avoid hydration mismatch
   const voiceBarHeights = ['16px', '24px', '12px', '20px', '28px'];
+
+  // Counted from the data, so it stays true as more answers are checked
+  const checkedAnswerCount = faqDatabase.filter(item => item.source).length;
+
+  const answerQualities = [
+    {
+      icon: <Zap className="w-6 h-6" />,
+      title: "Answers in Seconds",
+      description: "Ask in plain words and get the answer straight away, instead of clicking through menus or waiting on hold.",
+    },
+    {
+      icon: <CheckCircle2 className="w-6 h-6" />,
+      title: `${checkedAnswerCount} Answers Checked`,
+      description: "Answers in this demo are checked against official markham.ca pages, and the list keeps growing.",
+    },
+    {
+      icon: <Link2 className="w-6 h-6" />,
+      title: "One Click to the Source",
+      description: "Every checked answer links to the exact City page it came from, so you can confirm it yourself.",
+    },
+    {
+      icon: <ShieldCheck className="w-6 h-6" />,
+      title: "No Guessing",
+      description: "If HeyMarkham doesn't know, it says so and points you to the City's Contact Centre at 905-477-5530.",
+    },
+  ];
 
   const clickProblemStats = [
     { value: "7", label: "Steps", description: "To find one yard waste date in the example above" },
@@ -77,6 +104,29 @@ export default function HomePage() {
       <RevealOnScroll />
       <div className="flex-grow">
         <HeroDemo />
+
+        {/* Quick and accurate: proof points that are true of this demo */}
+        <section className="py-14 px-6 bg-slate-900 dark:bg-slate-950 border-t border-slate-800">
+          <div className="max-w-7xl mx-auto">
+            <h2 data-reveal className="text-2xl md:text-3xl font-serif font-bold text-white text-center mb-3">
+              Quick Answers You Can Trust
+            </h2>
+            <p data-reveal className="text-slate-300 text-center max-w-2xl mx-auto mb-10" style={{ transitionDelay: '0.1s' }}>
+              Speed is only useful if the answer is right. HeyMarkham is built for both.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {answerQualities.map((quality, i) => (
+                <div data-reveal key={quality.title} className="p-6 rounded-xl bg-slate-800/60 border border-slate-700" style={{ transitionDelay: `${i * 0.1}s` }}>
+                  <div className="w-12 h-12 rounded-lg bg-primary-600/30 text-primary-200 flex items-center justify-center mb-4">
+                    {quality.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">{quality.title}</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">{quality.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Voice-First Experience Section */}
         <section className="py-16 px-6 bg-primary-700 dark:bg-primary-900">

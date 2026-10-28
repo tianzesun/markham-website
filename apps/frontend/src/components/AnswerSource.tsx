@@ -2,7 +2,7 @@
 export const AnswerSource = ({ source, linkClassName = '' }: { source?: string; linkClassName?: string }) =>
   source ? (
     <>
-      From the City of Markham website.{' '}
+      Checked against markham.ca.{' '}
       <a href={source} target="_blank" rel="noopener noreferrer" className={`underline ${linkClassName}`}>
         View source
       </a>

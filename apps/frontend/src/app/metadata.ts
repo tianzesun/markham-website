@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     default: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
     template: '%s | HeyMarkham',
   },
-  description: 'Get instant answers about Markham city services using natural voice commands. Just say "Hey Markham". Available 24/7. Garbage collection, parks, events, permits and more.',
+  description: 'Quick, accurate answers about Markham city services, drawn from official City information with links to the source. Ask by voice or text, 24/7: garbage collection, parking, permits, recreation and more.',
   keywords: [
     'Markham', 'AI assistant', 'voice assistant', 'Markham garbage collection', 'Markham recycling',
     'Markham parks', 'Markham events', 'city services', 'smart city', 'Markham Ontario',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
-    description: 'Get instant answers about Markham city services 24/7. Just say "Hey Markham".',
+    description: 'Quick, accurate answers about Markham city services 24/7, with links to official sources. Just say "Hey Markham".',
     url: 'https://heymarkham.vercel.app',
     siteName: 'HeyMarkham',
     locale: 'en_CA',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
-    description: 'Get instant answers about Markham city services 24/7. Just say "Hey Markham".',
+    description: 'Quick, accurate answers about Markham city services 24/7, with links to official sources. Just say "Hey Markham".',
     creator: '@heymarkham',
   },
   robots: {
