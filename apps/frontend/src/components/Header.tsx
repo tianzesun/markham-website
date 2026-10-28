@@ -11,16 +11,17 @@ export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY } = useScroll();
   
-  const headerBackground = useTransform(scrollY, [0, 80], ['rgba(15, 23, 42, 0.7)', 'rgba(15, 23, 42, 0.95)']);
+  const headerBackground = useTransform(scrollY, [0, 80], ['rgba(15, 23, 42, 0.96)', 'rgba(15, 23, 42, 0.98)']);
   const headerBlur = useTransform(scrollY, [0, 80], ['blur(8px)', 'blur(20px)']);
   const headerShadow = useTransform(scrollY, [0, 80], ['0 0 0 0 transparent', '0 4px 20px -5px rgba(0, 0, 0, 0.1)']);
   const headerBorder = useTransform(scrollY, [0, 80], ['rgba(51, 65, 85, 0)', 'rgba(51, 65, 85, 0.8)']);
 
   const navigation = [
-    { name: 'Features', href: '#features' },
-    { name: 'Solution', href: '#solution' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' }
+    // Root-relative so the links also work from other pages such as /privacy
+    { name: 'Features', href: '/#features' },
+    { name: 'How It Works', href: '/#solution' },
+    { name: 'FAQ', href: '/#faq' },
+    { name: 'For Municipalities', href: '/#contact' }
   ];
 
   return (
@@ -82,10 +83,10 @@ export const Header: React.FC = () => {
             <ThemeToggle />
             <MagneticButton>
               <Link
-                href="#contact"
+                href="/#demo"
                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium text-sm transition-all shadow-sm btn-hover"
               >
-                Get Started
+                Try the Demo
                 <ArrowRight size={16} />
               </Link>
             </MagneticButton>
@@ -126,11 +127,11 @@ export const Header: React.FC = () => {
             ))}
             <div className="pt-3 mt-3 border-t border-slate-800">
               <Link
-                href="#contact"
+                href="/#demo"
                 className="block mx-4 bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-lg font-medium text-sm text-center transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Get Started
+                Try the Demo
               </Link>
             </div>
           </div>

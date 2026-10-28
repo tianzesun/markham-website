@@ -1,210 +1,297 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Mic, MicOff, Volume2, X, History } from 'lucide-react';
+import { Mic, MicOff, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { findAnswer } from '../lib/faq-data';
+import { createSpeechRecognition, isFatalSpeechError, type ISpeechRecognition } from '../lib/speech';
 
-interface ISpeechRecognition extends EventTarget {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  onresult: ((event: any) => void) | null;
-  onerror: ((event: any) => void) | null;
-  onend: (() => void) | null;
-  start(): void;
-  stop(): void;
-}
+const WAKE_PHRASES = ['hey markham', 'hi markham', 'okay markham', 'ok markham'];
+// How long to wait for a question after the wake word before going back to standby
+const QUESTION_TIMEOUT_MS = 8000;
 
-interface SpeechRecognitionConstructor {
-  new (): ISpeechRecognition;
-}
-
-declare global {
-  interface Window {
-    SpeechRecognition?: SpeechRecognitionConstructor;
-    webkitSpeechRecognition?: SpeechRecognitionConstructor;
-  }
-}
-
-export {};
+type Status = 'idle' | 'standby' | 'awaiting-question' | 'answering' | 'unsupported' | 'blocked';
 
 export const VoiceWakeWord = () => {
-  const [isListening, setIsListening] = useState(false);
-  const [isWakeWordActive, setIsWakeWordActive] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
   const [transcript, setTranscript] = useState('');
-  const [voiceLevel, setVoiceLevel] = useState(0);
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
-  const [showHistory, setShowHistory] = useState(false);
-  
+  const [exchange, setExchange] = useState<{ question: string; answer: string } | null>(null);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
-  const synthRef = useRef<SpeechSynthesis | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
-  const currentUtteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  // Mirrors of state for recognition callbacks, so the recognizer is created once
+  const isListeningRef = useRef(false);
+  const isAwakeRef = useRef(false);
+  const isSpeakingRef = useRef(false);
+  const questionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Audio feedback tones
   const playTone = useCallback((frequency: number, duration: number, volume: number = 0.1) => {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-    }
-    
-    const oscillator = audioContextRef.current.createOscillator();
-    const gainNode = audioContextRef.current.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContextRef.current.destination);
-    
-    oscillator.frequency.value = frequency;
-    oscillator.type = 'sine';
-    gainNode.gain.setValueAtTime(volume, audioContextRef.current.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContextRef.current.currentTime + duration);
-    
-    oscillator.start(audioContextRef.current.currentTime);
-    oscillator.stop(audioContextRef.current.currentTime + duration);
+    try {
+      if (!audioContextRef.current) {
+        audioContextRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      const context = audioContextRef.current;
+      const oscillator = context.createOscillator();
+      const gainNode = context.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(context.destination);
+
+      oscillator.frequency.value = frequency;
+      oscillator.type = 'sine';
+      gainNode.gain.setValueAtTime(volume, context.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, context.currentTime + duration);
+
+      oscillator.start(context.currentTime);
+      oscillator.stop(context.currentTime + duration);
+    } catch {}
   }, []);
 
-  const speak = useCallback((text: string) => {
-    if (synthRef.current) {
-      // Cancel any ongoing speech
-      synthRef.current.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1.0;
-      utterance.pitch = 0.95;
-      utterance.volume = 0.8;
-      
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      utterance.onerror = () => setIsSpeaking(false);
-      
-      currentUtteranceRef.current = utterance;
-      synthRef.current.speak(utterance);
+  const speak = useCallback((text: string, onDone?: () => void) => {
+    const synth = window.speechSynthesis;
+    if (!synth) {
+      onDone?.();
+      return;
     }
+    synth.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-CA';
+    utterance.rate = 1.0;
+    utterance.pitch = 0.95;
+    utterance.volume = 0.8;
+
+    // Ignore the microphone while speaking so the assistant doesn't hear itself
+    const finish = () => {
+      isSpeakingRef.current = false;
+      onDone?.();
+    };
+    utterance.onstart = () => { isSpeakingRef.current = true; };
+    utterance.onend = finish;
+    utterance.onerror = finish;
+
+    isSpeakingRef.current = true;
+    synth.speak(utterance);
   }, []);
 
-  // Interrupt speech immediately
-  const interruptSpeech = useCallback(() => {
-    if (synthRef.current && isSpeaking) {
-      synthRef.current.cancel();
-      setIsSpeaking(false);
-      playTone(350, 0.15, 0.08);
-    }
-  }, [isSpeaking, playTone]);
+  const clearQuestionTimeout = () => {
+    if (questionTimeoutRef.current) clearTimeout(questionTimeoutRef.current);
+    questionTimeoutRef.current = null;
+  };
 
-  // Mirror of isListening for recognition callbacks, so the recognizer is created once
-  const isListeningRef = useRef(false);
-  const isWakeWordActiveRef = useRef(false);
+  const returnToStandby = useCallback(() => {
+    clearQuestionTimeout();
+    isAwakeRef.current = false;
+    setTranscript('');
+    if (isListeningRef.current) setStatus('standby');
+  }, []);
+
+  const answerQuestion = useCallback((question: string) => {
+    clearQuestionTimeout();
+    isAwakeRef.current = false;
+    const answer = findAnswer(question);
+    setExchange({ question, answer });
+    setTranscript('');
+    setStatus('answering');
+    speak(answer, returnToStandby);
+  }, [speak, returnToStandby]);
 
   useEffect(() => {
-    synthRef.current = window.speechSynthesis;
-    
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-    
-    if (SpeechRecognitionAPI) {
-      recognitionRef.current = new SpeechRecognitionAPI();
-      recognitionRef.current.continuous = true;
-      recognitionRef.current.interimResults = true;
-      recognitionRef.current.lang = 'en-CA';
+    const recognition = createSpeechRecognition(true);
+    if (!recognition) return;
+    recognitionRef.current = recognition;
 
-      recognitionRef.current.onresult = (event: any) => {
-        const current = event.results[event.results.length - 1];
-        const text = current[0].transcript.toLowerCase().trim();
-        setTranscript(text);
+    recognition.onresult = (event) => {
+      if (isSpeakingRef.current) return;
 
-        // Interim results repeat the same phrase, so only greet once per activation
-        if (!isWakeWordActiveRef.current && (text.includes('hey markham') || text.includes('hi markham') || text.includes('okay markham'))) {
-          isWakeWordActiveRef.current = true;
-          setIsWakeWordActive(true);
-          speak("Hi there, how can I help you?");
-        }
-      };
+      const latest = event.results[event.results.length - 1];
+      const text = latest[0].transcript.toLowerCase().trim();
 
-      recognitionRef.current.onerror = (event: any) => {
-        // 'no-speech' and 'aborted' are recoverable; onend restarts the session
-        if (event?.error === 'not-allowed' || event?.error === 'service-not-allowed' || event?.error === 'audio-capture') {
-          isListeningRef.current = false;
-          setIsListening(false);
-          setIsWakeWordActive(false);
+      if (!isAwakeRef.current) {
+        const phrase = WAKE_PHRASES.find(p => text.includes(p));
+        if (!phrase) return;
+
+        // "Hey Markham, when is garbage day?" in one breath: answer straight away
+        const rest = text.slice(text.indexOf(phrase) + phrase.length).replace(/^[\s,.!?]+/, '');
+        if (latest.isFinal && rest.split(/\s+/).filter(Boolean).length >= 2) {
+          answerQuestion(rest);
+          return;
         }
-      };
-      recognitionRef.current.onend = () => {
-        if (isListeningRef.current && recognitionRef.current) {
-          try { recognitionRef.current.start(); } catch {}
-        }
-      };
-    }
+
+        isAwakeRef.current = true;
+        setStatus('awaiting-question');
+        playTone(660, 0.15);
+        questionTimeoutRef.current = setTimeout(returnToStandby, QUESTION_TIMEOUT_MS);
+        return;
+      }
+
+      // Awake: the wake word may still be in this result if it was said with the question
+      const phrase = WAKE_PHRASES.find(p => text.includes(p));
+      const question = phrase ? text.slice(text.indexOf(phrase) + phrase.length).replace(/^[\s,.!?]+/, '') : text;
+      setTranscript(question);
+      if (latest.isFinal && question) {
+        answerQuestion(question);
+      }
+    };
+
+    recognition.onerror = (event) => {
+      if (isFatalSpeechError(event?.error)) {
+        isListeningRef.current = false;
+        clearQuestionTimeout();
+        setStatus('blocked');
+        setIsPanelOpen(true);
+      }
+    };
+    recognition.onend = () => {
+      // Chrome ends continuous sessions periodically; resume while the user wants listening
+      if (isListeningRef.current) {
+        try { recognition.start(); } catch {}
+      }
+    };
 
     return () => {
       isListeningRef.current = false;
-      if (recognitionRef.current) {
-        recognitionRef.current.onend = null;
-        recognitionRef.current.stop();
-      }
-      synthRef.current?.cancel();
+      clearQuestionTimeout();
+      recognition.onend = null;
+      recognition.abort();
+      window.speechSynthesis?.cancel();
     };
-  }, [speak]);
+  }, [answerQuestion, playTone, returnToStandby]);
+
+  const stopListening = () => {
+    isListeningRef.current = false;
+    isAwakeRef.current = false;
+    clearQuestionTimeout();
+    recognitionRef.current?.stop();
+    window.speechSynthesis?.cancel();
+    isSpeakingRef.current = false;
+    setTranscript('');
+    setStatus('idle');
+  };
 
   const toggleListening = () => {
-    if (isListening) {
-      isListeningRef.current = false;
-      isWakeWordActiveRef.current = false;
-      recognitionRef.current?.stop();
-      setIsListening(false);
-      setIsWakeWordActive(false);
-    } else {
-      // Browsers without the Web Speech API (e.g. Firefox) have nothing to start
-      if (!recognitionRef.current) return;
-      try {
-        recognitionRef.current.start();
-        isListeningRef.current = true;
-        setIsListening(true);
-      } catch {}
+    if (isListeningRef.current) {
+      stopListening();
+      playTone(350, 0.15, 0.08);
+      return;
     }
+
+    setIsPanelOpen(true);
+    // Browsers without the Web Speech API (e.g. Firefox) have nothing to start
+    if (!recognitionRef.current) {
+      setStatus('unsupported');
+      return;
+    }
+    try {
+      recognitionRef.current.start();
+      isListeningRef.current = true;
+      setStatus('standby');
+    } catch {}
+  };
+
+  const closePanel = () => {
+    window.speechSynthesis?.cancel();
+    isSpeakingRef.current = false;
+    setIsPanelOpen(false);
+    if (status === 'answering') returnToStandby();
+  };
+
+  const isListening = status === 'standby' || status === 'awaiting-question' || status === 'answering';
+
+  const statusText: Record<Status, string> = {
+    idle: 'Voice assistant is off.',
+    standby: 'Listening for "Hey Markham"…',
+    'awaiting-question': transcript || "I'm listening. What's your question?",
+    answering: 'Answering…',
+    unsupported: "Voice isn't supported in this browser. Try Chrome, Edge or Safari, or type in the demo above.",
+    blocked: 'Microphone access was blocked. Allow it in your browser settings to use voice.',
   };
 
   return (
-    <motion.button
-      onClick={toggleListening}
-      aria-label={isListening ? 'Stop listening for "Hey Markham"' : 'Start listening for "Hey Markham"'}
-      aria-pressed={isListening}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all ${
-        isListening 
-          ? 'bg-primary-600 text-white ring-4 ring-primary-300 ring-opacity-50' 
-          : 'bg-white text-slate-700 shadow-lg border border-slate-200'
-      }`}
-    >
-      <AnimatePresence mode="wait">
-        {isListening ? (
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      <AnimatePresence>
+        {isPanelOpen && (
           <motion.div
-            key="mic-on"
-            initial={{ opacity: 0, rotate: -90 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            exit={{ opacity: 0, rotate: 90 }}
-            className="relative"
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="w-80 max-w-[calc(100vw-3rem)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-4 text-sm"
+            role="status"
+            aria-live="polite"
           >
-            <Mic className="w-6 h-6" />
-            {isWakeWordActive && (
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1.4, opacity: 0 }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="absolute inset-0 rounded-full bg-primary-400"
-              />
+            <div className="flex items-start justify-between gap-3 mb-2">
+              <p className="font-semibold text-slate-900 dark:text-white">HeyMarkham Voice</p>
+              <button
+                onClick={closePanel}
+                aria-label="Close voice panel"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="text-slate-600 dark:text-slate-300 mb-3">{statusText[status]}</p>
+            {exchange && (
+              <div className="space-y-2 border-t border-slate-100 dark:border-slate-800 pt-3">
+                <p className="text-slate-500 dark:text-slate-400">
+                  You asked: <span className="text-slate-900 dark:text-white">&ldquo;{exchange.question}&rdquo;</span>
+                </p>
+                <p className="text-slate-700 dark:text-slate-200">{exchange.answer}</p>
+                <p className="text-xs text-slate-400">
+                  Sample answer. Confirm details at{' '}
+                  <a href="https://www.markham.ca" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary-600 dark:hover:text-primary-300">markham.ca</a>.
+                </p>
+              </div>
             )}
-          </motion.div>
-        ) : (
-          <motion.div
-            key="mic-off"
-            initial={{ opacity: 0, rotate: 90 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            exit={{ opacity: 0, rotate: -90 }}
-          >
-            <MicOff className="w-6 h-6" />
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.button>
+
+      <motion.button
+        onClick={toggleListening}
+        aria-label={isListening ? 'Stop listening for "Hey Markham"' : 'Start listening for "Hey Markham"'}
+        aria-pressed={isListening}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all ${
+          isListening
+            ? 'bg-primary-600 text-white ring-4 ring-primary-300 ring-opacity-50'
+            : 'bg-white text-slate-700 shadow-lg border border-slate-200'
+        }`}
+      >
+        <AnimatePresence mode="wait">
+          {isListening ? (
+            <motion.div
+              key="mic-on"
+              initial={{ opacity: 0, rotate: -90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 90 }}
+              className="relative"
+            >
+              <Mic className="w-6 h-6" />
+              {status === 'awaiting-question' && (
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0.6 }}
+                  animate={{ scale: 1.8, opacity: 0 }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                  className="absolute inset-0 rounded-full bg-primary-400"
+                />
+              )}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="mic-off"
+              initial={{ opacity: 0, rotate: 90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: -90 }}
+            >
+              <MicOff className="w-6 h-6" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.button>
+    </div>
   );
 };

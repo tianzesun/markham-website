@@ -38,8 +38,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Source Sans Pro', 'system-ui', 'sans-serif'],
-        serif: ['Merriweather', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
     },
   },

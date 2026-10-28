@@ -1,20 +1,18 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useSpring, useTransform, useMotionValue, useMotionTemplate } from 'framer-motion';
+import { motion, useTransform, useMotionValue } from 'framer-motion';
 import { 
-  Mic, Search, Brain, 
-  ShieldCheck, Phone, Mail, CheckCircle2, 
-  BarChart3, Clock, AlertCircle, FileSearch, MessageSquare,
-  Send, Building2, MapPin, Globe, Calendar, Users,
-  MousePointer, Bot, Link2, Home, Baby, Heart, Zap, Play,
-  Smartphone, Volume2, Headphones, CreditCard, BookOpen, Ticket,
-  Car, Lightbulb, Shield, Check, PartyPopper, Sparkles, Wifi,
-  PhoneCall, Leaf, Landmark, Waves, Trees, CalendarDays, RefreshCw,
-  ArrowRight
+  Mic, Search, Brain, ShieldCheck, Mail, CheckCircle2, Clock,
+  AlertCircle, FileSearch, MessageSquare, Send, Building2, Calendar,
+  Users, MousePointer, Bot, Link2, Home, Baby, Heart, Zap,
+  Smartphone, Volume2, Headphones, CreditCard, BookOpen, Car,
+  Lightbulb, Sparkles, Wifi, PhoneCall, Leaf, Waves, Trees,
+  CalendarDays, ArrowRight
 } from 'lucide-react';
 import { submitContactForm } from './actions/contact';
 import { findAnswer } from '../lib/faq-data';
+import { createSpeechRecognition, type ISpeechRecognition } from '../lib/speech';
 import { FAQSection } from '../components/FAQSection';
 
 export default function HomePage() {
@@ -28,12 +26,14 @@ export default function HomePage() {
   );
 
   // Demo Chat State
-  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean}>>([
+  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean, isSample?: boolean}>>([
     { role: 'assistant', content: "👋 Hi there! I'm HeyMarkham. Ask me anything about City of Markham services." }
   ]);
   const [demoInput, setDemoInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  // Ref copy so voice callbacks registered once still see the current value
+  const isProcessingRef = useRef(false);
 
   // Auto scroll chat to bottom
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -44,20 +44,11 @@ export default function HomePage() {
     }
   }, [demoMessages]);
 
-  // Demo responses
-  const demoResponses: Record<string, string> = {
-    'garbage': "Your garbage collection is every Thursday. Please place bins at the curb by 7 AM. Next pickup: April 10th.",
-    'pool': "Markham Pan Am Centre pool closes at 10 PM today. Milliken Pool closes at 8 PM. The outdoor pools open May 18th.",
-    'parking': "Residential parking permits are $70/year. You can apply online at markham.ca/parking. Processing takes 2 business days.",
-    'cooling': "There are 7 cooling centers open right now. The nearest one to you is Milliken Mills Community Center, 5 minutes away.",
-    'recycle': "Blue bin accepts plastic bottles, paper, cardboard, metal cans. No plastic bags, food waste, or styrofoam please."
-  };
+  const askDemo = async (question: string) => {
+    if (!question.trim() || isProcessingRef.current) return;
+    isProcessingRef.current = true;
 
-  const handleDemoSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!demoInput.trim() || isProcessing) return;
-
-    const userMessage = demoInput;
+    const userMessage = question.trim();
     setDemoInput('');
     setDemoMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsProcessing(true);
@@ -75,7 +66,7 @@ export default function HomePage() {
     setDemoMessages(prev => {
       const newMessages = [...prev];
       newMessages.pop();
-      newMessages.push({ role: 'assistant', content: '', isTyping: false });
+      newMessages.push({ role: 'assistant', content: '', isTyping: false, isSample: true });
       return newMessages;
     });
     
@@ -90,14 +81,61 @@ export default function HomePage() {
       });
     }
     
+    isProcessingRef.current = false;
     setIsProcessing(false);
   };
 
+  const handleDemoSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    askDemo(demoInput);
+  };
+
+  // Voice input for the demo: one utterance, transcribed into the input, then asked
+  const demoRecognitionRef = useRef<ISpeechRecognition | null>(null);
+  const [isVoiceSupported, setIsVoiceSupported] = useState(true);
+
+  useEffect(() => {
+    const recognition = createSpeechRecognition(false);
+    if (!recognition) {
+      setIsVoiceSupported(false);
+      return;
+    }
+    recognition.onresult = (event) => {
+      const latest = event.results[event.results.length - 1];
+      const text = latest[0].transcript;
+      setDemoInput(text);
+      if (latest.isFinal) {
+        setIsRecording(false);
+        askDemo(text);
+      }
+    };
+    recognition.onerror = () => setIsRecording(false);
+    recognition.onend = () => setIsRecording(false);
+    demoRecognitionRef.current = recognition;
+    return () => recognition.abort();
+    // askDemo only touches refs and state setters, so the first-render closure stays correct
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const toggleDemoRecording = () => {
+    const recognition = demoRecognitionRef.current;
+    if (!recognition) return;
+    if (isRecording) {
+      recognition.stop();
+      setIsRecording(false);
+    } else {
+      try {
+        recognition.start();
+        setIsRecording(true);
+      } catch {}
+    }
+  };
+
   const clickProblemStats = [
-    { value: "10+", label: "Clicks to Find Info", description: "Average on municipal websites" },
-    { value: "10+ min", label: "Search Time", description: "For simple questions like pickup schedules" },
-    { value: "5+", label: "Platforms", description: "Residents must navigate multiple systems" },
-    { value: "70%", label: "After-Hours", description: "Queries happen when offices are closed" },
+    { value: "7", label: "Steps", description: "To find one yard waste date in the example above" },
+    { value: "Several", label: "Separate Systems", description: "Waste, recreation, libraries and transit each have their own" },
+    { value: "Office hours", label: "Phone Support", description: "Questions don't stop when lines close" },
+    { value: "1", label: "Question", description: "All HeyMarkham needs" },
   ];
 
   const winStories = [
@@ -131,7 +169,7 @@ export default function HomePage() {
     {
       icon: <Link2 className="w-6 h-6" />,
       title: "Verified by Source",
-      description: "Every answer comes with a direct link to the specific page on the official website. No more 'I don't trust the AI'—see exactly where the information came from."
+      description: "Answers link back to the official city page they came from, so you can check the information for yourself instead of taking the AI's word for it."
     },
     {
       icon: <MessageSquare className="w-6 h-6" />,
@@ -145,8 +183,8 @@ export default function HomePage() {
     },
     {
       icon: <ShieldCheck className="w-6 h-6" />,
-      title: "No Hallucinations",
-      description: "RAG grounds every response in actual city data. If the information isn't in official sources, the AI says so—instead of making things up."
+      title: "Says When It Doesn't Know",
+      description: "Answers are grounded in official city information. If the answer isn't in those sources, HeyMarkham says so and points you to the right contact instead of guessing."
     },
   ];
 
@@ -174,13 +212,12 @@ export default function HomePage() {
   const rotateY = useTransform(mouseX, [-0.5, 0.5], [-2, 2]);
   const glowX = useTransform(mouseX, [-0.5, 0.5], ['30%', '70%']);
   const glowY = useTransform(mouseY, [-0.5, 0.5], ['30%', '70%']);
-  const glowPosition = useMotionTemplate`${glowX} ${glowY}`;
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-white dark:bg-slate-950">
       <div className="flex-grow">
         {/* Hero Section - Interactive Demo */}
-        <section ref={heroRef} className="relative pt-12 pb-20 md:pt-20 md:pb-28 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+        <section ref={heroRef} className="relative pt-12 pb-16 md:pt-20 md:pb-20 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
           {/* Mouse following glow orb */}
           <motion.div 
             className="absolute w-[500px] h-[500px] bg-primary-500/15 rounded-full blur-3xl pointer-events-none"
@@ -208,7 +245,7 @@ export default function HomePage() {
               >
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-600/20 rounded-full text-primary-300 text-sm font-medium mb-6 border border-primary-500/30">
                   <Sparkles className="w-4 h-4" />
-                  Now in Public Beta for Markham Residents
+                  Beta Demo for Markham Residents
                 </div>
               </motion.div>
               
@@ -275,7 +312,7 @@ export default function HomePage() {
                       <h3 className="font-semibold text-white">HeyMarkham Assistant</h3>
                       <div className="flex items-center gap-1.5 text-xs text-green-400">
                         <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                        Online & Ready
+                        Demo with sample answers
                       </div>
                     </div>
                   </div>
@@ -301,7 +338,15 @@ export default function HomePage() {
                             <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                           </div>
                         ) : (
-                          <p className="text-white text-sm">{msg.content}</p>
+                          <>
+                            <p className="text-white text-sm">{msg.content}</p>
+                            {msg.isSample && (
+                              <p className="mt-2 text-xs text-slate-400">
+                                Sample answer. Confirm details at{' '}
+                                <a href="https://www.markham.ca" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">markham.ca</a>.
+                              </p>
+                            )}
+                          </>
                         )}
                       </div>
                       {msg.role === 'user' && (
@@ -318,22 +363,17 @@ export default function HomePage() {
                   <form onSubmit={handleDemoSubmit} className="flex gap-3">
                      <button 
                        type="button"
-                       onClick={() => setIsRecording(!isRecording)}
-                       aria-label={isRecording ? 'Stop recording' : 'Start recording'}
+                       onClick={toggleDemoRecording}
+                       disabled={!isVoiceSupported || isProcessing}
+                       title={isVoiceSupported ? undefined : "Voice input isn't supported in this browser"}
+                       aria-label={isRecording ? 'Stop voice input' : 'Ask by voice'}
                        aria-pressed={isRecording}
                        className={`w-12 h-12 ${isRecording 
                          ? 'bg-red-500 animate-pulse' 
-                         : 'bg-white hover:bg-gray-100'} rounded-xl flex items-center justify-center transition-all active:scale-95`}
+                         : 'bg-white hover:bg-gray-100'} rounded-xl flex items-center justify-center transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed`}
                      >
-                       <Mic className="w-5 h-5 text-gray-600" />
+                       <Mic className={`w-5 h-5 ${isRecording ? 'text-white' : 'text-gray-600'}`} />
                      </button>
-                     <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center transition-all active:scale-95">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M19 11H21L15 5L13 7L19 11Z" fill="currentColor" />
-                         <path d="M1 11C1 6.03 6.03 1 11 1C15.04 1 18.84 3.43 21 7V11C21 6.03 16.97 1 11 1C5.96 1 2.16 3.43 0 7L1 11Z" fill="currentColor" />
-                         <path d="M11 13C14.33 13 17 15.67 17 19C17 20.1 16.55 21.08 15.92 21.84L21 17L21 23L20.5 22.5L15.92 16.92C16.55 17.68 17 18.66 17 19.77C17 22.3 14.31 24 11 24C7.69 24 5 21.31 5 18C5 15.67 7.67 13 11 13Z" fill="currentColor" />
-                       </svg>
-                     </div>
                      <input 
                       type="text" 
                       placeholder="Ask HeyMarkham anything..."
@@ -392,7 +432,7 @@ export default function HomePage() {
               {/* Phone Mockup */}
               <div className="flex justify-center">
                 <div className="relative">
-                  <div className="w-64 h-[500px] bg-slate-900 rounded-[3rem] p-3 shadow-2xl border-4 border-slate-700">
+                  <div className="w-64 h-[580px] bg-slate-900 rounded-[3rem] p-3 shadow-2xl border-4 border-slate-700">
                     <div className="w-full h-full bg-gradient-to-b from-primary-800 to-primary-900 rounded-[2.5rem] overflow-hidden relative">
                       <div className="flex justify-between items-center px-6 py-3 bg-black/20">
                         <span className="text-white text-xs">9:41</span>
@@ -441,7 +481,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Natural Voice Recognition</h3>
-                    <p className="text-primary-200 text-sm">Speaks naturally, understands accents, and works with multiple languages.</p>
+                    <p className="text-primary-200 text-sm">Ask in plain Canadian English, the way you'd ask a neighbour.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -458,8 +498,8 @@ export default function HomePage() {
                     <Smartphone className="w-6 h-6 text-primary-200" />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold mb-1">Works Everywhere</h3>
-                    <p className="text-primary-200 text-sm">iOS, Android, web browser, smart speakers. Your assistant follows you.</p>
+                    <h3 className="text-white font-semibold mb-1">Nothing to Install</h3>
+                    <p className="text-primary-200 text-sm">Works in your web browser on phone or computer. Voice works best in Chrome, Edge and Safari.</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -468,7 +508,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1">Wake Word Activation</h3>
-                    <p className="text-primary-200 text-sm">Just say "Hey Markham" to start a conversation anytime.</p>
+                    <p className="text-primary-200 text-sm">Turn on the mic button, then just say "Hey Markham" and ask your question.</p>
                   </div>
                 </div>
               </div>
@@ -482,11 +522,11 @@ export default function HomePage() {
             <div className="flex flex-wrap justify-center gap-8 text-primary-200 text-sm">
               <div className="flex items-center gap-2">
                 <ShieldCheck size={18} className="text-green-400" />
-                <span>PIPEDA Compliant</span>
+                <span>No account needed</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck size={18} className="text-green-400" />
-                <span>WCAG 2.1 AA Accessible</span>
+                <span>Answers link to official sources</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck size={18} className="text-green-400" />
@@ -494,7 +534,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck size={18} className="text-green-400" />
-                <span>99.9% Uptime</span>
+                <span>Available 24/7</span>
               </div>
             </div>
           </div>
@@ -647,7 +687,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
               >
-                This Is Not ChatGPT
+                Purpose-Built for Markham
               </motion.h2>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -656,7 +696,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-lg text-slate-600 dark:text-slate-400"
               >
-                This is purpose built. This is correct. This is for Markham.
+                Grounded in official city information, not the open internet.
               </motion.p>
             </div>
 
@@ -669,7 +709,7 @@ export default function HomePage() {
                 whileHover={{ 
                   y: -6, 
                   scale: 1.015,
-                  boxShadow: "0 20px 40px -12px rgba(var(--primary), 0.15)"
+                  boxShadow: "0 20px 40px -12px rgba(72, 101, 129, 0.25)"
                 }}
                 transition={{ 
                   duration: 0.6, 
@@ -679,7 +719,7 @@ export default function HomePage() {
                   damping: 20
                 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="flex gap-4 p-6 rounded-xl bg-primary-50 dark:bg-slate-900 border border-primary-100 dark:border-slate-800 cursor-pointer will-change-transform"
+                className="flex gap-4 p-6 rounded-xl bg-primary-50 dark:bg-slate-900 border border-primary-100 dark:border-slate-800 will-change-transform"
               >
                   <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center text-primary-600 dark:text-primary-400">
                     {benefit.icon}
@@ -718,7 +758,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-lg text-slate-600 dark:text-slate-400"
               >
-                This is the most advanced municipal AI system ever built. No hallucinations. No guesswork. Just facts.
+                Every answer starts from official city documents, and cites them when it reaches you.
               </motion.p>
             </div>
 
@@ -770,7 +810,7 @@ export default function HomePage() {
                     <Search className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">3. Search</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Cosine similarity match against 120,000 documents</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Similarity search across official city documents</p>
                 </motion.div>
 
                 {/* Step 4 */}
@@ -830,7 +870,7 @@ export default function HomePage() {
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">7. Verify</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Answer returned with source citations. No hallucinations guaranteed.</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Answer returned with source citations, or a clear &ldquo;I don&rsquo;t know&rdquo;.</p>
                 </motion.div>
               </div>
 
@@ -875,12 +915,12 @@ export default function HomePage() {
                   viewport={{ once: true }}
                   className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white"
                 >
-                  <h4 className="font-bold mb-3 text-lg">Performance</h4>
+                  <h4 className="font-bold mb-3 text-lg">Built for Trust</h4>
                   <ul className="space-y-2 text-sm text-slate-300">
-                    <li>✓ 92% answer accuracy</li>
-                    <li>✓ {'<1.2s'} average response time</li>
-                    <li>✓ 99.9% uptime SLA</li>
-                    <li>✓ SOC 2 Type II compliant</li>
+                    <li>✓ Answers cite official sources</li>
+                    <li>✓ Declines questions outside city services</li>
+                    <li>✓ No account or sign-in required</li>
+                    <li>✓ Voice is opt-in, off until you turn it on</li>
                   </ul>
                 </motion.div>
               </div>
@@ -908,7 +948,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-lg text-slate-600 dark:text-slate-400"
               >
-                Real questions from real residents, answered instantly
+                Everyday questions, answered in one step
               </motion.p>
             </div>
 
@@ -979,7 +1019,7 @@ export default function HomePage() {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 mb-4 px-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white">Completed</h3>
+                  <h3 className="font-semibold text-slate-900 dark:text-white">Available in Demo</h3>
                   <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
                 <div className="bg-green-50 dark:bg-green-900/20 rounded-t-xl p-4 border-b-2 border-green-400 flex-shrink-0">
@@ -1019,7 +1059,7 @@ export default function HomePage() {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 mb-4 px-2">
                   <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white">In Progress</h3>
+                  <h3 className="font-semibold text-slate-900 dark:text-white">Up Next</h3>
                   <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
                 <div className="bg-amber-50 dark:bg-amber-900/20 rounded-t-xl p-4 border-b-2 border-amber-400 flex-shrink-0">
@@ -1035,21 +1075,21 @@ export default function HomePage() {
                         <BookOpen className="w-4 h-4 text-amber-600" />
                         <span className="font-medium text-slate-900 dark:text-white text-sm">Library System</span>
                       </div>
-                      <p className="text-xs text-slate-500">Q2 2026 — Check books, renew items</p>
+                      <p className="text-xs text-slate-500">Check books, renew items</p>
                     </div>
                     <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-amber-500">
                       <div className="flex items-center gap-2 mb-1">
                         <Waves className="w-4 h-4 text-amber-600" />
                         <span className="font-medium text-slate-900 dark:text-white text-sm">Recreation Booking</span>
                       </div>
-                      <p className="text-xs text-slate-500">Q2 2026 — Book pools, courts</p>
+                      <p className="text-xs text-slate-500">Book pools, courts</p>
                     </div>
                     <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-amber-500">
                       <div className="flex items-center gap-2 mb-1">
                         <Car className="w-4 h-4 text-amber-600" />
                         <span className="font-medium text-slate-900 dark:text-white text-sm">Permit Applications</span>
                       </div>
-                      <p className="text-xs text-slate-500">Q2 2026 — Parking, building permits</p>
+                      <p className="text-xs text-slate-500">Parking, building permits</p>
                     </div>
                   </div>
                 </div>
@@ -1059,7 +1099,7 @@ export default function HomePage() {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 mb-4 px-2">
                   <div className="w-3 h-3 bg-slate-400 rounded-full"></div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white">Planned</h3>
+                  <h3 className="font-semibold text-slate-900 dark:text-white">Later</h3>
                   <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
                 <div className="bg-slate-100 dark:bg-slate-800 rounded-t-xl p-4 border-b-2 border-slate-300 flex-shrink-0">
@@ -1075,21 +1115,21 @@ export default function HomePage() {
                         <Home className="w-4 h-4 text-slate-500" />
                         <span className="font-medium text-slate-900 dark:text-white text-sm">Property Tax</span>
                       </div>
-                      <p className="text-xs text-slate-500">Q4 2026 — View, pay, payment plans</p>
+                      <p className="text-xs text-slate-500">View, pay, payment plans</p>
                     </div>
                     <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-slate-400">
                       <div className="flex items-center gap-2 mb-1">
                         <Lightbulb className="w-4 h-4 text-slate-500" />
-                        <span className="font-medium text-slate-900 dark:text-white text-sm">Utility Bills</span>
+                        <span className="font-medium text-slate-900 dark:text-white text-sm">Water Bills</span>
                       </div>
-                      <p className="text-xs text-slate-500">Q4 2026 — Hydro, water, gas</p>
+                      <p className="text-xs text-slate-500">View and pay water bills</p>
                     </div>
                     <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-lg border-l-3 border-slate-400">
                       <div className="flex items-center gap-2 mb-1">
                         <CreditCard className="w-4 h-4 text-slate-500" />
                         <span className="font-medium text-slate-900 dark:text-white text-sm">Fines & Fees</span>
                       </div>
-                      <p className="text-xs text-slate-500">Q4 2026 — Parking tickets</p>
+                      <p className="text-xs text-slate-500">Parking tickets</p>
                     </div>
                   </div>
                 </div>
@@ -1105,6 +1145,9 @@ export default function HomePage() {
          <section id="contact" className="py-16 md:py-20 px-6 bg-primary-700 dark:bg-primary-900">
            <div className="max-w-5xl mx-auto">
              <div className="text-center mb-12">
+               <p className="text-sm font-semibold uppercase tracking-wider text-primary-200 mb-3">
+                 For the City of Markham and other municipalities
+               </p>
                <motion.h2 
                  initial={{ opacity: 0, y: 20 }}
                  whileInView={{ opacity: 1, y: 0 }}
@@ -1112,7 +1155,7 @@ export default function HomePage() {
                  viewport={{ once: true }}
                  className="text-2xl md:text-3xl font-serif font-bold text-white mb-4"
                >
-                 Ready to Transform Resident Services?
+                 Bring HeyMarkham to Your Residents
                </motion.h2>
                <motion.p 
                  initial={{ opacity: 0, y: 20 }}
@@ -1123,6 +1166,9 @@ export default function HomePage() {
                >
                  Start with a pilot. See the results. Then decide.
                </motion.p>
+               <p className="mt-3 text-sm text-primary-200">
+                 Residents: have feedback or a question about the demo? Use the same form.
+               </p>
              </div>
 
              <div className="grid md:grid-cols-2 gap-12">
@@ -1143,7 +1189,7 @@ export default function HomePage() {
                        </div>
                        <div>
                          <h4 className="text-white font-medium">Quick Implementation</h4>
-                         <p className="text-primary-200 text-sm">Deploy in weeks, not months. Our solution integrates with your existing systems.</p>
+                         <p className="text-primary-200 text-sm">Starts from the information already on your public website. No system replacement needed.</p>
                        </div>
                      </div>
                      <div className="flex gap-4">
@@ -1151,8 +1197,8 @@ export default function HomePage() {
                          <Users className="w-5 h-5 text-primary-200" />
                        </div>
                        <div>
-                         <h4 className="text-white font-medium">Reduce Call Volume</h4>
-                         <p className="text-primary-200 text-sm">Handle 80% of common questions automatically, freeing staff for complex issues.</p>
+                         <h4 className="text-white font-medium">Ease the Load on Staff</h4>
+                         <p className="text-primary-200 text-sm">Answers routine questions around the clock, so staff can focus on the complex ones.</p>
                        </div>
                      </div>
                      <div className="flex gap-4">
@@ -1160,8 +1206,8 @@ export default function HomePage() {
                          <ShieldCheck className="w-5 h-5 text-primary-200" />
                        </div>
                        <div>
-                         <h4 className="text-white font-medium">Enterprise Security</h4>
-                         <p className="text-primary-200 text-sm">PIPEDA compliant, WCAG 2.1 AA accessible, with 99.9% uptime guarantee.</p>
+                         <h4 className="text-white font-medium">Privacy and Accessibility First</h4>
+                         <p className="text-primary-200 text-sm">Designed around Canadian privacy law and accessibility standards. We&rsquo;ll walk your team through our approach during the pilot.</p>
                        </div>
                      </div>
                    </div>
@@ -1280,7 +1326,7 @@ export default function HomePage() {
                     <div className="text-center text-sm min-h-[20px]">
                      {optimisticContact.status === 'idle' && (
                        <p className="text-primary-200">
-                         We'll get back to you within 24 hours
+                         We'll reply by email as soon as we can
                        </p>
                      )}
                      {optimisticContact.status === 'success' && (

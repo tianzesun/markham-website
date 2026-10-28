@@ -19,7 +19,7 @@ export const FAQSection = () => {
     // Every word of the query must appear in the item's keywords or answer
     const words = searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
     return faqDatabase.filter(item => {
-      const haystack = `${item.keywords.join(' ')} ${item.answer}`.toLowerCase();
+      const haystack = `${item.question} ${item.keywords.join(' ')} ${item.answer}`.toLowerCase();
       return words.every(word => haystack.includes(word));
     });
   }, [searchQuery]);
@@ -34,7 +34,7 @@ export const FAQSection = () => {
     
     return parts.map((part, i) => 
       words.includes(part.toLowerCase())
-        ? <mark key={i} className="bg-sky-100 text-sky-900 dark:bg-sky-900 dark:text-sky-100 px-1 rounded">{part}</mark>
+        ? <mark key={i} className="bg-primary-100 text-primary-900 dark:bg-primary-800 dark:text-primary-50 px-0.5 rounded">{part}</mark>
         : part
     );
   };
@@ -53,8 +53,8 @@ export const FAQSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">Frequently Asked Questions</h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">Instant answers about City of Markham services</p>
+          <h2 className="text-2xl md:text-3xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Frequently Asked Questions</h2>
+          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">Sample answers about City of Markham services. Always confirm details at markham.ca.</p>
 
           {/* Search Input */}
           <div className="relative max-w-xl mx-auto">
@@ -64,7 +64,7 @@ export const FAQSection = () => {
               placeholder="Search for answers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all"
+              className="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               aria-label="Search FAQ"
             />
           </div>
@@ -90,8 +90,8 @@ export const FAQSection = () => {
                     className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
                     aria-expanded={openIndex === index}
                   >
-                    <span className="font-medium pr-4 capitalize text-slate-900 dark:text-white">
-                      {highlightText(item.keywords[0], searchQuery)}
+                    <span className="font-medium pr-4 text-slate-900 dark:text-white">
+                      {highlightText(item.question, searchQuery)}
                     </span>
                     {openIndex === index ? (
                       <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />

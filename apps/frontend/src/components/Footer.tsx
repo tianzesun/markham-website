@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 px-6 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+    <footer className="pt-12 pb-24 px-6 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Company */}
@@ -27,8 +27,9 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Product</h4>
             <ul className="space-y-2">
-              <li><Link href="#solution" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Features</Link></li>
-              <li><Link href="#contact" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Demo</Link></li>
+              <li><Link href="/#features" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Features</Link></li>
+              <li><Link href="/#demo" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Demo</Link></li>
+              <li><Link href="/#contact" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">For Municipalities</Link></li>
             </ul>
           </div>
 
@@ -36,8 +37,9 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Resources</h4>
             <ul className="space-y-2">
-              <li><a href="https://markham.ca" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">City of Markham</a></li>
-              <li><Link href="#contact" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Support</Link></li>
+              <li><a href="https://www.markham.ca" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">City of Markham (official site)</a></li>
+              <li><Link href="/#faq" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">FAQ</Link></li>
+              <li><Link href="/privacy" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -58,6 +60,11 @@ export const Footer: React.FC = () => {
             Built for Markham residents
           </p>
         </div>
+
+        <p className="mt-6 text-xs text-slate-400 dark:text-slate-500 text-center md:text-left">
+          HeyMarkham is an independent service by Aydenait Solutions and is not affiliated with or endorsed by the City of Markham.
+          Answers are samples for demonstration; always confirm details at markham.ca.
+        </p>
       </div>
     </footer>
   );

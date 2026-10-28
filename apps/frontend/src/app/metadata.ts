@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     default: 'HeyMarkham - Voice-Enabled AI Assistant for Markham Residents',
     template: '%s | HeyMarkham',
   },
-  description: 'Get instant answers about Markham city services using natural voice commands. Just say "Hey Markham". Available 24/7 with 90%+ accuracy. Garbage collection, parks, events, permits and more.',
+  description: 'Get instant answers about Markham city services using natural voice commands. Just say "Hey Markham". Available 24/7. Garbage collection, parks, events, permits and more.',
   keywords: [
     'Markham', 'AI assistant', 'voice assistant', 'Markham garbage collection', 'Markham recycling',
     'Markham parks', 'Markham events', 'city services', 'smart city', 'Markham Ontario',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  category: 'Government',
+  category: 'Technology',
   applicationName: 'HeyMarkham',
   appleWebApp: {
     capable: true,
@@ -58,5 +58,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0ea5e9',
+  themeColor: '#0f172a',
 };
