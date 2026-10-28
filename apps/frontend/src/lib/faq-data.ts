@@ -1,5 +1,5 @@
-// Entries with a source were checked against that markham.ca page in October 2026
-export const faqDatabase: Array<{ question: string, keywords: string[], answer: string, source?: string }> = [
+// Every entry was checked against its official source page in October 2026
+export const faqDatabase: Array<{ question: string, keywords: string[], answer: string, source: string }> = [
   {
     question: "When is my garbage collected?",
     keywords: ['garbage', 'waste', 'trash', 'pickup', 'collection', 'bin', 'schedule', 'thursday', 'clear', 'bag', 'every other week'],
@@ -44,8 +44,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "When does York Region Transit run?",
-    keywords: ['bus', 'transit', 'york', 'region', 'schedule', 'route', 'stop'],
-    answer: "York Region Transit runs bus service across Markham. Check yrt.ca or the YRT app for routes, schedules and live arrival times at your stop."
+    keywords: ['bus', 'transit', 'york', 'region', 'schedule', 'route', 'stop', 'presto', 'fare', 'trip planner'],
+    answer: "York Region Transit (YRT) runs Markham's buses. Use the YRT Trip Planner at yrt.ca for schedules, real-time departures and the closest stops. Pay with a PRESTO card, PRESTO on your phone, a PRESTO E-Ticket, or a credit or debit card. Customer service: 905-762-2100 or 1-866-668-3978.",
+    source: "https://www.yrt.ca/"
   },
   {
     question: "How are snow and sidewalks cleared?",
@@ -72,40 +73,10 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/decks-construction-permits"
   },
   {
-    question: "How do I report a pothole?",
-    keywords: ['road', 'pothole', 'repair', 'damage', 'report', 'issue'],
-    answer: "Report potholes to the City online through markham.ca or by calling the Contact Centre at 905-477-5530."
-  },
-  {
-    question: "How do I book a park pavilion for a party?",
-    keywords: ['birthday', 'party', 'book', 'rent', 'park', 'pavilion', 'facility'],
-    answer: "Park pavilions and picnic areas can be booked through the City's recreation booking system. Check markham.ca for availability, fees and booking rules."
-  },
-  {
-    question: "What do community centres offer?",
-    keywords: ['community', 'center', 'program', 'class', 'senior', 'activity', 'fitness'],
-    answer: "Markham's community centres offer fitness, arts, seniors' and children's programs, plus drop-in activities. Browse current programs and register on markham.ca."
-  },
-  {
-    question: "How do I buy a cemetery plot?",
-    keywords: ['cemetery', 'burial', 'plot', 'cremation', 'services'],
-    answer: "The City operates municipal cemeteries. Check markham.ca for plot availability, pricing and how to arrange a purchase."
-  },
-  {
-    question: "How do I get a marriage licence?",
-    keywords: ['marriage', 'license', 'ceremony', 'apply', 'civil'],
-    answer: "Marriage licences are issued by the City Clerk's office. Check markham.ca for current hours, fees, required ID and civil ceremony options."
-  },
-  {
     question: "What are the noise bylaw hours?",
     keywords: ['bylaw', 'noise', 'complaint', 'fine', 'after', 'hour', 'music', 'party', 'loud'],
     answer: "Playing loud music outdoors isn't allowed from 5 PM until 7 AM the next day (9 AM on Sundays), although amplified sound is now allowed until 11 PM on Fridays and Saturdays. Shouting, whistling and singing are prohibited after 11 PM. Outdoor functions on private property need a Noise Exemption Permit. To report noise, call By-law Enforcement at 905.479.7782.",
     source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/noise"
-  },
-  {
-    question: "Do I need a permit for a campfire?",
-    keywords: ['fire', 'alarm', 'burn', 'permit', 'campfire'],
-    answer: "You may need a permit for open-air burning, and burning is not allowed during a fire ban. Check markham.ca for current rules before lighting a fire."
   },
   {
     question: "Can I remove a tree on my property?",
@@ -132,26 +103,6 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     source: "https://www.markham.ca/sports-recreation-fitness/sports-recreation-programs/public-skating-lessons-hockey"
   },
   {
-    question: "How do I book a tennis court?",
-    keywords: ['tennis', 'court', 'book', 'reserve', 'fee'],
-    answer: "Many City tennis courts are available for drop-in use, and some can be booked. Check markham.ca for locations and booking details."
-  },
-  {
-    question: "When is the farmers market open?",
-    keywords: ['farmers', 'market', 'open', 'day', 'time', 'location'],
-    answer: "Markham has seasonal farmers markets. Check markham.ca for this year's locations, days and hours."
-  },
-  {
-    question: "Where can I find free public Wi-Fi?",
-    keywords: ['wifi', 'internet', 'public', 'free', 'hotspot'],
-    answer: "Free public Wi-Fi is available at many City facilities, including libraries and community centres. Check markham.ca for locations."
-  },
-  {
-    question: "How do I report a damaged sidewalk?",
-    keywords: ['sidewalk', 'repair', 'trip', 'crack', 'uneven', 'report'],
-    answer: "Report damaged or uneven sidewalks to the City online through markham.ca or by calling 905-477-5530."
-  },
-  {
     question: "How high can my fence be?",
     keywords: ['fence', 'height', 'tall', 'high', 'property', 'line', 'bylaw', 'pool', 'enclosure', 'neighbour', 'shared'],
     answer: "Front-yard fences can be up to 1.2 m (4 ft) high, and fences along rear and interior side property lines up to 1.8 m (6 ft). On corner lots, the side facing the street is limited to 1.2 m. Pools deeper than 0.6 m need a 1.2 m fence and a pool enclosure permit before filling. For a shared fence on the property line, give your neighbour 14 days' written notice by registered mail. Questions: 905.479.7782.",
@@ -159,39 +110,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "What are the allowed construction hours?",
-    keywords: ['construction', 'hours', 'weekend', 'noise', 'allowed', 'saturday', 'sunday', 'holiday'],
+    keywords: ['construction', 'construction hours', 'equipment', 'hours', 'weekend', 'saturday', 'sunday', 'holiday'],
     answer: "Construction equipment may be used on Saturdays from 9 AM to 5 PM and is prohibited at all times on Sundays and statutory holidays. Work outside the permitted times needs a noise exemption. See Markham's Noise By-law for weekday hours, or call 905.479.7782.",
     source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/noise"
-  },
-  {
-    question: "Do I need a permit for a garage sale?",
-    keywords: ['garage', 'sale', 'permit', 'limit', 'days'],
-    answer: "Garage sales are allowed, with some limits on how often you can hold them. Check markham.ca for the current rules."
-  },
-  {
-    question: "How do I report broken playground equipment?",
-    keywords: ['playground', 'equipment', 'broken', 'safe', 'inspect'],
-    answer: "Report broken playground equipment to the City by calling 905-477-5530 or online through markham.ca."
-  },
-  {
-    question: "Where are public washrooms?",
-    keywords: ['toilet', 'washroom', 'public', 'open', 'park', 'location'],
-    answer: "Public washrooms are available at community centres and in many parks, some seasonally. Check markham.ca for facility details."
-  },
-  {
-    question: "Where is the lost and found?",
-    keywords: ['lost', 'found', 'item', 'property', 'report'],
-    answer: "For items lost at a City facility, contact that facility or call the Contact Centre at 905-477-5530."
-  },
-  {
-    question: "Where can I find emergency shelter?",
-    keywords: ['shelter', 'homeless', 'support', 'housing', 'emergency'],
-    answer: "If you need emergency shelter, contact York Region's emergency housing services through york.ca, or call 211 for help finding services. In an emergency, call 911."
-  },
-  {
-    question: "How are Christmas trees collected?",
-    keywords: ['recycling', 'christmas', 'tree', 'dispose', 'drop off'],
-    answer: "Christmas trees are collected in January. Check your collection calendar on markham.ca for dates, and remove all decorations first."
   },
   {
     question: "How do I get rid of electronics?",
@@ -218,100 +139,16 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     source: "https://www.markham.ca/permits-licences-taxes/administrative-monetary-penalty-system"
   },
   {
-    question: "Where can I get a flu shot?",
-    keywords: ['vaccine', 'clinic', 'flu', 'shot', 'health'],
-    answer: "Flu shots are available from many pharmacies and doctors. York Region Public Health posts clinic information at york.ca/health."
-  },
-  {
-    question: "Can I get a childcare subsidy?",
-    keywords: ['daycare', 'childcare', 'subsidy', 'waitlist', 'register'],
-    answer: "Childcare fee subsidies are available to eligible families. Apply through York Region Children's Services at york.ca."
-  },
-  {
-    question: "How do I find a job with the City?",
-    keywords: ['employment', 'job', 'city', 'hire', 'career', 'vacancy'],
-    answer: "City of Markham job opportunities are posted at markham.ca/careers."
-  },
-  {
     question: "When does City Council meet?",
     keywords: ['council', 'meeting', 'agenda', 'minute', 'watch', 'attend', 'deputation', 'speak', 'minutes'],
     answer: "Council and committee meetings are held at the Markham Civic Centre, 101 Town Centre Boulevard, and are open to the public; you can attend or listen live online. Agendas and minutes are on markham.ca, and you can ask to speak at a meeting using the Request to Speak form. Questions: clerkspublic@markham.ca or 905.477.7000 ext. 2366.",
     source: "https://www.markham.ca/about-the-city-of-markham/city-hall/council-and-committee-meetings"
   },
   {
-    question: "Where can I see the City budget?",
-    keywords: ['budget', 'taxes', 'spending', 'financial', 'report'],
-    answer: "The City publishes its annual budget each year. Full budget documents are available for public download on markham.ca."
-  },
-  {
-    question: "What is Markham's population?",
-    keywords: ['population', 'people', 'residents', 'size', 'demographic'],
-    answer: "Markham had 338,503 residents in the 2021 Census, the largest population of any municipality in York Region."
-  },
-  {
-    question: "How big is Markham?",
-    keywords: ['area', 'size', 'big', 'square', 'kilometer', 'land'],
-    answer: "Markham is one of the largest municipalities in York Region, with many parks and community centres. See markham.ca for facts and figures."
-  },
-  {
-    question: "When was Markham founded?",
-    keywords: ['founded', 'incorporated', 'history', 'year', 'established'],
-    answer: "Markham was first settled in the 1790s, with early settlers led by William Berczy. It became a town in 1971 and a city in 2012."
-  },
-  {
-    question: "What does the Markham flag mean?",
-    keywords: ['flag', 'logo', 'symbol', 'crest', 'meaning'],
-    answer: "Markham's flag and crest reflect the city's history and heritage. See markham.ca for details."
-  },
-  {
     question: "What is the police non-emergency number?",
-    keywords: ['police', 'non-emergency', 'number', 'contact', 'report'],
-    answer: "York Regional Police non-emergency line: 1-866-876-5423. Always call 911 for emergencies."
-  },
-  {
-    question: "How do I reach Markham Fire Services?",
-    keywords: ['fire', 'department', 'station', 'emergency', 'contact'],
-    answer: "Markham Fire & Emergency Services operates fire stations across the city. Always call 911 for fire emergencies."
-  },
-  {
-    question: "Where is the nearest hospital?",
-    keywords: ['hospital', 'emergency', 'room', 'closest', 'nearest'],
-    answer: "Markham Stouffville Hospital, part of Oak Valley Health, has an emergency department open 24/7. In an emergency, call 911."
-  },
-  {
-    question: "What should I do if I see a coyote?",
-    keywords: ['coyote', 'wildlife', 'animal', 'encounter', 'report'],
-    answer: "Coyotes live in many urban areas. Keep pets on a leash, never feed wildlife, and report aggressive animals to the City at 905-477-5530."
-  },
-  {
-    question: "What should I do after hitting a deer?",
-    keywords: ['deer', 'collision', 'vehicle', 'hit', 'report'],
-    answer: "Report collisions with deer to York Regional Police. Do not approach injured animals."
-  },
-  {
-    question: "When does mosquito spraying happen?",
-    keywords: ['mosquito', 'spray', 'west', 'nile', 'program'],
-    answer: "York Region Public Health runs a mosquito and West Nile virus program each summer. See york.ca/health for details."
-  },
-  {
-    question: "Where are the Canada Day fireworks?",
-    keywords: ['canada', 'day', 'fireworks', 'celebration', 'event'],
-    answer: "Markham holds Canada Day celebrations each year. Check markham.ca for this year's locations and fireworks times."
-  },
-  {
-    question: "Where is the Remembrance Day ceremony?",
-    keywords: ['remembrance', 'day', 'ceremony', 'november', 'location'],
-    answer: "Remembrance Day ceremonies are held on November 11. Check markham.ca for this year's locations and times."
-  },
-  {
-    question: "When is Markham Pride?",
-    keywords: ['pride', 'event', 'parade', 'june', 'lgbtq'],
-    answer: "Check markham.ca for this year's Pride events and dates."
-  },
-  {
-    question: "When is the Santa Claus Parade?",
-    keywords: ['parade', 'santa', 'christmas', 'december', 'holiday'],
-    answer: "Markham's Santa Claus Parade is held each year in late fall. Check markham.ca for this year's date and route."
+    keywords: ['police', 'non-emergency', 'number', 'contact', 'report', 'report crime', 'theft'],
+    answer: "York Regional Police's non-emergency line is 1-866-876-5423 (TTY 1-800-668-0398). Some crimes, such as theft, fraud and property damage, can be reported online at yrp.ca. If it's an emergency, call 911 immediately.",
+    source: "https://www.yrp.ca/en/contact-us.aspx"
   },
   {
     question: "What should I do if my basement floods?",
@@ -321,18 +158,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "Who do I call about a power outage?",
-    keywords: ['power', 'outage', 'hydro', 'alectra', 'restore'],
-    answer: "Report power outages to Alectra Utilities and check its outage map at alectrautilities.com."
-  },
-  {
-    question: "Where can I find current road closures?",
-    keywords: ['road', 'closure', 'event', 'construction', 'detour'],
-    answer: "Current road closures and detours are posted on markham.ca."
-  },
-  {
-    question: "Where are the bike lanes and trails?",
-    keywords: ['bike', 'lane', 'trail', 'bicycle', 'path', 'map'],
-    answer: "Markham has bike lanes and multi-use trails across the city. Trail maps are available on markham.ca."
+    keywords: ['power', 'outage', 'hydro', 'alectra', 'restore', 'electricity'],
+    answer: "Report a power outage to Alectra Utilities at 1-833-253-2872, by online form or by chat, and check Alectra's outage map for updates. Use the same channels to report an electrical hazard.",
+    source: "https://alectrautilities.com/outages"
   },
   {
     question: "Where are the off-leash dog parks?",
@@ -341,141 +169,16 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     source: "https://www.markham.ca/permits-licences-taxes/animal-services/off-leash-dog-parks"
   },
   {
-    question: "Is there a public beach with lifeguards?",
-    keywords: ['beach', 'swim', 'lifeguard', 'summer', 'milne', 'reservoir'],
-    answer: "Check markham.ca for any supervised swimming areas and lifeguard hours this season."
-  },
-  {
     question: "When does summer camp registration open?",
     keywords: ['camp', 'summer', 'child', 'program', 'register', 'march break', 'winter camp', 'kids'],
     answer: "Markham runs summer, winter break and March Break camps with sports, music and arts, plus camps at the Markham Museum, Varley Art Gallery, Flato Markham Theatre and Markham Public Library. Ages, dates and fees are listed with each camp in the City's online program system. Questions: 905.477.5530.",
     source: "https://www.markham.ca/sports-recreation-fitness/sports-recreation-programs/camps"
   },
   {
-    question: "Where are the skate parks?",
-    keywords: ['skate', 'park', 'bmx', 'scooter', 'location'],
-    answer: "Markham has skate parks in several parks. Check markham.ca for locations and hours."
-  },
-  {
-    question: "Is there a disc golf course?",
-    keywords: ['disc', 'golf', 'frisbee', 'course', 'location'],
-    answer: "Check markham.ca for disc golf courses and other recreation facilities in City parks."
-  },
-  {
-    question: "Where can I go cross-country skiing?",
-    keywords: ['cross', 'country', 'ski', 'trail', 'winter', 'groomed'],
-    answer: "Check markham.ca and Rouge National Urban Park for cross-country ski trails and current conditions."
-  },
-  {
-    question: "Where can I go tobogganing?",
-    keywords: ['toboggan', 'hill', 'sledding', 'winter', 'location'],
-    answer: "Toboggan only on designated hills, never on streets. Check markham.ca for locations."
-  },
-  {
-    question: "Where are the splash pads?",
-    keywords: ['spray', 'pad', 'splash', 'summer', 'kid', 'water'],
-    answer: "Splash pads are open in summer at parks across the city. Check markham.ca for locations and hours."
-  },
-  {
-    question: "Are there free fitness classes?",
-    keywords: ['zumba', 'yoga', 'fitness', 'class', 'schedule', 'senior'],
-    answer: "Community centres offer fitness classes such as yoga and zumba. Check markham.ca for schedules and fees."
-  },
-  {
-    question: "Which taxi companies are licensed?",
-    keywords: ['taxi', 'licensed', 'company', 'number', 'call'],
-    answer: "Taxis in Markham must be licensed by the City. Check markham.ca for licensing information."
-  },
-  {
-    question: "Are City facilities accessible?",
-    keywords: ['accessible', 'accessibility', 'wheelchair', 'disabled', 'support'],
-    answer: "Markham works to make City facilities accessible. Check markham.ca for accessibility information, and yrt.ca for York Region Transit's accessible service."
-  },
-  {
-    question: "What services are at the Civic Centre?",
-    keywords: ['photo', 'passport', 'service', 'location'],
-    answer: "Check markham.ca for services available at the Civic Centre and their hours."
-  },
-  {
-    question: "Where can I find a commissioner of oaths?",
-    keywords: ['commissioner', 'oath', 'statutory', 'declaration', 'witness'],
-    answer: "A commissioner of oaths may be available at the Civic Centre. Check markham.ca for hours and fees."
-  },
-  {
-    question: "How do I make a freedom of information request?",
-    keywords: ['freedom', 'information', 'foi', 'request', 'document'],
-    answer: "Freedom of information requests are made to the City Clerk's office. See markham.ca for how to submit a request."
-  },
-  {
-    question: "What is the fine for littering?",
-    keywords: ['litter', 'fine', 'illegal', 'dumping', 'ticket'],
-    answer: "Littering and illegal dumping can lead to fines. Report illegal dumping to the City at 905-477-5530."
-  },
-  {
-    question: "Where is smoking banned?",
-    keywords: ['smoking', 'public', 'ban', 'park', 'bylaw'],
-    answer: "Smoking is banned in many public places under Ontario law and City bylaws, including near playgrounds. Check markham.ca for details."
-  },
-  {
-    question: "Where is vaping banned?",
-    keywords: ['vaping', 'public', 'area', 'allowed', 'law'],
-    answer: "Vaping is restricted in most of the same places as smoking under the Smoke-Free Ontario Act."
-  },
-  {
-    question: "Can I drink alcohol in a park?",
-    keywords: ['alcohol', 'park', 'public', 'drinking', 'allowed'],
-    answer: "Drinking alcohol in public parks is generally not allowed except at permitted events. Check markham.ca for current rules."
-  },
-  {
-    question: "When are campfires allowed?",
-    keywords: ['campfire', 'open', 'burn', 'permit', 'allowed'],
-    answer: "Campfires and open-air burning have strict rules and may need a permit. Check markham.ca before lighting a fire."
-  },
-  {
     question: "When can I set off fireworks?",
     keywords: ['fireworks', 'set off', 'personal', 'use', 'allowed', 'holiday', 'permit', 'victoria day', 'backyard'],
     answer: "Family fireworks may only be set off on private property with the owner's consent, never on City property such as parks, fields and roads. No permit is needed the day before Victoria Day, on Victoria Day, the day before Canada Day and on Canada Day; on any other day you need a permit, applied for online at least seven days ahead ($246 plus HST). Fines can reach $5,000.",
     source: "https://www.markham.ca/fireworks"
-  },
-  {
-    question: "How do I report graffiti?",
-    keywords: ['graffiti', 'remove', 'report', 'damage', 'vandalism'],
-    answer: "Report graffiti on public property to the City at 905-477-5530 or online through markham.ca."
-  },
-  {
-    question: "Can I put up signs on utility poles?",
-    keywords: ['illegal', 'sign', 'poster', 'remove', 'utility', 'pole'],
-    answer: "Signs and posters are restricted on utility poles and City property. Check the sign bylaw on markham.ca."
-  },
-  {
-    question: "When can I use a leaf blower?",
-    keywords: ['leaf', 'blower', 'noise', 'hour', 'restriction'],
-    answer: "Leaf blowers and other noisy equipment are limited to certain hours. Check the noise bylaw on markham.ca."
-  },
-  {
-    question: "Is there a rain barrel rebate?",
-    keywords: ['rain', 'barrel', 'program', 'discount', 'rebate'],
-    answer: "Check markham.ca for any current rain barrel or water conservation programs."
-  },
-  {
-    question: "Can I keep backyard chickens?",
-    keywords: ['backyard', 'chicken', 'hen', 'rooster', 'allowed', 'number'],
-    answer: "Rules about keeping backyard hens are set by City bylaw. Check markham.ca for what's allowed."
-  },
-  {
-    question: "Can I keep bees?",
-    keywords: ['bee', 'hive', 'beekeeping', 'register', 'apiary'],
-    answer: "Rules about backyard beekeeping are set by provincial and City regulations. Check markham.ca and Ontario's beekeeping rules before getting started."
-  },
-  {
-    question: "Do I need a permit for solar panels?",
-    keywords: ['solar', 'panel', 'permit', 'rebate', 'installation'],
-    answer: "Solar panel installations may need a building permit. Check markham.ca, and look for available energy rebates."
-  },
-  {
-    question: "Where are public EV chargers?",
-    keywords: ['ev', 'charger', 'station', 'public', 'location'],
-    answer: "Markham has public EV charging stations at City facilities. Check markham.ca for locations."
   },
   {
     question: "Which bags can go in the green bin?",
@@ -485,60 +188,15 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How should I put out my garbage?",
-    keywords: ['black', 'bin', 'garbage', 'what goes', 'accepted', 'clear bag', 'privacy'],
+    keywords: ['garbage', 'put out', 'garbage can', 'clear bag', 'privacy', 'tinted'],
     answer: "Garbage must be in clear bags; black, dark, tinted or white bags aren't accepted, but up to four opaque privacy bags can go inside a clear bag. You can also use a garbage can up to 0.5 m by 0.9 m and under 18 kg. Clear-bag garbage is collected every other week.",
     source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
-  },
-  {
-    question: "How do I report a missed collection?",
-    keywords: ['missed', 'collection', 'report', 'forgot', 'pickup'],
-    answer: "If your collection was missed, report it to the City online through markham.ca or by calling 905-477-5530."
-  },
-  {
-    question: "When is Christmas tree collection?",
-    keywords: ['christmas', 'tree', 'collection', 'disposal', 'curbside'],
-    answer: "Christmas trees are collected in January. Remove all decorations and tinsel before placing the tree at the curb, and check markham.ca for dates."
-  },
-  {
-    question: "How do I book a meeting with my councillor?",
-    keywords: ['appointment', 'council', 'member', 'ward', 'meet'],
-    answer: "Contact your ward councillor through the councillor pages on markham.ca to request a meeting."
   },
   {
     question: "How do I report an issue to the City?",
     keywords: ['311', 'app', 'download', 'issue', 'report', 'issue', 'problem', 'request', 'contact'],
     answer: "Report a problem or make a request online at markham.ca (Report a Problem), call the Contact Centre at 905.477.5530, or email customerservice@markham.ca. For after-hours emergencies, call 905.477.7000 and press 0.",
     source: "https://www.markham.ca/contact-us"
-  },
-  {
-    question: "What is stormwater management?",
-    keywords: ['stormwater', 'management', 'rainwater', 'snow', 'melt', 'river', 'system'],
-    answer: "Stormwater management is a municipal service that includes transport and treatment of rainwater and snow melt runoff. It also includes river system restoration to protect critical infrastructure and improve sensitive species habitat."
-  },
-  {
-    question: "What is Markham's stormwater strategy?",
-    keywords: ['stormwater', 'strategy', 'flood', 'erosion', 'control', 'watercourse', 'pond', 'facility'],
-    answer: "Markham's Stormwater Management Strategy includes flood control, erosion control, watercourse management, and stormwater facility maintenance. The strategy manages both water quantity and quality released into creeks and rivers."
-  },
-  {
-    question: "What is in Markham's stormwater system?",
-    keywords: ['stormwater', 'system', 'infrastructure', 'sewer', 'ditch', 'manhole', 'catch', 'basin', 'culvert', 'pond'],
-    answer: "Markham stormwater system includes: 743km storm sewers, 176km ditches, 11,400 manholes, 20,000 catch basins, 301 outfalls, 4,500 culverts, 70 stormwater ponds and 2 pumping stations."
-  },
-  {
-    question: "Are all areas' stormwater systems the same?",
-    keywords: ['stormwater', 'different', 'area', 'standard', 'design', 'flood', 'capacity', '1980'],
-    answer: "No. Stormwater systems built over decades to different design standards. Pre-1980 systems have limited storm capacity. Modern systems provide better quality control and mimic natural water cycles."
-  },
-  {
-    question: "How is stormwater management funded?",
-    keywords: ['stormwater', 'funding', 'pay', 'tax', 'development', 'charge', 'grant', 'cost', 'share'],
-    answer: "Stormwater activities funded through property taxes, development charges, grants, and occasional cost-sharing with partner agencies."
-  },
-  {
-    question: "What is the stormwater fee?",
-    keywords: ['stormwater', 'fee', 'drainage', 'flood', 'control', 'capacity', 'improvement', 'dedicated', 'funding'],
-    answer: "The city-wide stormwater management fee is a dedicated funding source for storm drainage system capacity improvements. This expanded service improves flood control and reduces flood damage risk across Markham."
   },
   {
     question: "How wide are sidewalks?",

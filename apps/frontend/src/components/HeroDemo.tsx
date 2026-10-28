@@ -11,7 +11,7 @@ import { createSpeechRecognition, type ISpeechRecognition } from '../lib/speech'
 // The interactive hero: demo chat, voice input and mouse parallax
 export const HeroDemo = () => {
   // Demo Chat State
-  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean, isSample?: boolean, source?: string}>>([
+  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean, source?: string}>>([
     { role: 'assistant', content: "👋 Hi there! I'm HeyMarkham. Ask me anything about City of Markham services." }
   ]);
   const [demoInput, setDemoInput] = useState('');
@@ -51,7 +51,7 @@ export const HeroDemo = () => {
     setDemoMessages(prev => {
       const newMessages = [...prev];
       newMessages.pop();
-      newMessages.push({ role: 'assistant', content: '', isTyping: false, isSample: true, source });
+      newMessages.push({ role: 'assistant', content: '', isTyping: false, source });
       return newMessages;
     });
     
@@ -210,7 +210,7 @@ export const HeroDemo = () => {
                   <p className="font-semibold text-white">HeyMarkham Assistant</p>
                   <div className="flex items-center gap-1.5 text-xs text-green-400">
                     <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                    Demo with sample answers
+                    Answers checked against official sources
                   </div>
                 </div>
               </div>
@@ -238,7 +238,7 @@ export const HeroDemo = () => {
                     ) : (
                       <>
                         <p className="text-white text-sm">{msg.content}</p>
-                        {msg.isSample && (
+                        {msg.source && (
                           <p className="mt-2 text-xs text-slate-400">
                             <AnswerSource source={msg.source} linkClassName="hover:text-white" />
                           </p>

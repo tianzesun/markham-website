@@ -28,7 +28,7 @@ export default function HomePage() {
     {
       icon: <CheckCircle2 className="w-6 h-6" />,
       title: `${checkedAnswerCount} Answers Checked`,
-      description: "Answers in this demo are checked against official markham.ca pages, and the list keeps growing.",
+      description: "Every answer in this demo is checked against an official source, mostly markham.ca, and the list keeps growing.",
     },
     {
       icon: <Link2 className="w-6 h-6" />,

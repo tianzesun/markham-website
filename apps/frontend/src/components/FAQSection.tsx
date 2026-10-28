@@ -49,7 +49,7 @@ export const FAQSection = () => {
       <div className="max-w-4xl mx-auto">
         <div data-reveal className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Frequently Asked Questions</h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">Answers about City of Markham services, with links to the official source where we&rsquo;ve checked them. Always confirm details at markham.ca.</p>
+          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">Answers about City of Markham services, each checked against an official source and linked to it. Details can change, so always confirm on the source page.</p>
 
           {/* Search Input */}
           <div className="relative max-w-xl mx-auto">

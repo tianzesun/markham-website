@@ -234,9 +234,11 @@ export const VoiceWakeWord = () => {
                   You asked: <span className="text-slate-900 dark:text-white">&ldquo;{exchange.question}&rdquo;</span>
                 </p>
                 <p className="text-slate-700 dark:text-slate-200">{exchange.answer}</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  <AnswerSource source={exchange.source} linkClassName="hover:text-primary-600 dark:hover:text-primary-300" />
-                </p>
+                {exchange.source && (
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    <AnswerSource source={exchange.source} linkClassName="hover:text-primary-600 dark:hover:text-primary-300" />
+                  </p>
+                )}
               </div>
             )}
           </div>

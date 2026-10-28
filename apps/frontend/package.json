@@ -12,7 +12,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,css,md}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "node --test src/lib/*.test.ts"
   },
   "dependencies": {
     "@heymarkham/ui": "workspace:*",

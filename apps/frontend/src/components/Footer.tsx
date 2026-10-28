@@ -64,7 +64,7 @@ export const Footer: React.FC = () => {
 
         <p className="mt-6 text-xs text-slate-500 dark:text-slate-400 text-center md:text-left">
           HeyMarkham is an independent service by Aydenait Solutions and is not affiliated with or endorsed by the City of Markham.
-          Answers are samples for demonstration; always confirm details at markham.ca.
+          Demo answers were checked against official sources in October 2026; always confirm current details on the source page.
         </p>
       </div>
     </footer>
