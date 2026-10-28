@@ -48,6 +48,7 @@ export const Footer: React.FC = () => {
             <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Contact</h4>
             <ul className="space-y-2">
               <li><a href="mailto:info@aydenait.com" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">info@aydenait.com</a></li>
+              <li><a href="tel:+12898599523" className="text-sm text-slate-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">289-859-9523</a></li>
             </ul>
           </div>
         </div>

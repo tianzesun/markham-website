@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useTransform, useMotionValue } from 'framer-motion';
 import { 
-  Mic, Search, Brain, ShieldCheck, Mail, CheckCircle2, Clock,
+  Mic, Search, Brain, ShieldCheck, Mail, Phone, CheckCircle2, Clock,
   AlertCircle, FileSearch, MessageSquare, Send, Building2, Calendar,
   Users, MousePointer, Bot, Link2, Home, Baby, Heart, Zap,
   Smartphone, Volume2, Headphones, CreditCard, BookOpen, Car,
@@ -1219,6 +1219,10 @@ export default function HomePage() {
                      <div className="flex items-center gap-3 text-primary-200">
                        <Mail className="w-5 h-5" />
                        <a href="mailto:info@aydenait.com" className="hover:text-white transition-colors">info@aydenait.com</a>
+                     </div>
+                     <div className="flex items-center gap-3 text-primary-200">
+                       <Phone className="w-5 h-5" />
+                       <a href="tel:+12898599523" className="hover:text-white transition-colors">289-859-9523</a>
                      </div>
                    </div>
                  </div>

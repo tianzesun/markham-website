@@ -9,6 +9,9 @@ export const metadata: Metadata = {
 
 const LAST_UPDATED = 'October 27, 2026'
 
+const EMAIL = 'info@aydenait.com'
+const PHONE = '289-859-9523'
+
 export default function PrivacyPage() {
   return (
     <div className="bg-white dark:bg-slate-950">
@@ -19,8 +22,9 @@ export default function PrivacyPage() {
         <Section title="Who we are">
           <p>
             HeyMarkham is operated by Aydenait Solutions. It is an independent service and is not
-            affiliated with or endorsed by the City of Markham. Questions about this policy can be sent
-            to <a href="mailto:info@aydenait.com" className="text-primary-600 dark:text-primary-400 underline">info@aydenait.com</a>.
+            affiliated with or endorsed by the City of Markham. Questions about this policy can be emailed
+            to <a href={`mailto:${EMAIL}`} className="text-primary-600 dark:text-primary-400 underline">{EMAIL}</a> or
+            asked by phone at <a href="tel:+12898599523" className="text-primary-600 dark:text-primary-400 underline">{PHONE}</a>.
           </p>
         </Section>
 
@@ -28,9 +32,11 @@ export default function PrivacyPage() {
           <h3 className="font-semibold text-slate-900 dark:text-white mt-2 mb-2">Contact form</h3>
           <p className="mb-4">
             When you send a message through the contact form, we receive your name, email address,
-            subject and message. We use this only to reply to you. The form is delivered to us through
-            Formspree, a form-delivery service based in the United States, so your message may be
-            processed and stored outside Canada.
+            subject and message. We use this only to reply to you, and we don&rsquo;t sell it or share it
+            for marketing. The form is delivered to us by Formspree, Inc., a form-delivery service that
+            uses technical infrastructure in the United States, so your message is processed and stored
+            outside Canada and may be accessible to authorities there under US law. A copy of each
+            message is kept in our Formspree account and in our email inbox.
           </p>
 
           <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Demo questions</h3>
@@ -64,16 +70,18 @@ export default function PrivacyPage() {
 
         <Section title="How long we keep it">
           <p>
-            We keep contact messages only as long as needed to respond and follow up, and delete them
-            when they are no longer needed or when you ask us to.
+            We keep contact messages only as long as needed to respond and follow up. When they are no
+            longer needed, or when you ask us to, we delete them from both our inbox and our Formspree
+            account. Formspree may keep its own technical logs under its{' '}
+            <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">privacy policy</a>.
           </p>
         </Section>
 
         <Section title="Your choices and rights">
           <p className="mb-4">
-            You can ask to see, correct or delete the personal information we hold about you by
-            emailing <a href="mailto:info@aydenait.com" className="text-primary-600 dark:text-primary-400 underline">info@aydenait.com</a>.
-            We will respond within 30 days.
+            You can ask to see, correct or delete the personal information we hold about you, or
+            withdraw your consent, by emailing <a href={`mailto:${EMAIL}`} className="text-primary-600 dark:text-primary-400 underline">{EMAIL}</a> or
+            calling <a href="tel:+12898599523" className="text-primary-600 dark:text-primary-400 underline">{PHONE}</a>. We will respond within 30 days.
           </p>
           <p>
             We handle personal information in line with Canada&rsquo;s Personal Information Protection and
