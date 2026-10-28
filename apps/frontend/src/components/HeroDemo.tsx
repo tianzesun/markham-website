@@ -4,13 +4,14 @@ import { useState, useRef, useEffect } from 'react';
 import { 
   Mic, Send, Building2, Users, Bot, Sparkles
 } from 'lucide-react';
-import { findAnswer } from '../lib/faq-data';
+import { findFaq } from '../lib/faq-data';
+import { AnswerSource } from './AnswerSource';
 import { createSpeechRecognition, type ISpeechRecognition } from '../lib/speech';
 
 // The interactive hero: demo chat, voice input and mouse parallax
 export const HeroDemo = () => {
   // Demo Chat State
-  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean, isSample?: boolean}>>([
+  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean, isSample?: boolean, source?: string}>>([
     { role: 'assistant', content: "👋 Hi there! I'm HeyMarkham. Ask me anything about City of Markham services." }
   ]);
   const [demoInput, setDemoInput] = useState('');
@@ -44,13 +45,13 @@ export const HeroDemo = () => {
     await new Promise(resolve => setTimeout(resolve, 1200));
     
     // Find actual matching response from knowledge base
-    const response = findAnswer(userMessage);
+    const { answer: response, source } = findFaq(userMessage);
 
     // Type out response character by character for realistic effect
     setDemoMessages(prev => {
       const newMessages = [...prev];
       newMessages.pop();
-      newMessages.push({ role: 'assistant', content: '', isTyping: false, isSample: true });
+      newMessages.push({ role: 'assistant', content: '', isTyping: false, isSample: true, source });
       return newMessages;
     });
     
@@ -237,8 +238,7 @@ export const HeroDemo = () => {
                         <p className="text-white text-sm">{msg.content}</p>
                         {msg.isSample && (
                           <p className="mt-2 text-xs text-slate-400">
-                            Sample answer. Confirm details at{' '}
-                            <a href="https://www.markham.ca" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">markham.ca</a>.
+                            <AnswerSource source={msg.source} linkClassName="hover:text-white" />
                           </p>
                         )}
                       </>
@@ -288,9 +288,9 @@ export const HeroDemo = () => {
                 </button>
               </form>
               
-              {/* Quick Suggestions */}
+              {/* Quick Suggestions: topics whose answers are checked against markham.ca */}
               <div className="mt-3 flex flex-wrap gap-2">
-                {['Garbage pickup', 'Pool hours', 'Parking permit', 'Cooling center'].map((suggestion) => (
+                {['Garbage pickup', 'Overnight parking', 'Green bin', 'Backyard fireworks', 'Tree permit'].map((suggestion) => (
                   <button
                     key={suggestion}
                     type="button"

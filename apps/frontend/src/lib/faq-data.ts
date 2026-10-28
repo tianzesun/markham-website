@@ -1,8 +1,10 @@
-export const faqDatabase: Array<{ question: string, keywords: string[], answer: string }> = [
+// Entries with a source were checked against that markham.ca page in October 2026
+export const faqDatabase: Array<{ question: string, keywords: string[], answer: string, source?: string }> = [
   {
     question: "When is my garbage collected?",
-    keywords: ['garbage', 'waste', 'trash', 'pickup', 'collection', 'bin', 'schedule', 'thursday'],
-    answer: "Collection days depend on your zone. Look up your address in the collection calendar on markham.ca to see your schedule, and have your bins at the curb early on collection day."
+    keywords: ['garbage', 'waste', 'trash', 'pickup', 'collection', 'bin', 'schedule', 'thursday', 'clear', 'bag', 'every other week'],
+    answer: "Clear-bag garbage is collected every other week on your regular collection day, and the green bin every week. Put material at the curb by 7 AM on collection day or after 7 PM the night before. Garbage must be in clear bags (no black, dark, tinted or white bags), though you can put up to four privacy bags inside a clear bag. Use the What Goes Where tool on markham.ca to find your schedule.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
     question: "What are the pool hours?",
@@ -10,9 +12,10 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     answer: "Pool hours vary by location and season. Check the drop-in swim schedules on markham.ca for current times at each pool."
   },
   {
-    question: "How do I get a residential parking permit?",
-    keywords: ['parking', 'permit', 'residential', 'cost', 'apply', 'price', 'year'],
-    answer: "Residential parking permits are issued by the City. Check markham.ca for eligibility, current fees and how to apply online."
+    question: "Can I park on the street overnight?",
+    keywords: ['parking', 'permit', 'residential', 'cost', 'apply', 'price', 'year', 'overnight', 'exemption', 'street', 'night'],
+    answer: "Parking on Markham streets is not allowed from 2:30 AM to 6 AM unless signs say otherwise. You can request an overnight exemption online through the City's permit portal. Since October 1, 2026 each daily exemption has a $6 processing fee, and each licence plate can get up to 10 exemptions per calendar year. Exemptions aren't valid during snow clearing, and vehicles with unpaid parking tickets aren't eligible. Questions: parkingadmin@markham.ca or 905.477.7000.",
+    source: "https://www.markham.ca/permits-licences-taxes/parking/overnight-parking-request"
   },
   {
     question: "Where can I find a cooling centre?",
@@ -21,13 +24,15 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "What goes in the blue bin?",
-    keywords: ['recycle', 'blue', 'bin', 'what', 'plastic', 'paper', 'cardboard', 'allowed', 'styrofoam'],
-    answer: "The blue bin is for recyclables such as paper, cardboard and many plastic and metal containers. Rules change from time to time, so check the waste sorting tool on markham.ca to see what goes where."
+    keywords: ['recycle', 'blue', 'bin', 'what', 'plastic', 'paper', 'cardboard', 'allowed', 'styrofoam', 'blue box', 'circular materials'],
+    answer: "Blue box recycling in Markham is a separate service run by Circular Materials, not the City. Use the What Goes Where tool on markham.ca to check what goes in your blue box. City recycling depots don't sell blue boxes.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
     question: "When is yard waste collected?",
-    keywords: ['yard', 'waste', 'brush', 'leaves', 'branch', 'grass', 'cutting'],
-    answer: "Yard waste is collected on a seasonal schedule. Check your collection calendar on markham.ca for dates, and for how to bag leaves and bundle branches."
+    keywords: ['yard', 'waste', 'brush', 'leaves', 'branch', 'grass', 'cutting', 'kraft', 'paper bag'],
+    answer: "Yard material is collected every other week from April to October, then weekly from November to mid-December. Use Kraft paper yard waste bags, open rigid containers or bushel baskets, and don't use any type of plastic bag. Grass clippings and sod aren't collected at the curb.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
     question: "When are Markham libraries open?",
@@ -46,13 +51,15 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How do I license my dog or cat?",
-    keywords: ['dog', 'cat', 'pet', 'license', 'tag', 'cost', 'animal'],
-    answer: "Pet licences are issued by the City. Check markham.ca for which pets need a licence, current fees and how to buy or renew online."
+    keywords: ['dog', 'cat', 'pet', 'license', 'tag', 'cost', 'animal', 'licence', 'renew'],
+    answer: "Dogs and cats in Markham need a licence, including if they're microchipped. Apply online at markham.ca; tags are mailed within 7 to 10 business days. Licences renew each calendar year on January 1. Animal Services: 905.415.7531 or customerservice@markham.ca, every day from 8 AM to 9 PM.",
+    source: "https://www.markham.ca/permits-licences-taxes/animal-services"
   },
   {
     question: "When is my property tax due?",
-    keywords: ['tax', 'property', 'bill', 'pay', 'due', 'amount', 'online'],
-    answer: "Property taxes are billed in instalments through the year. Due dates are printed on your tax bill, and markham.ca lists payment options, including online banking and pre-authorized payments."
+    keywords: ['tax', 'property', 'bill', 'pay', 'due', 'amount', 'online', 'instalment', 'interim', 'final', 'pre-authorized'],
+    answer: "Markham sends two property tax bills a year: an interim bill in early January (50% of the previous year's taxes) and a final bill in early June. Your exact due dates are on your bill. You can pay through your bank, by mail, at the Civic Centre cashier (8:30 AM to 4:30 PM, no cash), or with a pre-authorized plan of 4, 6 or 11 instalments. Pay at least five business days before the due date to avoid late fees. Questions: 905.477.5530.",
+    source: "https://www.markham.ca/permits-licences-taxes/property-taxes/frequently-asked-questions"
   },
   {
     question: "Do I need a building permit?",
@@ -86,8 +93,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "What are the noise bylaw hours?",
-    keywords: ['bylaw', 'noise', 'complaint', 'fine', 'after', 'hour'],
-    answer: "Markham's noise bylaw limits loud noise during overnight hours. Check markham.ca for the exact rules, and call 905-477-5530 to make a complaint."
+    keywords: ['bylaw', 'noise', 'complaint', 'fine', 'after', 'hour', 'music', 'party', 'loud'],
+    answer: "Playing loud music outdoors isn't allowed from 5 PM until 7 AM the next day (9 AM on Sundays), although amplified sound is now allowed until 11 PM on Fridays and Saturdays. Shouting, whistling and singing are prohibited after 11 PM. Outdoor functions on private property need a Noise Exemption Permit. To report noise, call By-law Enforcement at 905.479.7782.",
+    source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/noise"
   },
   {
     question: "Do I need a permit for a campfire?",
@@ -96,8 +104,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "Can I remove a tree on my property?",
-    keywords: ['tree', 'cut', 'remove', 'city', 'boulevard', 'protected'],
-    answer: "Removing larger trees may require a permit, and trees on the City boulevard belong to the City. Check markham.ca before removing or pruning a tree."
+    keywords: ['tree', 'cut', 'remove', 'city', 'boulevard', 'protected', 'tree permit', 'arborist', 'diameter'],
+    answer: "You need a permit before injuring or removing any private tree with a trunk 20 cm or more across, measured 1.37 m above the ground, whatever its health. Apply online; the processing fee is $20.50 and applications are reviewed within 45 days of payment. Trees on a property line need the neighbour's consent. Contact TreePreservationAdmin@markham.ca or 905.477.7000.",
+    source: "https://www.markham.ca/permits-licences-taxes/permits/tree-permit-application"
   },
   {
     question: "How do water bills work, and how do I report a leak?",
@@ -136,13 +145,15 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How high can my fence be?",
-    keywords: ['fence', 'height', 'property', 'line', 'bylaw'],
-    answer: "Fence height limits depend on where the fence is on your property. Check the fence bylaw on markham.ca before you build."
+    keywords: ['fence', 'height', 'tall', 'high', 'property', 'line', 'bylaw', 'pool', 'enclosure', 'neighbour', 'shared'],
+    answer: "Front-yard fences can be up to 1.2 m (4 ft) high, and fences along rear and interior side property lines up to 1.8 m (6 ft). On corner lots, the side facing the street is limited to 1.2 m. Pools deeper than 0.6 m need a 1.2 m fence and a pool enclosure permit before filling. For a shared fence on the property line, give your neighbour 14 days' written notice by registered mail. Questions: 905.479.7782.",
+    source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/fences-swimming-pools"
   },
   {
     question: "What are the allowed construction hours?",
-    keywords: ['construction', 'hours', 'weekend', 'noise', 'allowed'],
-    answer: "Construction noise is limited to certain hours, with stricter limits on Sundays and holidays. Check the noise bylaw on markham.ca for exact times."
+    keywords: ['construction', 'hours', 'weekend', 'noise', 'allowed', 'saturday', 'sunday', 'holiday'],
+    answer: "Construction equipment may be used on Saturdays from 9 AM to 5 PM and is prohibited at all times on Sundays and statutory holidays. Work outside the permitted times needs a noise exemption. See Markham's Noise By-law for weekday hours, or call 905.479.7782.",
+    source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/noise"
   },
   {
     question: "Do I need a permit for a garage sale?",
@@ -176,23 +187,27 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How do I get rid of electronics?",
-    keywords: ['e-waste', 'electronic', 'dispose', 'battery', 'recycle'],
-    answer: "Electronics and household batteries shouldn't go in the garbage. Check markham.ca for depot locations and drop-off events."
+    keywords: ['e-waste', 'electronic', 'dispose', 'battery', 'recycle', 'batteries', 'depot', 'hazardous', 'paint', 'light bulb'],
+    answer: "Markham recycling depots accept electronics, alkaline batteries, ink cartridges and textiles; scrap metal is collected monthly by booking at 905.477.5530. Lithium-ion batteries, light bulbs and household hazardous waste go to the York Region Household Hazardous Waste Depot at 430 Rodick Road. Depots don't accept cash.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/recycling-depots-drop-centres"
   },
   {
     question: "What goes in the green bin?",
-    keywords: ['compost', 'green', 'bin', 'food', 'waste', 'organics'],
-    answer: "The green bin is for food scraps and other organics. Check the waste sorting tool on markham.ca to see what's accepted."
+    keywords: ['compost', 'green', 'bin', 'food', 'waste', 'organics', 'diaper', 'pet waste'],
+    answer: "The green bin is collected every week. It takes food scraps (including bones, coffee grounds, tea bags and grease), soiled paper such as paper towels and pizza boxes, diapers, pet waste and kitty litter. Keep it under 18 kg with the lid fully closed, and put extra organics in a clear bag beside it. A green bin costs $32 at City recycling depots and some community centres.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/green-bin"
   },
   {
     question: "How do I arrange bulky item pickup?",
-    keywords: ['bulky', 'item', 'furniture', 'mattress', 'pickup', 'large'],
-    answer: "Large items such as furniture may be collected on garbage day, with limits. Check markham.ca for current bulky item rules."
+    keywords: ['bulky', 'item', 'furniture', 'mattress', 'pickup', 'large', 'appliance', 'fridge', 'couch', 'renovation'],
+    answer: "Bulky items are collected every two weeks on your regular clear-bag garbage day, with no appointment needed. Large appliances are collected monthly by appointment for $18.50 each; call 905.477.5530. Renovation materials aren't collected at the curb; take them to the Earl Turcott Waste Management Facility at 300 Rodick Road.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
     question: "How do I pay or dispute a parking ticket?",
-    keywords: ['tickets', 'traffic', 'parking', 'pay', 'fine', 'dispute'],
-    answer: "Parking tickets can be paid or disputed online. Your ticket shows the deadline and the website to use, and markham.ca has more information."
+    keywords: ['tickets', 'traffic', 'parking', 'pay', 'fine', 'dispute', 'amps'],
+    answer: "You can pay a parking ticket online or by phone at 905-678-8465 (toll-free 1-877-678-8465), both with a $2.50 fee; in person at the Markham Civic Centre from 8:30 AM to 4:30 PM; or by cheque by mail or at the Thornhill entrance drop box. Most parking violations fall under the City's Administrative Monetary Penalty System; see markham.ca for how to dispute one.",
+    source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/parking"
   },
   {
     question: "Where can I get a flu shot?",
@@ -226,7 +241,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How big is Markham?",
-    keywords: ['area', 'size', 'square', 'kilometer', 'land'],
+    keywords: ['area', 'size', 'big', 'square', 'kilometer', 'land'],
     answer: "Markham is one of the largest municipalities in York Region, with many parks and community centres. See markham.ca for facts and figures."
   },
   {
@@ -406,8 +421,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "When can I set off fireworks?",
-    keywords: ['fireworks', 'personal', 'use', 'allowed', 'holiday'],
-    answer: "Consumer fireworks are only allowed on certain days. Check the fireworks bylaw on markham.ca for this year's permitted dates."
+    keywords: ['fireworks', 'set off', 'personal', 'use', 'allowed', 'holiday', 'permit', 'victoria day', 'backyard'],
+    answer: "Family fireworks may only be set off on private property with the owner's consent, never on City property such as parks, fields and roads. No permit is needed the day before Victoria Day, on Victoria Day, the day before Canada Day and on Canada Day; on any other day you need a permit, applied for online at least seven days ahead ($246 plus HST). Fines can reach $5,000.",
+    source: "https://www.markham.ca/fireworks"
   },
   {
     question: "How do I report graffiti?",
@@ -451,13 +467,15 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "Which bags can go in the green bin?",
-    keywords: ['green', 'bin', 'bag', 'compostable', 'plastic', 'allowed'],
-    answer: "Check markham.ca for which bags are accepted in the green bin. Regular plastic bags usually aren't."
+    keywords: ['green', 'bin', 'bag', 'compostable', 'plastic', 'allowed', 'plastic bag', 'liner'],
+    answer: "Any bag, including plastic grocery bags, can line your green bin and kitchen container. Put extra organic material in a clear bag beside the bin at the curb.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/green-bin"
   },
   {
-    question: "What goes in the black bin?",
-    keywords: ['black', 'bin', 'garbage', 'what goes', 'accepted'],
-    answer: "The black bin is for garbage only. No recycling, organics or hazardous waste."
+    question: "How should I put out my garbage?",
+    keywords: ['black', 'bin', 'garbage', 'what goes', 'accepted', 'clear bag', 'privacy'],
+    answer: "Garbage must be in clear bags; black, dark, tinted or white bags aren't accepted, but up to four opaque privacy bags can go inside a clear bag. You can also use a garbage can up to 0.5 m by 0.9 m and under 18 kg. Clear-bag garbage is collected every other week.",
+    source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
     question: "How do I report a missed collection?",
@@ -476,8 +494,9 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How do I report an issue to the City?",
-    keywords: ['311', 'app', 'download', 'report', 'issue'],
-    answer: "To report an issue or make a request, contact the City's Contact Centre at 905-477-5530, email customerservice@markham.ca, or submit a request online at markham.ca."
+    keywords: ['311', 'app', 'download', 'issue', 'report', 'issue', 'problem', 'request', 'contact'],
+    answer: "Report a problem or make a request online at markham.ca (Report a Problem), call the Contact Centre at 905.477.5530, or email customerservice@markham.ca. For after-hours emergencies, call 905.477.7000 and press 0.",
+    source: "https://www.markham.ca/contact-us"
   },
   {
     question: "What is stormwater management?",
@@ -557,10 +576,25 @@ const genericKeywords = new Set([
   'far', 'wide', 'safe', 'size', 'item', 'line', 'call', 'free', 'time', 'day', 'days', 'year',
 ]);
 
+// Words from the question itself also count as keywords, minus ones too common to mean anything
+const questionStopwords = new Set([
+  'what', 'when', 'where', 'which', 'does', 'have', 'with', 'about', 'there', 'should', 'will',
+  'from', 'your', 'this', 'that', 'into', 'after', 'markham', 'city', 'find', 'many', 'need',
+]);
+const entryKeywords = faqDatabase.map(entry => {
+  const questionWords = entry.question
+    .toLowerCase()
+    .replace(/[^a-z0-9\s'-]/g, ' ')
+    .split(/\s+/)
+    .map(word => word.replace(/'s$/, ''))
+    .filter(word => word.length >= 4 && !questionStopwords.has(word));
+  return [...new Set([...entry.keywords, ...questionWords])];
+});
+
 // How many entries share each keyword; a keyword used by one or two entries is a strong signal
 const keywordFrequency = new Map<string, number>();
-for (const entry of faqDatabase) {
-  for (const keyword of new Set(entry.keywords)) {
+for (const keywords of entryKeywords) {
+  for (const keyword of keywords) {
     keywordFrequency.set(keyword, (keywordFrequency.get(keyword) ?? 0) + 1);
   }
 }
@@ -577,18 +611,20 @@ const matchesKeyword = (query: string, keyword: string) => {
   return pattern.test(query);
 };
 
+const FALLBACK_ANSWER = "I'm HeyMarkham, and I can only help with questions about Markham municipal services. I don't have specific information about that question. For further assistance you can call City of Markham customer service at 905-477-5530 or email customerservice@markham.ca during business hours.";
+
 /**
- * Find best matching answer for user query
+ * Find best matching answer for user query, with the markham.ca page it came from if checked
  */
-export function findAnswer(query: string): string {
+export function findFaq(query: string): { answer: string; source?: string } {
   const lowerQuery = query.toLowerCase();
   
-  let bestMatch = null;
+  let bestMatch: (typeof faqDatabase)[number] | null = null;
   let highestScore = 0;
 
-  for (const entry of faqDatabase) {
+  for (const [index, entry] of faqDatabase.entries()) {
     let score = 0;
-    for (const keyword of entry.keywords) {
+    for (const keyword of entryKeywords[index]) {
       if (matchesKeyword(lowerQuery, keyword)) {
         const isDistinctive = !genericKeywords.has(keyword) && (keywordFrequency.get(keyword) ?? 0) <= 2;
         score += isDistinctive ? 2 : 1;
@@ -602,9 +638,13 @@ export function findAnswer(query: string): string {
 
   // Minimum threshold - two common keywords, or one distinctive keyword
   if (highestScore >= 2 && bestMatch) {
-    return bestMatch.answer;
+    return { answer: bestMatch.answer, source: bestMatch.source };
   }
   
   // Uncertain / irrelevant question
-  return "I'm HeyMarkham, and I can only help with questions about Markham municipal services. I don't have specific information about that question. For further assistance you can call City of Markham customer service at 905-477-5530 or email customerservice@markham.ca during business hours.";
+  return { answer: FALLBACK_ANSWER };
+}
+
+export function findAnswer(query: string): string {
+  return findFaq(query).answer;
 }

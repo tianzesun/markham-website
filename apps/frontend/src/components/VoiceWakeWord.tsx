@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Mic, MicOff, X } from 'lucide-react';
-import { findAnswer } from '../lib/faq-data';
+import { findFaq } from '../lib/faq-data';
+import { AnswerSource } from './AnswerSource';
 import { createSpeechRecognition, isFatalSpeechError, type ISpeechRecognition } from '../lib/speech';
 
 const WAKE_PHRASES = ['hey markham', 'hi markham', 'okay markham', 'ok markham'];
@@ -14,7 +15,7 @@ type Status = 'idle' | 'standby' | 'awaiting-question' | 'answering' | 'unsuppor
 export const VoiceWakeWord = () => {
   const [status, setStatus] = useState<Status>('idle');
   const [transcript, setTranscript] = useState('');
-  const [exchange, setExchange] = useState<{ question: string; answer: string } | null>(null);
+  const [exchange, setExchange] = useState<{ question: string; answer: string; source?: string } | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
@@ -90,8 +91,8 @@ export const VoiceWakeWord = () => {
   const answerQuestion = useCallback((question: string) => {
     clearQuestionTimeout();
     isAwakeRef.current = false;
-    const answer = findAnswer(question);
-    setExchange({ question, answer });
+    const { answer, source } = findFaq(question);
+    setExchange({ question, answer, source });
     setTranscript('');
     setStatus('answering');
     speak(answer, returnToStandby);
@@ -233,9 +234,8 @@ export const VoiceWakeWord = () => {
                   You asked: <span className="text-slate-900 dark:text-white">&ldquo;{exchange.question}&rdquo;</span>
                 </p>
                 <p className="text-slate-700 dark:text-slate-200">{exchange.answer}</p>
-                <p className="text-xs text-slate-400">
-                  Sample answer. Confirm details at{' '}
-                  <a href="https://www.markham.ca" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary-600 dark:hover:text-primary-300">markham.ca</a>.
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <AnswerSource source={exchange.source} linkClassName="hover:text-primary-600 dark:hover:text-primary-300" />
                 </p>
               </div>
             )}

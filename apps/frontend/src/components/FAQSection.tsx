@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 import { faqDatabase } from '../lib/faq-data';
+import { AnswerSource } from './AnswerSource';
 
 export const FAQSection = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -11,8 +12,8 @@ export const FAQSection = () => {
   // Filter FAQ items based on search query
   const filteredItems = useMemo(() => {
     if (!searchQuery.trim()) {
-      // Show first 12 items when no search
-      return faqDatabase.slice(0, 12);
+      // With no search, show 12 items, answers checked against markham.ca first
+      return [...faqDatabase.filter(item => item.source), ...faqDatabase.filter(item => !item.source)].slice(0, 12);
     }
 
     // Every word of the query must appear in the item's keywords or answer
@@ -48,7 +49,7 @@ export const FAQSection = () => {
       <div className="max-w-4xl mx-auto">
         <div data-reveal className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Frequently Asked Questions</h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">Sample answers about City of Markham services. Always confirm details at markham.ca.</p>
+          <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">Answers about City of Markham services, with links to the official source where we&rsquo;ve checked them. Always confirm details at markham.ca.</p>
 
           {/* Search Input */}
           <div className="relative max-w-xl mx-auto">
@@ -101,6 +102,9 @@ export const FAQSection = () => {
                   <div className="overflow-hidden">
                     <div className="px-6 pb-5 pt-0 text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-700">
                       <p className="pt-4">{highlightText(item.answer, searchQuery)}</p>
+                      <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+                        <AnswerSource source={item.source} linkClassName="hover:text-primary-600 dark:hover:text-primary-300" />
+                      </p>
                     </div>
                   </div>
                 </div>
