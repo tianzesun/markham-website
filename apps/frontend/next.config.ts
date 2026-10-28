@@ -5,6 +5,24 @@ const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const isDev = process.env.NODE_ENV !== 'production'
+
+// Content Security Policy: only this site's own scripts, styles, fonts and connections.
+// 'unsafe-inline' scripts are needed for the statically rendered pages' inline Next.js data
+// (nonces would force every page to render per request). Dev adds what hot reload needs.
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ''}`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  `connect-src 'self'${isDev ? ' ws: https://va.vercel-scripts.com' : ''}`,
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join('; ')
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@heymarkham/ui', 'lucide-react'],
@@ -30,6 +48,15 @@ const nextConfig: NextConfig = {
     {
       source: '/(.*)',
       headers: [
+        {
+          key: 'Content-Security-Policy',
+          value: contentSecurityPolicy,
+        },
+        {
+          // Browsers remember to use HTTPS only, for two years
+          key: 'Strict-Transport-Security',
+          value: 'max-age=63072000; includeSubDomains',
+        },
         {
           key: 'X-Frame-Options',
           value: 'DENY',

@@ -13,6 +13,15 @@ const contactSchema = z.object({
 export async function submitContactForm(
   formData: FormData
 ) {
+  // Spam trap: real visitors never see the "contact_hp" field, so anything in it is a bot.
+  // Report success so the bot has no signal to adapt to, but send nothing.
+  if (String(formData.get('contact_hp') ?? '').trim() !== '') {
+    return {
+      success: true,
+      error: null,
+    };
+  }
+
   // Validate
   const validatedFields = contactSchema.safeParse({
     name: formData.get('name'),

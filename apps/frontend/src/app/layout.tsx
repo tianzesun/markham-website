@@ -1,4 +1,5 @@
 import { Source_Sans_3, Merriweather } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import '../styles/globals.css'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
@@ -47,6 +48,8 @@ export default function RootLayout({
         </main>
         <Footer />
         <VoiceWakeWord />
+        {/* Cookie-free visit counts; what's collected is described on the privacy page */}
+        <Analytics />
       </body>
     </html>
   )

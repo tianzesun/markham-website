@@ -1,0 +1,29 @@
+# Weekly check that every FAQ answer's source page still loads.
+# A failed run means a City page moved or was removed: re-check that answer against the new page.
+# GitHub emails a failed scheduled run to whoever last changed this schedule.
+name: Source links
+
+on:
+  schedule:
+    - cron: '0 13 * * 1' # Mondays 13:00 UTC (9 AM Toronto in summer, 8 AM in winter)
+  workflow_dispatch: # also runnable by hand from the Actions tab
+
+permissions:
+  contents: read
+
+jobs:
+  check-sources:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      # The check only needs Node: it imports the FAQ data file directly, no dependencies
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Check FAQ source pages
+        run: node scripts/check-sources.ts

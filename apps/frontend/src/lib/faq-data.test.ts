@@ -7,12 +7,12 @@ import { faqDatabase, findFaq } from './faq-data.ts';
 const expectedSources: Array<[string, string]> = [
   ['When is garbage day?', 'recycling-garbage/curbside-collection'],
   ['Garbage pickup', 'recycling-garbage/curbside-collection'],
-  ['Can I park on the street overnight?', 'overnight-parking-request'],
-  ['Overnight parking', 'overnight-parking-request'],
+  ['Can I park on the street overnight?', 'overnight-street-parking-request'],
+  ['Overnight parking', 'overnight-street-parking-request'],
   ['what goes in the blue bin', 'recycling-garbage/curbside-collection'],
   ['Green bin', 'recycling-garbage/green-bin'],
   ['Can I put plastic bags in the green bin?', 'recycling-garbage/green-bin'],
-  ['Backyard fireworks', '/fireworks'],
+  ['Backyard fireworks', 'family-fireworks-permit'],
   ['Tree permit', 'tree-permit-application'],
   ['Do I need a permit to cut down a tree?', 'tree-permit-application'],
   ['How tall can my fence be?', 'fences-swimming-pools'],
@@ -56,10 +56,10 @@ const variantPhrasings: Array<[string, string]> = [
   ['call police not emergency', 'yrp.ca'],
   ['my hydro is out', 'alectrautilities.com'],
   ['blackout in my area', 'alectrautilities.com'],
-  ['can my cousin leave his car on the road tonight', 'overnight-parking-request'],
+  ['can my cousin leave his car on the road tonight', 'overnight-street-parking-request'],
   ['I got a parking fine', 'administrative-monetary-penalty-system'],
   ['how do I register my puppy', 'animal-services'],
-  ['are firecrackers allowed', '/fireworks'],
+  ['are firecrackers allowed', 'family-fireworks-permit'],
   ['can I chop down the tree in my yard', 'tree-permit-application'],
   ['water in my basement', 'basement-flooding'],
   ['when will the snowplough come', 'winter-road-services'],
@@ -70,7 +70,7 @@ const variantPhrasings: Array<[string, string]> = [
   ['old tv disposal', 'recycling-depots-drop-centres'],
   ['can i leave my bins out overnight', 'recycling-garbage/curbside-collection'],
   ['when is garbge day', 'recycling-garbage/curbside-collection'],
-  ['firewroks rules', '/fireworks'],
+  ['firewroks rules', 'family-fireworks-permit'],
   ['libary hours', 'markhampubliclibrary.ca'],
   ['recylcing depot', 'recycling-depots-drop-centres'],
   ['basment flooded', 'basement-flooding'],
@@ -104,7 +104,7 @@ test('every FAQ question finds its own answer', () => {
 });
 
 test('every entry links to an official https source', () => {
-  const official = ['www.markham.ca', 'www.markhampubliclibrary.ca', 'www.yrt.ca', 'www.yrp.ca', 'alectrautilities.com'];
+  const official = ['www.markham.ca', 'markhampubliclibrary.ca', 'www.yrt.ca', 'www.yrp.ca', 'alectrautilities.com'];
   for (const entry of faqDatabase) {
     const url = new URL(entry.source);
     assert.equal(url.protocol, 'https:', entry.question);

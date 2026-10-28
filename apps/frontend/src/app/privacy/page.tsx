@@ -60,11 +60,23 @@ export default function PrivacyPage() {
             the site remembers it. It never leaves your device.
           </p>
 
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Visit counts</h3>
+          <p className="mb-4">
+            We use Vercel Web Analytics to count visits and see which pages are useful. It doesn&rsquo;t use
+            cookies and doesn&rsquo;t track you across other websites. For each page view it records the
+            page address, the site that linked you here, your approximate location (country, region
+            and city), your device type, and your browser and operating system. Visitors are told apart
+            only by a hash of the request, which is discarded after 24 hours, and we see the results only
+            as totals. It does not record what you type into the demo, the FAQ search or the contact
+            form. See{' '}
+            <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline">Vercel&rsquo;s Web Analytics privacy information</a>{' '}
+            for details.
+          </p>
+
           <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Hosting</h3>
           <p>
             The site is hosted by Vercel, which keeps standard technical logs, such as IP addresses and
-            browser type, to deliver and secure the site. We do not use analytics, advertising or
-            tracking cookies.
+            browser type, to deliver and secure the site. We do not use advertising or tracking cookies.
           </p>
         </Section>
 

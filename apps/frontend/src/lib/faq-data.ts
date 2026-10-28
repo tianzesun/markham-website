@@ -16,7 +16,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     question: "Can I park on the street overnight?",
     keywords: ['parking', 'permit', 'residential', 'cost', 'apply', 'price', 'year', 'overnight', 'exemption', 'street', 'night'],
     answer: "Parking on Markham streets is not allowed from 2:30 AM to 6 AM unless signs say otherwise. You can request an overnight exemption online through the City's permit portal. Since October 1, 2026 each daily exemption has a $6 processing fee, and each licence plate can get up to 10 exemptions per calendar year. Exemptions aren't valid during snow clearing, and vehicles with unpaid parking tickets aren't eligible. Questions: parkingadmin@markham.ca or 905.477.7000.",
-    source: "https://www.markham.ca/permits-licences-taxes/parking/overnight-parking-request"
+    source: "https://www.markham.ca/permits-licences-taxes/parking/overnight-street-parking-request"
   },
   {
     question: "Where can I find a cooling centre?",
@@ -40,13 +40,13 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     question: "When are Markham libraries open?",
     keywords: ['library', 'open', 'close', 'renew', 'borrow', 'card', 'branch', 'hours'],
     answer: "A Markham Public Library card is free. Check each branch's hours at markham.bibliocommons.com/locations, and see or renew your checked-out items online under My Borrowing. Questions: 905.513.7977 or AskMPL@markhamlibrary.ca.",
-    source: "https://www.markhampubliclibrary.ca/"
+    source: "https://markhampubliclibrary.ca/"
   },
   {
     question: "When does York Region Transit run?",
     keywords: ['bus', 'transit', 'york', 'region', 'schedule', 'route', 'stop', 'presto', 'fare', 'trip planner'],
     answer: "York Region Transit (YRT) runs Markham's buses. Use the YRT Trip Planner at yrt.ca for schedules, real-time departures and the closest stops. Pay with a PRESTO card, PRESTO on your phone, a PRESTO E-Ticket, or a credit or debit card. Customer service: 905-762-2100 or 1-866-668-3978.",
-    source: "https://www.yrt.ca/"
+    source: "https://www.yrt.ca/en/index.aspx"
   },
   {
     question: "How are snow and sidewalks cleared?",
@@ -82,7 +82,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     question: "Can I remove a tree on my property?",
     keywords: ['tree', 'cut', 'remove', 'city', 'boulevard', 'protected', 'tree permit', 'arborist', 'diameter'],
     answer: "You need a permit before injuring or removing any private tree with a trunk 20 cm or more across, measured 1.37 m above the ground, whatever its health. Apply online; the processing fee is $20.50 and applications are reviewed within 45 days of payment. Trees on a property line need the neighbour's consent. Contact TreePreservationAdmin@markham.ca or 905.477.7000.",
-    source: "https://www.markham.ca/permits-licences-taxes/permits/tree-permit-application"
+    source: "https://www.markham.ca/neighbourhood-services/trees/tree-permit-application"
   },
   {
     question: "How do water bills work, and how do I report a leak?",
@@ -148,7 +148,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     question: "What is the police non-emergency number?",
     keywords: ['police', 'non-emergency', 'number', 'contact', 'report', 'report crime', 'theft'],
     answer: "York Regional Police's non-emergency line is 1-866-876-5423 (TTY 1-800-668-0398). Some crimes, such as theft, fraud and property damage, can be reported online at yrp.ca. If it's an emergency, call 911 immediately.",
-    source: "https://www.yrp.ca/en/contact-us.aspx"
+    source: "https://www.yrp.ca/contact-us"
   },
   {
     question: "What should I do if my basement floods?",
@@ -160,7 +160,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     question: "Who do I call about a power outage?",
     keywords: ['power', 'outage', 'hydro', 'alectra', 'restore', 'electricity'],
     answer: "Report a power outage to Alectra Utilities at 1-833-253-2872, by online form or by chat, and check Alectra's outage map for updates. Use the same channels to report an electrical hazard.",
-    source: "https://alectrautilities.com/outages"
+    source: "https://alectrautilities.com/outages-safety"
   },
   {
     question: "Where are the off-leash dog parks?",
@@ -178,7 +178,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
     question: "When can I set off fireworks?",
     keywords: ['fireworks', 'set off', 'personal', 'use', 'allowed', 'holiday', 'permit', 'victoria day', 'backyard'],
     answer: "Family fireworks may only be set off on private property with the owner's consent, never on City property such as parks, fields and roads. No permit is needed the day before Victoria Day, on Victoria Day, the day before Canada Day and on Canada Day; on any other day you need a permit, applied for online at least seven days ahead ($246 plus HST). Fines can reach $5,000.",
-    source: "https://www.markham.ca/fireworks"
+    source: "https://www.markham.ca/neighbourhood-services/fire-services-emergency-preparedness/family-fireworks-permit"
   },
   {
     question: "Which bags can go in the green bin?",

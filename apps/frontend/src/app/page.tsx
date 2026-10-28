@@ -10,6 +10,7 @@ import { ContactForm } from '../components/ContactForm';
 import { FAQSection } from '../components/FAQSection';
 import { RevealOnScroll } from '../components/RevealOnScroll';
 import { faqDatabase } from '../lib/faq-data';
+import { AnswerSource } from '../components/AnswerSource';
 
 // Server-rendered; only HeroDemo, FAQSection and ContactForm hydrate in the browser
 export default function HomePage() {
@@ -85,12 +86,12 @@ export default function HomePage() {
     {
       icon: <MessageSquare className="w-6 h-6" />,
       title: "Natural Language",
-      description: 'Talk to it like a neighbor. Ask "Hey, what can I put in my blue bin?" instead of stiff, formal search terms. The AI understands context, not just keywords.'
+      description: 'Talk to it like a neighbour. Ask "Hey, what can I put in my blue bin?" instead of stiff, formal search terms. In the full product, the AI understands context, not just keywords.'
     },
     {
       icon: <Brain className="w-6 h-6" />,
       title: "Contextual Understanding",
-      description: "Unlike keyword-matching chatbots that fail when you phrase things differently, our RAG system understands what you're actually asking—not just what words you used."
+      description: "Unlike keyword-matching chatbots that fail when you phrase things differently, the full product's RAG system understands what you're actually asking, not just what words you used."
     },
     {
       icon: <ShieldCheck className="w-6 h-6" />,
@@ -175,7 +176,7 @@ export default function HomePage() {
                             <p className="text-white text-sm">"Hey Markham, when's my garbage collection?"</p>
                           </div>
                           <div className="bg-white rounded-lg p-3">
-                            <p className="text-slate-700 text-sm">Your next garbage day is this Thursday. Put it out by 7 AM in clear bags.</p>
+                            <p className="text-slate-700 text-sm">Clear-bag garbage goes out every other week and your green bin every week. Have it at the curb by 7 AM.</p>
                           </div>
                         </div>
                         <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
@@ -343,14 +344,14 @@ export default function HomePage() {
                   <div className="space-y-3">
                     <div className="bg-slate-50 dark:bg-slate-900 rounded p-3">
                       <p className="text-sm text-slate-600 dark:text-slate-400">User asks:</p>
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">"When does the pool close?"</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">"Can my visitor park on the street tonight?"</p>
                     </div>
                     <div className="flex justify-center">
                       <div className="text-2xl">↓</div>
                     </div>
                     <div className="bg-red-50 dark:bg-red-900/20 rounded p-3">
                       <p className="text-sm text-slate-600 dark:text-slate-400">Chatbot response:</p>
-                      <p className="text-sm text-red-700 dark:text-red-300">"I found 15 results for 'pool'. Did you mean: pool permits, pool schedule, pool fees?"</p>
+                      <p className="text-sm text-red-700 dark:text-red-300">"I found 15 results for 'park'. Did you mean: parks, park permits, parking lots?"</p>
                     </div>
                   </div>
                 </div>
@@ -364,14 +365,17 @@ export default function HomePage() {
                   <div className="space-y-3">
                     <div className="bg-slate-50 dark:bg-slate-900 rounded p-3">
                       <p className="text-sm text-slate-600 dark:text-slate-400">User asks:</p>
-                      <p className="text-sm font-medium text-slate-900 dark:text-white">"When does the pool close?"</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">"Can my visitor park on the street tonight?"</p>
                     </div>
                     <div className="flex justify-center">
                       <div className="text-2xl">↓</div>
                     </div>
                     <div className="bg-green-50 dark:bg-green-900/20 rounded p-3">
                       <p className="text-sm text-slate-600 dark:text-slate-400">HeyMarkham response:</p>
-                      <p className="text-sm text-green-700 dark:text-green-300">"The Markham Pan Am Centre pool closes at 10 PM today. The Milliken Pool closes at 8 PM. Which one are you looking for?"</p>
+                      <p className="text-sm text-green-700 dark:text-green-300">"Street parking isn't allowed from 2:30 AM to 6 AM unless signs say otherwise, but you can request an overnight exemption online for $6 a night, up to 10 a year per licence plate."</p>
+                      <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                        <AnswerSource source="https://www.markham.ca/permits-licences-taxes/parking/overnight-street-parking-request" linkClassName="hover:text-primary-600 dark:hover:text-primary-300" />
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -416,11 +420,17 @@ export default function HomePage() {
         <section id="solution" className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-16">
+              <p data-reveal className="text-sm font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400 mb-3">
+                In the full HeyMarkham product
+              </p>
               <h2 data-reveal className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 How RAG Actually Works
               </h2>
               <p data-reveal className="text-lg text-slate-600 dark:text-slate-400" style={{ transitionDelay: '0.1s' }}>
-                Every answer starts from official city documents, and cites them when it reaches you.
+                In the full product, every answer starts from official city documents and cites them when it reaches you.
+              </p>
+              <p data-reveal className="mt-3 text-sm text-slate-500 dark:text-slate-400" style={{ transitionDelay: '0.15s' }}>
+                The demo on this page is a simplified offline version: it matches your question to checked answers and links to each source.
               </p>
             </div>
 
@@ -495,7 +505,10 @@ export default function HomePage() {
               </div>
 
               {/* Technical Specifications */}
-              <div className="mt-16 grid md:grid-cols-3 gap-6">
+              <h3 data-reveal className="mt-16 mb-6 text-center text-lg font-semibold text-slate-900 dark:text-white">
+                Full product specifications
+              </h3>
+              <div className="grid md:grid-cols-3 gap-6">
                 <div data-reveal className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white" style={{ transitionDelay: '0.7s' }}>
                   <h4 className="font-bold mb-3 text-lg">Graph RAG System</h4>
                   <ul className="space-y-2 text-sm text-slate-300">

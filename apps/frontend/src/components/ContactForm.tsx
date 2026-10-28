@@ -38,6 +38,11 @@ export const ContactForm = () => {
         }}
         className="space-y-5 bg-white/10 p-6 rounded-xl border border-white/20"
       >
+        {/* Spam trap: hidden from people and screen readers, but bots fill it in */}
+        <div className="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
+          <label htmlFor="contact_hp">Leave this field empty</label>
+          <input type="text" id="contact_hp" name="contact_hp" tabIndex={-1} autoComplete="off" />
+        </div>
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-primary-100 mb-2">
             Name
