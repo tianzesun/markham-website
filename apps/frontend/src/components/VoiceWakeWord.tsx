@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Mic, MicOff, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { findAnswer } from '../lib/faq-data';
 import { createSpeechRecognition, isFatalSpeechError, type ISpeechRecognition } from '../lib/speech';
 
@@ -211,14 +210,9 @@ export const VoiceWakeWord = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      <AnimatePresence>
-        {isPanelOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="w-80 max-w-[calc(100vw-3rem)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-4 text-sm"
+      {isPanelOpen && (
+          <div
+            className="animate-fade-up w-80 max-w-[calc(100vw-3rem)] rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-xl p-4 text-sm"
             role="status"
             aria-live="polite"
           >
@@ -245,53 +239,25 @@ export const VoiceWakeWord = () => {
                 </p>
               </div>
             )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
 
-      <motion.button
+      <button
         onClick={toggleListening}
         aria-label={isListening ? 'Stop listening for "Hey Markham"' : 'Start listening for "Hey Markham"'}
         aria-pressed={isListening}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all ${
+        className={`relative w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all hover:scale-105 active:scale-95 ${
           isListening
             ? 'bg-primary-600 text-white ring-4 ring-primary-300 ring-opacity-50'
             : 'bg-white text-slate-700 shadow-lg border border-slate-200'
         }`}
       >
-        <AnimatePresence mode="wait">
-          {isListening ? (
-            <motion.div
-              key="mic-on"
-              initial={{ opacity: 0, rotate: -90 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              exit={{ opacity: 0, rotate: 90 }}
-              className="relative"
-            >
-              <Mic className="w-6 h-6" />
-              {status === 'awaiting-question' && (
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0.6 }}
-                  animate={{ scale: 1.8, opacity: 0 }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="absolute inset-0 rounded-full bg-primary-400"
-                />
-              )}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="mic-off"
-              initial={{ opacity: 0, rotate: 90 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              exit={{ opacity: 0, rotate: -90 }}
-            >
-              <MicOff className="w-6 h-6" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.button>
+        {/* Expanding ring while waiting for the question after the wake word */}
+        {status === 'awaiting-question' && (
+          <span className="absolute inset-0 rounded-full bg-primary-400 opacity-60 animate-ping" aria-hidden="true" />
+        )}
+        {isListening ? <Mic className="relative w-6 h-6" /> : <MicOff className="w-6 h-6" />}
+      </button>
     </div>
   );
 };

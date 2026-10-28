@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Search, ChevronDown, ChevronUp } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Search, ChevronDown } from 'lucide-react';
 import { faqDatabase } from '../lib/faq-data';
 
 export const FAQSection = () => {
@@ -45,22 +44,17 @@ export const FAQSection = () => {
   };
 
   return (
-    <section id="faq" className="py-20 px-6 bg-slate-50 dark:bg-slate-900">
+    <section id="faq" className="py-20 px-6 bg-slate-50 dark:bg-slate-900 scroll-mt-16">
       <div className="max-w-4xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div data-reveal className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Frequently Asked Questions</h2>
           <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">Sample answers about City of Markham services. Always confirm details at markham.ca.</p>
 
           {/* Search Input */}
           <div className="relative max-w-xl mx-auto">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" aria-hidden="true" />
             <input
-              type="text"
+              type="search"
               placeholder="Search for answers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -68,79 +62,64 @@ export const FAQSection = () => {
               aria-label="Search FAQ"
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* FAQ Items */}
         <div className="space-y-4">
-          <AnimatePresence mode="popLayout">
-            {filteredItems.length > 0 ? (
-              filteredItems.map((item) => {
-                const index = faqDatabase.indexOf(item);
-                return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden"
-                >
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item) => {
+              const index = faqDatabase.indexOf(item);
+              const isOpen = openIndex === index;
+              return (
+              <div
+                key={index}
+                className="animate-fade-up bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden"
+              >
+                <h3>
                   <button
                     onClick={() => toggleItem(index)}
                     className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
-                    aria-expanded={openIndex === index}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${index}`}
                   >
                     <span className="font-medium pr-4 text-slate-900 dark:text-white">
                       {highlightText(item.question, searchQuery)}
                     </span>
-                    {openIndex === index ? (
-                      <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
-                    )}
+                    <ChevronDown
+                      className={`w-5 h-5 text-slate-500 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                      aria-hidden="true"
+                    />
                   </button>
-                  
-                  <AnimatePresence>
-                    {openIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="px-6 pb-5 pt-0 text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-700">
-                          <p className="pt-4">{highlightText(item.answer, searchQuery)}</p>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-                );
-              })
-            ) : (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700"
-              >
-                <Search className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-slate-500 mb-2">No results found</h3>
-                <p className="text-slate-400">Try searching for different keywords like "garbage", "parking", or "library"</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                </h3>
+                
+                {/* Answers stay in the HTML (good for search engines); grid rows animate the height */}
+                <div
+                  id={`faq-answer-${index}`}
+                  className={`grid transition-[grid-template-rows] duration-200 ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+                  inert={!isOpen}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-6 pb-5 pt-0 text-slate-600 dark:text-slate-300 border-t border-slate-100 dark:border-slate-700">
+                      <p className="pt-4">{highlightText(item.answer, searchQuery)}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              );
+            })
+          ) : (
+            <div className="animate-fade-up text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+              <Search className="w-12 h-12 text-slate-300 mx-auto mb-4" aria-hidden="true" />
+              <p className="text-lg font-medium text-slate-600 dark:text-slate-300 mb-2">No results found</p>
+              <p className="text-slate-500 dark:text-slate-400">Try searching for different keywords like &ldquo;garbage&rdquo;, &ldquo;parking&rdquo; or &ldquo;library&rdquo;</p>
+            </div>
+          )}
         </div>
 
-        {/* Results count */}
-        {searchQuery && (
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center text-slate-500 mt-8"
-          >
-            Showing {filteredItems.length} result{filteredItems.length !== 1 ? 's' : ''} for "{searchQuery}"
-          </motion.p>
-        )}
+        {/* Results count, announced to screen readers as the visitor types */}
+        <p className="text-center text-slate-500 dark:text-slate-400 mt-8 min-h-[1.5rem]" aria-live="polite">
+          {searchQuery && <>Showing {filteredItems.length} result{filteredItems.length !== 1 ? 's' : ''} for &ldquo;{searchQuery}&rdquo;</>}
+        </p>
       </div>
     </section>
   );

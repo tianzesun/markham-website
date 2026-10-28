@@ -7,14 +7,14 @@ const bundleAnalyzer = withBundleAnalyzer({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@heymarkham/ui', 'framer-motion', 'lucide-react'],
+  transpilePackages: ['@heymarkham/ui', 'lucide-react'],
   serverExternalPackages: ['sharp'],
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
   productionBrowserSourceMaps: false,
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react'],
   },
   images: {
     remotePatterns: [

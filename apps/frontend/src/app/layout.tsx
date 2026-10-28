@@ -14,7 +14,8 @@ const sourceSans = Source_Sans_3({
 
 const merriweather = Merriweather({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  // Only bold is used (headings)
+  weight: ['700'],
   display: 'swap',
   variable: '--font-serif',
 })

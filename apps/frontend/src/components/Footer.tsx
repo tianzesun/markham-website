@@ -55,14 +55,14 @@ export const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            © {currentYear} <a href="https://aydenait.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 hover:underline">Aydenait Solutions</a>. All rights reserved.
+            © {currentYear} <a href="https://aydenait.com" target="_blank" rel="noopener noreferrer" className="text-primary-600 dark:text-primary-400 underline hover:no-underline">Aydenait Solutions</a>. All rights reserved.
           </p>
-          <p className="text-sm text-slate-400 dark:text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Built for Markham residents
           </p>
         </div>
 
-        <p className="mt-6 text-xs text-slate-400 dark:text-slate-500 text-center md:text-left">
+        <p className="mt-6 text-xs text-slate-500 dark:text-slate-400 text-center md:text-left">
           HeyMarkham is an independent service by Aydenait Solutions and is not affiliated with or endorsed by the City of Markham.
           Answers are samples for demonstration; always confirm details at markham.ca.
         </p>

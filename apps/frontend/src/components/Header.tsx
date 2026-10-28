@@ -1,20 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Mic, Menu, X, ArrowRight } from 'lucide-react';
-import { useMagneticEffect } from '../hooks/useMagneticEffect';
 import { ThemeToggle } from './ThemeToggle';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
-  
-  const headerBackground = useTransform(scrollY, [0, 80], ['rgba(15, 23, 42, 0.96)', 'rgba(15, 23, 42, 0.98)']);
-  const headerBlur = useTransform(scrollY, [0, 80], ['blur(8px)', 'blur(20px)']);
-  const headerShadow = useTransform(scrollY, [0, 80], ['0 0 0 0 transparent', '0 4px 20px -5px rgba(0, 0, 0, 0.1)']);
-  const headerBorder = useTransform(scrollY, [0, 80], ['rgba(51, 65, 85, 0)', 'rgba(51, 65, 85, 0.8)']);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Shadow and border appear once the page scrolls under the header
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navigation = [
     // Root-relative so the links also work from other pages such as /privacy
@@ -25,25 +26,15 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <motion.header 
-      style={{
-        backgroundColor: headerBackground,
-        WebkitBackdropFilter: headerBlur,
-        backdropFilter: headerBlur,
-        boxShadow: headerShadow,
-        borderColor: headerBorder,
-      } as any}
-      className="fixed top-0 left-0 right-0 z-[100] backdrop-blur-md border-b transition-all duration-300"
+    <header
+      className={`fixed top-0 left-0 right-0 z-[100] border-b bg-slate-900/[0.97] transition-[box-shadow,border-color] duration-300 ${
+        isScrolled ? 'border-slate-700/80 shadow-[0_4px_20px_-5px_rgba(0,0,0,0.25)]' : 'border-transparent'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-3"
-          >
+          <div className="animate-fade-up flex items-center gap-3">
             <div className="w-9 h-9 bg-primary-600 rounded-lg flex items-center justify-center">
               <Mic className="text-white" size={18} />
             </div>
@@ -52,45 +43,33 @@ export const Header: React.FC = () => {
                 HeyMarkham
               </span>
             </Link>
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             {navigation.map((item, index) => (
-              <motion.div
+              <Link
                 key={item.name}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                href={item.href}
+                className="animate-fade-up text-sm font-medium text-white hover:text-primary-200 transition-colors"
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
-                <Link
-                  href={item.href}
-                  className="text-sm font-medium text-white"
-                >
-                  {item.name}
-                </Link>
-              </motion.div>
+                {item.name}
+              </Link>
             ))}
           </nav>
 
           {/* CTA Button */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="hidden md:flex items-center gap-3"
-          >
+          <div className="animate-fade-up hidden md:flex items-center gap-3 [animation-delay:300ms]">
             <ThemeToggle />
-            <MagneticButton>
-              <Link
-                href="/#demo"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium text-sm transition-all shadow-sm btn-hover"
-              >
-                Try the Demo
-                <ArrowRight size={16} />
-              </Link>
-            </MagneticButton>
-          </motion.div>
+            <Link
+              href="/#demo"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium text-sm transition-all shadow-sm hover:-translate-y-0.5"
+            >
+              Try the Demo
+              <ArrowRight size={16} />
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
@@ -99,53 +78,45 @@ export const Header: React.FC = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
-              className="p-2 text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="p-2 text-slate-300 hover:text-white transition-colors"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: isMenuOpen ? 1 : 0, height: isMenuOpen ? 'auto' : 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden border-t border-slate-800"
+        {/* Mobile Navigation: grid row height animates from 0 to content height */}
+        <div
+          className={`md:hidden grid transition-[grid-template-rows,opacity] duration-300 ${
+            isMenuOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+          }`}
           inert={!isMenuOpen}
         >
-          <div className="py-4 space-y-1">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block px-4 py-2.5 text-sm font-medium text-white"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-3 mt-3 border-t border-slate-800">
-              <Link
-                href="/#demo"
-                className="block mx-4 bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-lg font-medium text-sm text-center transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Try the Demo
-              </Link>
+          <div className="overflow-hidden">
+            <div className="py-4 space-y-1 border-t border-slate-800">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block px-4 py-2.5 text-sm font-medium text-white"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <div className="pt-3 mt-3 border-t border-slate-800">
+                <Link
+                  href="/#demo"
+                  className="block mx-4 bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-lg font-medium text-sm text-center transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Try the Demo
+                </Link>
+              </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.header>
-  );
-};
-
-const MagneticButton = ({ children }: { children: React.ReactNode }) => {
-  const { ref, x, y } = useMagneticEffect();
-  return (
-    <motion.div ref={ref} style={{ x, y }}>
-      {children}
-    </motion.div>
+    </header>
   );
 };

@@ -1,135 +1,19 @@
-"use client";
-
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, useTransform, useMotionValue } from 'framer-motion';
 import { 
   Mic, Search, Brain, ShieldCheck, Mail, Phone, CheckCircle2, Clock,
-  AlertCircle, FileSearch, MessageSquare, Send, Building2, Calendar,
-  Users, MousePointer, Bot, Link2, Home, Baby, Heart, Zap,
-  Smartphone, Volume2, Headphones, CreditCard, BookOpen, Car,
-  Lightbulb, Sparkles, Wifi, PhoneCall, Leaf, Waves, Trees,
-  CalendarDays, ArrowRight
+  AlertCircle, FileSearch, MessageSquare, Building2, Calendar, Users,
+  MousePointer, Bot, Link2, Home, Baby, Heart, Zap, Smartphone,
+  Volume2, Headphones, CreditCard, BookOpen, Car, Lightbulb,
+  Sparkles, Wifi, PhoneCall, Leaf, Waves, Trees, CalendarDays
 } from 'lucide-react';
-import { submitContactForm } from './actions/contact';
-import { findAnswer } from '../lib/faq-data';
-import { createSpeechRecognition, type ISpeechRecognition } from '../lib/speech';
+import { HeroDemo } from '../components/HeroDemo';
+import { ContactForm } from '../components/ContactForm';
 import { FAQSection } from '../components/FAQSection';
+import { RevealOnScroll } from '../components/RevealOnScroll';
 
+// Server-rendered; only HeroDemo, FAQSection and ContactForm hydrate in the browser
 export default function HomePage() {
   // Generate static heights for voice bars to avoid hydration mismatch
   const voiceBarHeights = ['16px', '24px', '12px', '20px', '28px'];
-  
-  // Optimistic update for contact form
-  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
-  const [optimisticContact, setOptimisticContact] = useState<{ status: 'idle' | 'success' | 'error'; error: string | null }>(
-    { status: 'idle', error: null }
-  );
-
-  // Demo Chat State
-  const [demoMessages, setDemoMessages] = useState<Array<{role: 'user' | 'assistant', content: string, isTyping?: boolean, isSample?: boolean}>>([
-    { role: 'assistant', content: "👋 Hi there! I'm HeyMarkham. Ask me anything about City of Markham services." }
-  ]);
-  const [demoInput, setDemoInput] = useState('');
-  const [isRecording, setIsRecording] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
-  // Ref copy so voice callbacks registered once still see the current value
-  const isProcessingRef = useRef(false);
-
-  // Auto scroll chat to bottom
-  const chatContainerRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    }
-  }, [demoMessages]);
-
-  const askDemo = async (question: string) => {
-    if (!question.trim() || isProcessingRef.current) return;
-    isProcessingRef.current = true;
-
-    const userMessage = question.trim();
-    setDemoInput('');
-    setDemoMessages(prev => [...prev, { role: 'user', content: userMessage }]);
-    setIsProcessing(true);
-
-    // Add typing indicator
-    setDemoMessages(prev => [...prev, { role: 'assistant', content: '', isTyping: true }]);
-    
-    // RAG Search Simulation phases
-    await new Promise(resolve => setTimeout(resolve, 1200));
-    
-    // Find actual matching response from knowledge base
-    const response = findAnswer(userMessage);
-
-    // Type out response character by character for realistic effect
-    setDemoMessages(prev => {
-      const newMessages = [...prev];
-      newMessages.pop();
-      newMessages.push({ role: 'assistant', content: '', isTyping: false, isSample: true });
-      return newMessages;
-    });
-    
-    // Simulate typing output
-    for (let i = 0; i <= response.length; i++) {
-      await new Promise(resolve => setTimeout(resolve, 15));
-      setDemoMessages(prev => {
-        const newMessages = [...prev];
-        const last = newMessages[newMessages.length - 1];
-        newMessages[newMessages.length - 1] = { ...last, content: response.substring(0, i) };
-        return newMessages;
-      });
-    }
-    
-    isProcessingRef.current = false;
-    setIsProcessing(false);
-  };
-
-  const handleDemoSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    askDemo(demoInput);
-  };
-
-  // Voice input for the demo: one utterance, transcribed into the input, then asked
-  const demoRecognitionRef = useRef<ISpeechRecognition | null>(null);
-  const [isVoiceSupported, setIsVoiceSupported] = useState(true);
-
-  useEffect(() => {
-    const recognition = createSpeechRecognition(false);
-    if (!recognition) {
-      setIsVoiceSupported(false);
-      return;
-    }
-    recognition.onresult = (event) => {
-      const latest = event.results[event.results.length - 1];
-      const text = latest[0].transcript;
-      setDemoInput(text);
-      if (latest.isFinal) {
-        setIsRecording(false);
-        askDemo(text);
-      }
-    };
-    recognition.onerror = () => setIsRecording(false);
-    recognition.onend = () => setIsRecording(false);
-    demoRecognitionRef.current = recognition;
-    return () => recognition.abort();
-    // askDemo only touches refs and state setters, so the first-render closure stays correct
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const toggleDemoRecording = () => {
-    const recognition = demoRecognitionRef.current;
-    if (!recognition) return;
-    if (isRecording) {
-      recognition.stop();
-      setIsRecording(false);
-    } else {
-      try {
-        recognition.start();
-        setIsRecording(true);
-      } catch {}
-    }
-  };
 
   const clickProblemStats = [
     { value: "7", label: "Steps", description: "To find one yard waste date in the example above" },
@@ -188,235 +72,17 @@ export default function HomePage() {
     },
   ];
 
-  // Mouse parallax effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const heroRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      mouseX.set(x);
-      mouseY.set(y);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [2, -2]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-2, 2]);
-  const glowX = useTransform(mouseX, [-0.5, 0.5], ['30%', '70%']);
-  const glowY = useTransform(mouseY, [-0.5, 0.5], ['30%', '70%']);
-
   return (
     <div className="min-h-screen w-full flex flex-col bg-white dark:bg-slate-950">
+      <RevealOnScroll />
       <div className="flex-grow">
-        {/* Hero Section - Interactive Demo */}
-        <section ref={heroRef} className="relative pt-12 pb-16 md:pt-20 md:pb-20 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-          {/* Mouse following glow orb */}
-          <motion.div 
-            className="absolute w-[500px] h-[500px] bg-primary-500/15 rounded-full blur-3xl pointer-events-none"
-            style={{
-              left: glowX,
-              top: glowY,
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-              backgroundSize: '40px 40px'
-            }} />
-          </div>
-          
-          <div className="max-w-7xl mx-auto relative z-10">
-            {/* Header Text */}
-            <div className="text-center max-w-4xl mx-auto mb-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-600/20 rounded-full text-primary-300 text-sm font-medium mb-6 border border-primary-500/30">
-                  <Sparkles className="w-4 h-4" />
-                  Beta Demo for Markham Residents
-                </div>
-              </motion.div>
-              
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
-              >
-                Ask Markham.
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-300">
-                  Get Answers Instantly.
-                </span>
-              </motion.h1>
-
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl mx-auto"
-              >
-                The AI voice assistant that answers your city questions 24/7. No hold times, no clicking through 12 pages. Just ask.
-              </motion.p>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap justify-center gap-4"
-            >
-            </motion.div>
-            </div>
-
-            {/* Live Interactive Demo */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ 
-                opacity: 1, 
-                y: 0
-              }}
-              style={{
-                perspective: 1000,
-                transformPerspective: 1000,
-                rotateX: rotateX,
-                rotateY: rotateY
-              }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              id="demo"
-              className="max-w-3xl mx-auto relative group"
-            >
-              {/* Glow Effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 rounded-2xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-700" />
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary-500/0 via-primary-400/70 to-primary-500/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="relative bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
-                {/* Chat Header */}
-                <div className="px-6 py-4 border-b border-slate-700 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
-                      <Building2 className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white">HeyMarkham Assistant</h3>
-                      <div className="flex items-center gap-1.5 text-xs text-green-400">
-                        <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                        Demo with sample answers
-                      </div>
-                    </div>
-                  </div>
-                  <span className="text-xs text-slate-500">Beta Demo</span>
-                </div>
-                
-                {/* Chat Messages */}
-                <div ref={chatContainerRef} className="p-6 h-72 overflow-y-auto space-y-4 bg-slate-900/50 scroll-smooth">
-                  {demoMessages.map((msg, i) => (
-                    <div key={i} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
-                      {msg.role === 'assistant' && (
-                        <div className="w-8 h-8 bg-primary-600 rounded-full flex-shrink-0 flex items-center justify-center">
-                          <Bot className="w-4 h-4 text-white" />
-                        </div>
-                      )}
-                      <div className={`${msg.role === 'user' 
-                        ? 'bg-primary-600 rounded-2xl rounded-tr-none' 
-                        : 'bg-slate-800 rounded-2xl rounded-tl-none'} px-4 py-3 max-w-md`}>
-                        {msg.isTyping ? (
-                          <div className="flex gap-1 items-center h-5">
-                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                          </div>
-                        ) : (
-                          <>
-                            <p className="text-white text-sm">{msg.content}</p>
-                            {msg.isSample && (
-                              <p className="mt-2 text-xs text-slate-400">
-                                Sample answer. Confirm details at{' '}
-                                <a href="https://www.markham.ca" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">markham.ca</a>.
-                              </p>
-                            )}
-                          </>
-                        )}
-                      </div>
-                      {msg.role === 'user' && (
-                        <div className="w-8 h-8 bg-slate-600 rounded-full flex-shrink-0 flex items-center justify-center">
-                          <Users className="w-4 h-4 text-white" />
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Input Area */}
-                <div className="p-4 border-t border-slate-700 bg-slate-900">
-                  <form onSubmit={handleDemoSubmit} className="flex gap-3">
-                     <button 
-                       type="button"
-                       onClick={toggleDemoRecording}
-                       disabled={!isVoiceSupported || isProcessing}
-                       title={isVoiceSupported ? undefined : "Voice input isn't supported in this browser"}
-                       aria-label={isRecording ? 'Stop voice input' : 'Ask by voice'}
-                       aria-pressed={isRecording}
-                       className={`w-12 h-12 ${isRecording 
-                         ? 'bg-red-500 animate-pulse' 
-                         : 'bg-white hover:bg-gray-100'} rounded-xl flex items-center justify-center transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed`}
-                     >
-                       <Mic className={`w-5 h-5 ${isRecording ? 'text-white' : 'text-gray-600'}`} />
-                     </button>
-                     <input 
-                      type="text" 
-                      placeholder="Ask HeyMarkham anything..."
-                      aria-label="Ask HeyMarkham a question"
-                      value={demoInput}
-                      onChange={(e) => setDemoInput(e.target.value)}
-                      disabled={isProcessing}
-                      className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:opacity-50"
-                    />
-                    <button 
-                      type="submit"
-                      disabled={isProcessing || !demoInput.trim()}
-                      aria-label="Send message"
-                      className="w-12 h-12 bg-primary-600 hover:bg-primary-500 rounded-xl flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-                    >
-                      <Send className="w-5 h-5 text-white" />
-                    </button>
-                  </form>
-                  
-                  {/* Quick Suggestions */}
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {['Garbage pickup', 'Pool hours', 'Parking permit', 'Cooling center'].map((suggestion) => (
-                      <button
-                        key={suggestion}
-                        type="button"
-                        onClick={() => setDemoInput(suggestion)}
-                        className="text-xs px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full transition-colors"
-                      >
-                        {suggestion}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <HeroDemo />
 
         {/* Voice-First Experience Section */}
         <section className="py-16 px-6 bg-primary-700 dark:bg-primary-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-primary-200 text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-white text-sm font-medium mb-4">
                 <Volume2 className="w-4 h-4" />
                 Voice-First Experience
               </div>
@@ -544,24 +210,12 @@ export default function HomePage() {
         <section className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
-              >
+              <h2 data-reveal className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 Why Traditional City Portals Fail Residents
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="text-lg text-slate-600 dark:text-slate-400"
-              >
+              </h2>
+              <p data-reveal className="text-lg text-slate-600 dark:text-slate-400" style={{ transitionDelay: '0.1s' }}>
                 The search for the needle in the haystack
-              </motion.p>
+              </p>
             </div>
 
             {/* The "12-Click" Problem */}
@@ -680,47 +334,17 @@ export default function HomePage() {
         <section id="features" className="py-16 px-6 bg-white dark:bg-slate-950">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
-              >
+              <h2 data-reveal className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 Purpose-Built for Markham
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="text-lg text-slate-600 dark:text-slate-400"
-              >
+              </h2>
+              <p data-reveal className="text-lg text-slate-600 dark:text-slate-400" style={{ transitionDelay: '0.1s' }}>
                 Grounded in official city information, not the open internet.
-              </motion.p>
+              </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               {ragBenefits.map((benefit, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ 
-                  y: -6, 
-                  scale: 1.015,
-                  boxShadow: "0 20px 40px -12px rgba(72, 101, 129, 0.25)"
-                }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: i * 0.12,
-                  type: "spring", 
-                  stiffness: 260, 
-                  damping: 20
-                }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="flex gap-4 p-6 rounded-xl bg-primary-50 dark:bg-slate-900 border border-primary-100 dark:border-slate-800 will-change-transform"
-              >
+              <div data-reveal key={i} className="hover:-translate-y-1.5 hover:shadow-xl flex gap-4 p-6 rounded-xl bg-primary-50 dark:bg-slate-900 border border-primary-100 dark:border-slate-800" style={{ transitionDelay: `${i * 0.12}s` }}>
                   <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center text-primary-600 dark:text-primary-400">
                     {benefit.icon}
                   </div>
@@ -732,7 +356,7 @@ export default function HomePage() {
                       {benefit.description}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -742,24 +366,12 @@ export default function HomePage() {
         <section id="solution" className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
-              >
+              <h2 data-reveal className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 How RAG Actually Works
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="text-lg text-slate-600 dark:text-slate-400"
-              >
+              </h2>
+              <p data-reveal className="text-lg text-slate-600 dark:text-slate-400" style={{ transitionDelay: '0.1s' }}>
                 Every answer starts from official city documents, and cites them when it reaches you.
-              </motion.p>
+              </p>
             </div>
 
             {/* RAG Pipeline Animation */}
@@ -769,120 +381,72 @@ export default function HomePage() {
               
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-6">
                 {/* Step 1 */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10"
-                >
+                <div data-reveal className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10">
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center mx-auto mb-4 text-primary-600 dark:text-primary-400">
                     <MessageSquare className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">1. Question</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Resident asks question in natural language</p>
-                </motion.div>
+                </div>
 
                 {/* Step 2 */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10"
-                >
+                <div data-reveal className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10" style={{ transitionDelay: '0.1s' }}>
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center mx-auto mb-4 text-primary-600 dark:text-primary-400">
                     <Brain className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">2. Embedding</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Question converted to 1536 dimensional vector</p>
-                </motion.div>
+                </div>
 
                 {/* Step 3 */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10"
-                >
+                <div data-reveal className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10" style={{ transitionDelay: '0.2s' }}>
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center mx-auto mb-4 text-primary-600 dark:text-primary-400">
                     <Search className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">3. Search</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Similarity search across official city documents</p>
-                </motion.div>
+                </div>
 
                 {/* Step 4 */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10"
-                >
+                <div data-reveal className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10" style={{ transitionDelay: '0.3s' }}>
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center mx-auto mb-4 text-primary-600 dark:text-primary-400">
                     <FileSearch className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">4. Retrieve</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Top 3 most relevant official documents returned</p>
-                </motion.div>
+                </div>
 
                 {/* Step 5 */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10"
-                >
+                <div data-reveal className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10" style={{ transitionDelay: '0.4s' }}>
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center mx-auto mb-4 text-primary-600 dark:text-primary-400">
                     <BookOpen className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">5. Context</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Documents injected into LLM prompt context window</p>
-                </motion.div>
+                </div>
 
                 {/* Step 6 */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10"
-                >
+                <div data-reveal className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10" style={{ transitionDelay: '0.5s' }}>
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-lg flex items-center justify-center mx-auto mb-4 text-primary-600 dark:text-primary-400">
                     <Bot className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">6. Generate</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 text-center">LLM answers ONLY using provided context. Temperature = 0</p>
-                </motion.div>
+                </div>
 
                 {/* Step 7 */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10"
-                >
+                <div data-reveal className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative z-10" style={{ transitionDelay: '0.6s' }}>
                   <div className="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center mx-auto mb-4 text-green-600 dark:text-green-400">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white text-center mb-2">7. Verify</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Answer returned with source citations, or a clear &ldquo;I don&rsquo;t know&rdquo;.</p>
-                </motion.div>
+                </div>
               </div>
 
               {/* Technical Specifications */}
               <div className="mt-16 grid md:grid-cols-3 gap-6">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                  viewport={{ once: true }}
-                  className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white"
-                >
+                <div data-reveal className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white" style={{ transitionDelay: '0.7s' }}>
                   <h4 className="font-bold mb-3 text-lg">Graph RAG System</h4>
                   <ul className="space-y-2 text-sm text-slate-300">
                     <li>✓ Microsoft GraphRAG Architecture</li>
@@ -890,15 +454,9 @@ export default function HomePage() {
                     <li>✓ Cross document relationship reasoning</li>
                     <li>✓ Hierarchical community detection</li>
                   </ul>
-                </motion.div>
+                </div>
 
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                  viewport={{ once: true }}
-                  className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white"
-                >
+                <div data-reveal className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white" style={{ transitionDelay: '0.8s' }}>
                   <h4 className="font-bold mb-3 text-lg">LLM Pipeline</h4>
                   <ul className="space-y-2 text-sm text-slate-300">
                     <li>✓ GPT-4o Mini</li>
@@ -906,15 +464,9 @@ export default function HomePage() {
                     <li>✓ System prompt boundary enforcement</li>
                     <li>✓ Global search + local search</li>
                   </ul>
-                </motion.div>
+                </div>
 
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.9 }}
-                  viewport={{ once: true }}
-                  className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white"
-                >
+                <div data-reveal className="bg-slate-900 dark:bg-black rounded-xl p-6 text-white" style={{ transitionDelay: '0.9s' }}>
                   <h4 className="font-bold mb-3 text-lg">Built for Trust</h4>
                   <ul className="space-y-2 text-sm text-slate-300">
                     <li>✓ Answers cite official sources</li>
@@ -922,7 +474,7 @@ export default function HomePage() {
                     <li>✓ No account or sign-in required</li>
                     <li>✓ Voice is opt-in, off until you turn it on</li>
                   </ul>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -932,36 +484,17 @@ export default function HomePage() {
         <section className="py-16 px-6 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4"
-              >
+              <h2 data-reveal className="text-2xl md:text-3xl font-serif font-bold text-slate-900 dark:text-white mb-4">
                 How It Works For You
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="text-lg text-slate-600 dark:text-slate-400"
-              >
+              </h2>
+              <p data-reveal className="text-lg text-slate-600 dark:text-slate-400" style={{ transitionDelay: '0.1s' }}>
                 Everyday questions, answered in one step
-              </motion.p>
+              </p>
             </div>
 
             <div className="space-y-6">
               {winStories.map((story, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-slate-50 dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800"
-                >
+                <div data-reveal key={i} className="bg-slate-50 dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800" style={{ transitionDelay: `${i * 0.1}s` }}>
                   <div className="p-6">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/50 flex items-center justify-center text-primary-600 dark:text-primary-400">
@@ -995,7 +528,7 @@ export default function HomePage() {
                       {story.outcome}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -1020,7 +553,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2 mb-4 px-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   <h3 className="font-semibold text-slate-900 dark:text-white">Available in Demo</h3>
-                  <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
+                  <span className="ml-auto text-xs text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
                 <div className="bg-green-50 dark:bg-green-900/20 rounded-t-xl p-4 border-b-2 border-green-400 flex-shrink-0">
                   <div className="flex items-center justify-between">
@@ -1060,7 +593,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2 mb-4 px-2">
                   <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
                   <h3 className="font-semibold text-slate-900 dark:text-white">Up Next</h3>
-                  <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
+                  <span className="ml-auto text-xs text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
                 <div className="bg-amber-50 dark:bg-amber-900/20 rounded-t-xl p-4 border-b-2 border-amber-400 flex-shrink-0">
                   <div className="flex items-center justify-between">
@@ -1100,7 +633,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2 mb-4 px-2">
                   <div className="w-3 h-3 bg-slate-400 rounded-full"></div>
                   <h3 className="font-semibold text-slate-900 dark:text-white">Later</h3>
-                  <span className="ml-auto text-xs text-slate-500 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
+                  <span className="ml-auto text-xs text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded-full">3 items</span>
                 </div>
                 <div className="bg-slate-100 dark:bg-slate-800 rounded-t-xl p-4 border-b-2 border-slate-300 flex-shrink-0">
                   <div className="flex items-center justify-between">
@@ -1148,24 +681,12 @@ export default function HomePage() {
                <p className="text-sm font-semibold uppercase tracking-wider text-primary-200 mb-3">
                  For the City of Markham and other municipalities
                </p>
-               <motion.h2 
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.5 }}
-                 viewport={{ once: true }}
-                 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4"
-               >
+               <h2 data-reveal className="text-2xl md:text-3xl font-serif font-bold text-white mb-4">
                  Bring HeyMarkham to Your Residents
-               </motion.h2>
-               <motion.p 
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.5, delay: 0.1 }}
-                 viewport={{ once: true }}
-                 className="text-primary-100"
-               >
+               </h2>
+               <p data-reveal className="text-primary-100" style={{ transitionDelay: '0.1s' }}>
                  Start with a pilot. See the results. Then decide.
-               </motion.p>
+               </p>
                <p className="mt-3 text-sm text-primary-200">
                  Residents: have feedback or a question about the demo? Use the same form.
                </p>
@@ -1173,13 +694,7 @@ export default function HomePage() {
 
              <div className="grid md:grid-cols-2 gap-12">
                {/* Contact Info */}
-               <motion.div 
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.5 }}
-                 viewport={{ once: true }}
-                 className="space-y-8"
-               >
+               <div data-reveal className="space-y-8">
                  <div className="text-left">
                    <h3 className="text-xl font-bold text-white mb-4">Why Choose HeyMarkham?</h3>
                    <div className="space-y-4">
@@ -1226,126 +741,9 @@ export default function HomePage() {
                      </div>
                    </div>
                  </div>
-               </motion.div>
+               </div>
 
-               {/* Contact Form */}
-               <motion.div 
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.5, delay: 0.2 }}
-                 viewport={{ once: true }}
-               >
-                 <form 
-                   onSubmit={async (e) => {
-                     e.preventDefault();
-                     if (isSubmittingContact) return;
-                     const form = e.currentTarget;
-                     const formData = new FormData(form);
-                     setIsSubmittingContact(true);
-                     try {
-                       const result = await submitContactForm(formData);
-                       if (result.success) {
-                         setOptimisticContact({ status: 'success', error: null });
-                         form.reset();
-                       } else {
-                         setOptimisticContact({ status: 'error', error: result.error || 'Failed to send' });
-                       }
-                     } catch {
-                       setOptimisticContact({ status: 'error', error: 'Failed to send message' });
-                     } finally {
-                       setIsSubmittingContact(false);
-                     }
-                   }}
-                   className="space-y-5 bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
-                 >
-                   <div>
-                     <label htmlFor="name" className="block text-sm font-medium text-primary-100 mb-2">
-                       Name
-                     </label>
-                     <input
-                       type="text"
-                       id="name"
-                       name="name"
-                       autoComplete="name"
-                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
-                       placeholder="Your name"
-                       required
-                     />
-                   </div>
-                   <div>
-                     <label htmlFor="email" className="block text-sm font-medium text-primary-100 mb-2">
-                       Email
-                     </label>
-                     <input
-                       type="email"
-                       id="email"
-                       name="email"
-                       autoComplete="email"
-                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
-                       placeholder="your@email.com"
-                       required
-                     />
-                   </div>
-                   
-                   <div>
-                     <label htmlFor="subject" className="block text-sm font-medium text-primary-100 mb-2">
-                       Subject
-                     </label>
-                     <input
-                       type="text"
-                       id="subject"
-                       name="subject"
-                       className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
-                       placeholder="How can we help?"
-                       required
-                     />
-                   </div>
-                   
-                   <div>
-                     <label htmlFor="message" className="block text-sm font-medium text-primary-100 mb-2">
-                       Message
-                     </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows={4}
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-primary-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all resize-none"
-                        placeholder="Tell us more about your needs..."
-                        required
-                      />
-                   </div>
-                   
-                   <div>
-                     <button 
-                       type="submit"
-                       disabled={isSubmittingContact}
-                       className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-primary-50 text-primary-700 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
-                     >
-                       {isSubmittingContact ? 'Sending...' : 'Send Message'}
-                       <ArrowRight size={18} />
-                     </button>
-                   </div>
-                   
-                    {/* Status message */}
-                    <div className="text-center text-sm min-h-[20px]">
-                     {optimisticContact.status === 'idle' && (
-                       <p className="text-primary-200">
-                         We'll reply by email as soon as we can
-                       </p>
-                     )}
-                     {optimisticContact.status === 'success' && (
-                       <p className="text-green-300">
-                         Message sent! We'll get back to you shortly.
-                       </p>
-                     )}
-                     {optimisticContact.status === 'error' && (
-                       <p className="text-red-300">
-                         {optimisticContact.error || 'Failed to send message'}
-                       </p>
-                     )}
-                   </div>
-                 </form>
-               </motion.div>
+               <ContactForm />
              </div>
            </div>
          </section>
