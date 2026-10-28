@@ -2,13 +2,13 @@
 export const faqDatabase: Array<{ question: string, keywords: string[], answer: string, source: string }> = [
   {
     question: "When is my garbage collected?",
-    keywords: ['garbage', 'waste', 'trash', 'pickup', 'collection', 'bin', 'schedule', 'thursday', 'clear', 'bag', 'every other week'],
+    keywords: ['garbage', 'waste', 'trash', 'pickup', 'collection', 'bin', 'schedule', 'thursday', 'clear', 'bag', 'every other week', 'bins out', 'set out', 'curb'],
     answer: "Clear-bag garbage is collected every other week on your regular collection day, and the green bin every week. Put material at the curb by 7 AM on collection day or after 7 PM the night before. Garbage must be in clear bags (no black, dark, tinted or white bags), though you can put up to four privacy bags inside a clear bag. Use the What Goes Where tool on markham.ca to find your schedule.",
     source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
     question: "Where can I go swimming?",
-    keywords: ['pool', 'swim', 'swimming', 'close', 'open', 'hour', 'time', 'facility', 'public swim', 'lane', 'aquafit', 'drop-in'],
+    keywords: ['pool', 'swim', 'swimming', 'hour', 'facility', 'public swim', 'lane', 'aquafit', 'drop-in'],
     answer: "Markham pools offer public swims, including recreational, lane and endurance lane swims, plus Aquafit classes. Find drop-in times through the City's online program system (View Drop In Programs on markham.ca), or call the Contact Centre at 905.477.5530.",
     source: "https://www.markham.ca/sports-recreation-fitness/sports-recreation-programs/swimming"
   },
@@ -38,7 +38,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "When are Markham libraries open?",
-    keywords: ['library', 'book', 'open', 'close', 'renew', 'borrow', 'card', 'branch', 'hours'],
+    keywords: ['library', 'open', 'close', 'renew', 'borrow', 'card', 'branch', 'hours'],
     answer: "A Markham Public Library card is free. Check each branch's hours at markham.bibliocommons.com/locations, and see or renew your checked-out items online under My Borrowing. Questions: 905.513.7977 or AskMPL@markhamlibrary.ca.",
     source: "https://www.markhampubliclibrary.ca/"
   },
@@ -68,13 +68,13 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "Do I need a building permit?",
-    keywords: ['building', 'permit', 'renovation', 'deck', 'fence', 'application', 'cost', 'shed', 'addition', 'garage', 'basement', 'renovate'],
+    keywords: ['building', 'permit', 'renovation', 'deck', 'application', 'cost', 'shed', 'addition', 'garage', 'basement', 'renovate'],
     answer: "You need a building permit for most construction, including additions, garages, carports, sunrooms and structural changes such as removing a basement wall. Decks need one if they're over 10 m², attached to the house, or more than 600 mm (2 ft) above the ground; sheds and other accessory buildings need one at 10 m² or more. Replacing fixtures, like-for-like furnace or water heater replacement, painting, new cupboards and re-shingling don't. Permit questions: 905-475-4870.",
     source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/decks-construction-permits"
   },
   {
     question: "What are the noise bylaw hours?",
-    keywords: ['bylaw', 'noise', 'complaint', 'fine', 'after', 'hour', 'music', 'party', 'loud'],
+    keywords: ['bylaw', 'noise', 'complaint', 'fine', 'after', 'hour', 'party', 'loud', 'loud music'],
     answer: "Playing loud music outdoors isn't allowed from 5 PM until 7 AM the next day (9 AM on Sundays), although amplified sound is now allowed until 11 PM on Fridays and Saturdays. Shouting, whistling and singing are prohibited after 11 PM. Outdoor functions on private property need a Noise Exemption Permit. To report noise, call By-law Enforcement at 905.479.7782.",
     source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/noise"
   },
@@ -92,7 +92,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "When are municipal elections held?",
-    keywords: ['election', 'vote', 'poll', 'station', 'day', 'register', 'results', 'voting', 'online'],
+    keywords: ['election', 'vote', 'poll', 'station', 'day', 'results', 'voting', 'online'],
     answer: "Markham's 2026 municipal election ran from October 16 to 26, 2026, with online voting. Results are posted at markham.ca/elections. Ontario municipal elections are held every four years.",
     source: "https://www.markham.ca/elections"
   },
@@ -104,7 +104,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How high can my fence be?",
-    keywords: ['fence', 'height', 'tall', 'high', 'property', 'line', 'bylaw', 'pool', 'enclosure', 'neighbour', 'shared'],
+    keywords: ['fence', 'height', 'property', 'line', 'bylaw', 'pool', 'enclosure', 'neighbour', 'shared'],
     answer: "Front-yard fences can be up to 1.2 m (4 ft) high, and fences along rear and interior side property lines up to 1.8 m (6 ft). On corner lots, the side facing the street is limited to 1.2 m. Pools deeper than 0.6 m need a 1.2 m fence and a pool enclosure permit before filling. For a shared fence on the property line, give your neighbour 14 days' written notice by registered mail. Questions: 905.479.7782.",
     source: "https://www.markham.ca/about-city-markham/city-hall/bylaw/fences-swimming-pools"
   },
@@ -116,25 +116,25 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "How do I get rid of electronics?",
-    keywords: ['e-waste', 'electronic', 'dispose', 'battery', 'recycle', 'batteries', 'depot', 'hazardous', 'paint', 'light bulb'],
+    keywords: ['e-waste', 'electronic', 'electronics', 'dispose', 'battery', 'recycle', 'batteries', 'depot', 'hazardous', 'paint', 'light bulb', 'textiles', 'clothes'],
     answer: "Markham recycling depots accept electronics, alkaline batteries, ink cartridges and textiles; scrap metal is collected monthly by booking at 905.477.5530. Lithium-ion batteries, light bulbs and household hazardous waste go to the York Region Household Hazardous Waste Depot at 430 Rodick Road. Depots don't accept cash.",
     source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/recycling-depots-drop-centres"
   },
   {
     question: "What goes in the green bin?",
-    keywords: ['compost', 'green', 'bin', 'food', 'waste', 'organics', 'diaper', 'pet waste'],
+    keywords: ['compost', 'green', 'bin', 'food', 'waste', 'organics', 'diaper', 'pet waste', 'pizza box', 'coffee', 'bones', 'kitty litter'],
     answer: "The green bin is collected every week. It takes food scraps (including bones, coffee grounds, tea bags and grease), soiled paper such as paper towels and pizza boxes, diapers, pet waste and kitty litter. Keep it under 18 kg with the lid fully closed, and put extra organics in a clear bag beside it. A green bin costs $32 at City recycling depots and some community centres.",
     source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/green-bin"
   },
   {
     question: "How do I arrange bulky item pickup?",
-    keywords: ['bulky', 'item', 'furniture', 'mattress', 'pickup', 'large', 'appliance', 'fridge', 'couch', 'renovation'],
+    keywords: ['bulky', 'item', 'furniture', 'mattress', 'pickup', 'large', 'appliance', 'fridge', 'couch', 'renovation', 'dispose'],
     answer: "Bulky items are collected every two weeks on your regular clear-bag garbage day, with no appointment needed. Large appliances are collected monthly by appointment for $18.50 each; call 905.477.5530. Renovation materials aren't collected at the curb; take them to the Earl Turcott Waste Management Facility at 300 Rodick Road.",
     source: "https://www.markham.ca/neighbourhood-services/recycling-garbage/curbside-collection"
   },
   {
     question: "How do I pay or dispute a parking ticket?",
-    keywords: ['tickets', 'traffic', 'parking', 'pay', 'fine', 'dispute', 'amps', 'penalty notice', 'screening', 'review', 'appeal'],
+    keywords: ['tickets', 'parking ticket', 'traffic', 'parking', 'pay', 'fine', 'dispute', 'amps', 'penalty notice', 'screening', 'review', 'appeal'],
     answer: "Most parking tickets are penalty notices under Markham's Administrative Monetary Penalty System. You have 15 days from the notice date to pay or request a screening review. Pay online through the City's ticket portal, by phone at 1.888.948.1408, in person at the Civic Centre cashier, or by cheque by mail. Request a review online or through amps@markham.ca. Paying late adds a $25 fee.",
     source: "https://www.markham.ca/permits-licences-taxes/administrative-monetary-penalty-system"
   },
@@ -152,7 +152,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "What should I do if my basement floods?",
-    keywords: ['flood', 'basement', 'rain', 'storm', 'sewer', 'backup', 'backwater valve', 'sump pump', 'rebate', 'sewer backup'],
+    keywords: ['flood', 'basement', 'storm', 'sewer', 'backup', 'backwater valve', 'sump pump', 'rebate', 'sewer backup'],
     answer: "Report basement flooding to the City's Waterworks team at 905.477.5530 and staff will investigate. The City fixes blockages on City property; blockages on private property are the owner's cost. The Private Plumbing Protection Rebate can cover up to $1,750 for an indoor backwater valve, $2,000 for an outdoor one, and up to $5,000 to disconnect weeping tiles with a sump pump. The City never calls homeowners to sell flood protection devices.",
     source: "https://www.markham.ca/neighbourhood-services/water-sewer/basement-flooding-and-sewer-back-prevention"
   },
@@ -230,7 +230,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
   },
   {
     question: "What happens to landscaping in the right-of-way?",
-    keywords: ['impacted', 'property', 'right', 'of', 'way', 'landscaping', 'sprinkler', 'fence', 'construction'],
+    keywords: ['impacted', 'property', 'right', 'of', 'way', 'landscaping', 'sprinkler', 'construction'],
     answer: "Private landscaping in the City right-of-way that conflicts with sidewalk construction will be removed. Tell the City promptly if you want to salvage any items. Questions: 905.477.5530.",
     source: "https://www.markham.ca/neighbourhood-services/roads-sidewalks/sidewalk-completion-program/faqs-contact"
   },
@@ -252,6 +252,7 @@ export const faqDatabase: Array<{ question: string, keywords: string[], answer: 
 const genericKeywords = new Set([
   'what', 'when', 'where', 'why', 'how', 'my', 'of', 'on', 'off', 'not', 'use', 'way', 'right',
   'far', 'wide', 'safe', 'size', 'item', 'line', 'call', 'free', 'time', 'day', 'days', 'year',
+  'open', 'close',
 ]);
 
 // Words from the question itself also count as keywords, minus ones too common to mean anything
@@ -289,15 +290,127 @@ const matchesKeyword = (query: string, keyword: string) => {
   return pattern.test(query);
 };
 
+// Everyday words residents use, mapped to the words the FAQ entries use.
+// Phrases are replaced first, then single words.
+const phraseSynonyms: Array<[RegExp, string]> = [
+  [/\bwater in (?:my|the|our) basement\b/g, 'basement flooding'],
+  [/\bnon[ -]?emergency\b/g, 'police non-emergency'],
+  [/\bcut down\b|\bchop down\b/g, 'cut'],
+  [/\bsnow ?pl(?:ough|ow)s?\b/g, 'snow plow'],
+  [/\bpower (?:went )?out\b/g, 'power outage'],
+  [/\bfood scraps?\b/g, 'green bin food'],
+  [/\bnot (?:an )?emergency\b/g, 'police non-emergency'],
+  [/\bget rid of\b|\bthrow (?:out|away)\b/g, 'dispose'],
+  [/\bpick(?:ed)? ?up\b/g, 'collection'],
+  [/\bhow often\b/g, 'schedule'],
+  [/\bheat ?waves?\b/g, 'heat warning'],
+  [/\bcool(?:ing)? (?:off|down)\b/g, 'cooling'],
+];
+const wordSynonyms = new Map<string, string>([
+  ['trash', 'garbage'], ['rubbish', 'garbage'], ['refuse', 'garbage'], ['junk', 'garbage'],
+  ['compost', 'green bin'], ['organics', 'green bin'],
+  ['recycling', 'recycle'], ['recyclables', 'recycle'],
+  ['cop', 'police'], ['cops', 'police'], ['officer', 'police'],
+  ['hydro', 'power'], ['electricity', 'power'], ['blackout', 'power outage'],
+  ['car', 'parking'], ['cars', 'parking'], ['vehicle', 'parking'],
+  ['tonight', 'overnight'], ['overnite', 'overnight'],
+  ['fine', 'ticket'], ['fines', 'ticket'], ['penalty', 'ticket'],
+  ['puppy', 'dog'], ['puppies', 'dog'], ['pup', 'dog'], ['doggy', 'dog'],
+  ['kitty', 'cat'], ['kitten', 'cat'], ['register', 'licence'],
+  ['license', 'licence'], ['licenses', 'licence'],
+  ['firecracker', 'fireworks'], ['firecrackers', 'fireworks'], ['firework', 'fireworks'],
+  ['chop', 'cut'], ['plough', 'plow'],
+  ['tv', 'electronics'], ['television', 'electronics'], ['computer', 'electronics'], ['laptop', 'electronics'],
+  ['books', 'library'], ['borrow', 'library'],
+  ['center', 'centre'], ['neighbor', 'neighbour'],
+]);
+
+// Single words the FAQ knows; long enough that correcting a typo toward them is safe
+const vocabulary = [...new Set(entryKeywords.flat().flatMap(keyword => keyword.split(/\s+/)))]
+  .filter(word => word.length >= 5);
+const knownWords = new Set(entryKeywords.flat().flatMap(keyword => keyword.split(/\s+/)));
+
+// Edit distance counting a swap of neighbouring letters as one edit ("firewroks" -> "fireworks")
+const editDistance = (a: string, b: string): number => {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+      }
+    }
+  }
+  return d[a.length][b.length];
+};
+
+// Typos usually keep the first letter, so only correct toward words that share it.
+// Six letters minimum: shorter real words ("prime", "tower") are too close to keywords ("price", "power")
+const correctTypo = (word: string): string => {
+  if (word.length < 6 || knownWords.has(word)) return word;
+  const maxDistance = word.length >= 8 ? 2 : 1;
+  let best = word;
+  let bestDistance = maxDistance + 1;
+  for (const candidate of vocabulary) {
+    if (candidate[0] !== word[0] || Math.abs(candidate.length - word.length) > maxDistance) continue;
+    const distance = editDistance(word, candidate);
+    if (distance < bestDistance) {
+      best = candidate;
+      bestDistance = distance;
+    }
+  }
+  return best;
+};
+
+// Lower-case, map synonyms and plurals, and fix typos, so the keyword match sees FAQ wording
+const normalizeQuery = (query: string): string => {
+  let text = query.toLowerCase().replace(/[^a-z0-9\s'-]/g, ' ');
+  for (const [pattern, replacement] of phraseSynonyms) text = text.replace(pattern, replacement);
+  return text
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(word => wordSynonyms.get(word) ?? word)
+    .map(word => (word.length > 4 && word.endsWith('ies') ? word.slice(0, -3) + 'y' : word))
+    .map(correctTypo)
+    .join(' ');
+};
+
+// Words that carry no topic, ignored when checking how much of a question an answer covers
+const contentStopwords = new Set([
+  'a', 'an', 'the', 'i', 'me', 'my', 'we', 'our', 'you', 'your', 'he', 'his', 'she', 'her', 'it', 'its', 'they', 'them',
+  'is', 'are', 'am', 'was', 'be', 'been', 'do', 'does', 'did', 'can', 'could', 'should', 'would', 'will', 'may', 'must',
+  'have', 'has', 'had', 'get', 'got', 'need', 'want', 'go', 'going', 'take', 'make', 'let', 'help', 'tell', 'know', 'see',
+  'what', 'when', 'where', 'which', 'who', 'why', 'how', 'there', 'here', 'this', 'that', 'these', 'those',
+  'to', 'of', 'in', 'on', 'at', 'for', 'from', 'by', 'with', 'about', 'into', 'out', 'up', 'down', 'off', 'over',
+  'and', 'or', 'but', 'if', 'so', 'not', 'no', 'any', 'some', 'all', 'much', 'many', 'more', 'most', 'too', 'very',
+  'please', 'hi', 'hello', 'thanks', 'near', 'nearest', 'best', 'good', 'new', 'old', 'time', 'day', 'today', 'now',
+  'markham', 'city', 'allowed', 'okay', 'ok', 'just', 'like', 'also', 'still', 'again', 'one',
+  'leave', 'put', 'often', 'usually', 'happen', 'happens', 'someone', 'anyone', 'area', 'place',
+]);
+
+// Share of a question's meaningful words that the chosen answer's keywords account for
+const coverage = (query: string, keywords: string[]): number => {
+  const contentWords = query.split(' ').filter(word => word && !contentStopwords.has(word));
+  if (contentWords.length === 0) return 1;
+  const covered = contentWords.filter(word => keywords.some(keyword => matchesKeyword(word, keyword) || keyword.split(' ').includes(word)));
+  return covered.length / contentWords.length;
+};
+
+// Below this share the question is probably about something else that merely shares a word
+const MIN_COVERAGE = 0.4;
+
 const FALLBACK_ANSWER = "I'm HeyMarkham, and I can only help with questions about Markham municipal services. I don't have specific information about that question. For further assistance you can call City of Markham customer service at 905-477-5530 or email customerservice@markham.ca during business hours.";
 
 /**
  * Find best matching answer for user query, with the markham.ca page it came from if checked
  */
 export function findFaq(query: string): { answer: string; source?: string } {
-  const lowerQuery = query.toLowerCase();
+  const lowerQuery = normalizeQuery(query);
   
   let bestMatch: (typeof faqDatabase)[number] | null = null;
+  let bestIndex = -1;
   let highestScore = 0;
 
   for (const [index, entry] of faqDatabase.entries()) {
@@ -312,11 +425,12 @@ export function findFaq(query: string): { answer: string; source?: string } {
     if (score > highestScore) {
       highestScore = score;
       bestMatch = entry;
+      bestIndex = index;
     }
   }
 
-  // Minimum threshold - two common keywords, or one distinctive keyword
-  if (highestScore >= 2 && bestMatch) {
+  // Minimum threshold - two common keywords, or one distinctive keyword - and enough of the question covered
+  if (highestScore >= 2 && bestMatch && coverage(lowerQuery, entryKeywords[bestIndex]) >= MIN_COVERAGE) {
     return { answer: bestMatch.answer, source: bestMatch.source };
   }
   

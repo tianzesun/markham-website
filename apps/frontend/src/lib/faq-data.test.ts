@@ -48,8 +48,52 @@ for (const [question, sourcePart] of expectedSources) {
   });
 }
 
+// Everyday words, typos and plurals that should still reach the right page
+const variantPhrasings: Array<[string, string]> = [
+  ['When is trash day?', 'curbside-collection'],
+  ['when do they take the rubbish', 'curbside-collection'],
+  ['how do I call the cops for a non emergency', 'yrp.ca'],
+  ['call police not emergency', 'yrp.ca'],
+  ['my hydro is out', 'alectrautilities.com'],
+  ['blackout in my area', 'alectrautilities.com'],
+  ['can my cousin leave his car on the road tonight', 'overnight-parking-request'],
+  ['I got a parking fine', 'administrative-monetary-penalty-system'],
+  ['how do I register my puppy', 'animal-services'],
+  ['are firecrackers allowed', '/fireworks'],
+  ['can I chop down the tree in my yard', 'tree-permit-application'],
+  ['water in my basement', 'basement-flooding'],
+  ['when will the snowplough come', 'winter-road-services'],
+  ['which bin does pizza box go in', 'recycling-garbage/green-bin'],
+  ['how often is recycling picked up', 'recycling-garbage/curbside-collection'],
+  ['i need to get rid of paint cans', 'recycling-depots-drop-centres'],
+  ['get rid of an old couch', 'recycling-garbage/curbside-collection'],
+  ['old tv disposal', 'recycling-depots-drop-centres'],
+  ['can i leave my bins out overnight', 'recycling-garbage/curbside-collection'],
+  ['when is garbge day', 'recycling-garbage/curbside-collection'],
+  ['firewroks rules', '/fireworks'],
+  ['libary hours', 'markhampubliclibrary.ca'],
+  ['recylcing depot', 'recycling-depots-drop-centres'],
+  ['basment flooded', 'basement-flooding'],
+  ['dog lisence', 'animal-services'],
+  ['swiming pool', 'sports-recreation-programs/swimming'],
+  ['are there any libraries near me', 'markhampubliclibrary.ca'],
+];
+
+for (const [question, sourcePart] of variantPhrasings) {
+  test(`variant "${question}" is answered from ${sourcePart}`, () => {
+    const { source } = findFaq(question);
+    assert.ok(source?.includes(sourcePart), `got ${source ?? 'the fallback answer'}`);
+  });
+}
+
 test('off-topic questions get the fallback, not a guess', () => {
-  for (const question of ['What is the capital of France?', 'tell me a joke', 'Who won the hockey game?']) {
+  const offTopic = [
+    'What is the capital of France?', 'tell me a joke', 'Who won the hockey game?', 'what is the weather tomorrow',
+    'who is the prime minister', 'book a flight to vancouver', 'is it going to rain', 'how tall is the cn tower',
+    'play some music', 'what is the best pizza in toronto', 'nearest gas station', 'buy concert tickets',
+    'when does the mall close', 'best park in toronto for picnics', 'what movies are playing tonight',
+  ];
+  for (const question of offTopic) {
     assert.equal(findFaq(question).source, undefined, question);
   }
 });
